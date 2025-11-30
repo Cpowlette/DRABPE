@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Black Voices Book Nook</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;800&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/50e9b64021.js" crossorigin="anonymous"></script>
+
+    <style>
+        /* --- COPY THESE STYLES FOR THE HERO SECTION --- */
+        :root {
+            /* Palette Variables */
+            --brand-navy: #112026;
+            --brand-teal: #7eebb7;
+            --brand-orange: #ff6b35; 
+            --brand-gold: #FFD700;
+        }
+
+        /* Hero Container */
+        .vibrant-hero {
+            position: relative;
+            background-color: var(--brand-navy);
+            color: #ffffff;
+            padding: 80px 0;
+            overflow: hidden;
+            /* Bottom border to separate from your existing content */
+            border-bottom: 8px solid var(--brand-teal);
+            
+            /* Afrocentric Geometric Pattern (CSS Only) */
+            background-image: 
+                radial-gradient(circle at 10% 50%, rgba(21, 42, 42, 0.05) 0%, transparent 20%),
+                radial-gradient(circle at 90% 20%, rgba(59, 118, 118, 0.05) 0%, transparent 20%),
+                repeating-linear-gradient(45deg, rgba(97, 194, 194,0.03) 0px, rgba(255,255,255,0.03) 1px, transparent 1px, transparent 20px);
+        }
+
+        /* Typography */
+        .hero-headline {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 800;
+            font-size: 3.5rem;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+        }
+        
+        .hero-headline span {
+            color: var(--brand-teal);
+        }
+
+        .hero-subheadline {
+            font-family: 'Open Sans', sans-serif;
+            font-size: 1.2rem;
+            color: rgba(255,255,255,0.8);
+            margin-bottom: 2rem;
+            font-weight: 400;
+            max-width: 550px;
+        }
+
+        /* Buttons */
+        .btn-vibrant {
+            border-radius: 50px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 15px 35px;
+            transition: all 0.3s ease;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .btn-teal-gradient {
+            background: linear-gradient(135deg, var(--brand-teal) 0%, #2a9d8f 100%);
+            color: var(--brand-navy);
+            border: none;
+            box-shadow: 0 5px 15px rgba(126, 235, 183, 0.3);
+        }
+
+        .btn-teal-gradient:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(126, 235, 183, 0.5);
+            color: var(--brand-navy);
+        }
+
+        .btn-orange-outline {
+            background: transparent;
+            border: 2px solid var(--brand-orange);
+            color: var(--brand-orange) !important;
+            margin-left: 15px;
+        }
+
+        .btn-orange-outline:hover {
+            background: var(--brand-orange) !important;
+            color: #fff;
+            transform: translateY(-3px);
+        }
+
+        /* Visuals */
+        .hero-image-wrapper {
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-img-main {
+            width: 100%;
+            border-radius: 15px;
+            /* Teal Shadow Offset */
+            box-shadow: 15px 15px 0px rgba(126, 235, 183, 0.15); 
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        /* Decorative Background Blob */
+        .hero-blob {
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, var(--brand-teal) 0%, transparent 70%);
+            opacity: 0.1;
+            filter: blur(80px);
+            top: -100px;
+            right: -100px;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        @media (max-width: 991px) {
+            .hero-headline { font-size: 2.5rem; }
+            .btn-orange-outline { margin-left: 0; margin-top: 15px; display: block; width: fit-content; }
+        }
+    </style>
+</head>
+<body>
+    <header class="vibrant-hero">
+        <div class="hero-blob"></div>
+
+        <div class="container" style="position: relative; z-index: 2;">
+            <div class="row align-items-center">
+                
+                <div class="col-lg-6 mb-5 mb-lg-0">
+                    <h1 class="hero-headline">
+                        Igniting <br><span>Black Excellence</span> <br>Through Stories.
+                    </h1>
+                    <p class="hero-subheadline">
+                        A dynamic hub for culture, education, and entrepreneurship. 
+                        Discover resources that empower the community and inspire the next generation.
+                    </p>
+                    <div class="d-flex flex-wrap align-items-center">
+                        <a href="#" class="btn btn-vibrant btn-teal-gradient">
+                            Explore Resources
+                        </a>
+                        <a href="#" class="btn btn-vibrant btn-orange-outline">
+                            Join Community
+                        </a>
+                    </div>
+                </div>
+
+                <div class="col-lg-6">
+                    <div class="hero-image-wrapper">
+                        <img src="https://images.unsplash.com/photo-1571260899304-425eee4c7efc?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Community gathering and learning" class="hero-img-main">
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </header>
+    <div class="container mt-5">
+        <h2>Your Content Continues Here...</h2>
+    </div>
+
+</body>
+</html>

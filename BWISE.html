@@ -1,0 +1,1518 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BWISE Health & Wellness • DRABPE</title>
+  <meta name="description" content="DRABPE's BWISE Health & Wellness initiative across Durham Region — partners, upcoming events, gallery, and sponsors." />
+  
+  <style>
+    /* Reset */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    /* CSS Variables */
+    :root {
+      --primary: #8dcdbc;
+      --primary-700: #6bb5a3;
+      --accent: #a8e6d7;
+      --bg: #ffffff;
+      --bg-50: #f9fafb;
+      --ink: #111827;
+      --muted: #6b7280;
+      --border: #e5e7eb;
+      --shadow: 0 10px 30px rgba(141, 205, 188, 0.3);
+    }
+
+    /* Base Styles */
+    body {
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Inter, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+      background: var(--bg);
+      color: var(--ink);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* ========== HERO SECTION ========== */
+    .hero {
+      position: relative;
+      min-height: 90vh;
+      display: grid;
+      place-items: center;
+      padding: 80px 20px;
+      text-align: center;
+      background: linear-gradient(135deg, #fff 0%, var(--bg-50) 100%);
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(600px 300px at 20% 25%, rgba(141, 205, 188, .2), transparent 70%),
+        radial-gradient(600px 300px at 80% 75%, rgba(168, 230, 215, .18), transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-bg-logos {
+      position: absolute;
+      inset: 0;
+      opacity: .12;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .floating-logo {
+      position: absolute;
+      background: url("https://drabpe.org/wp-content/uploads/2025/09/Picture-bwise.png") center/contain no-repeat;
+      will-change: transform;
+      filter: grayscale(.3);
+    }
+
+    .floating-logo.small {
+      width: 56px;
+      height: 56px;
+    }
+
+    .floating-logo.medium {
+      width: 96px;
+      height: 96px;
+    }
+
+    .floating-logo.large {
+      width: 140px;
+      height: 140px;
+    }
+
+    @keyframes diag1 {
+      0% {
+        transform: translate(-100px, -100px) rotate(0);
+      }
+      100% {
+        transform: translate(calc(100vw + 100px), calc(100vh + 100px)) rotate(360deg);
+      }
+    }
+
+    @keyframes diag2 {
+      0% {
+        transform: translate(calc(100vw + 100px), -100px) rotate(0);
+      }
+      100% {
+        transform: translate(-100px, calc(100vh + 100px)) rotate(-360deg);
+      }
+    }
+
+    @keyframes diag3 {
+      0% {
+        transform: translate(-100px, 50vh) rotate(0) scale(.9);
+      }
+      100% {
+        transform: translate(calc(100vw + 100px), 50vh) rotate(180deg) scale(1.1);
+      }
+    }
+
+    @keyframes diag4 {
+      0% {
+        transform: translate(50vw, -100px) rotate(0);
+      }
+      100% {
+        transform: translate(50vw, calc(100vh + 100px)) rotate(270deg);
+      }
+    }
+
+    .hero-inner {
+      position: relative;
+      z-index: 1;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .hero-logo {
+      max-width: 190px;
+      margin: 0 auto 24px;
+      filter: drop-shadow(0 6px 20px rgba(141, 205, 188, .35));
+    }
+
+    .hero-title {
+      font-weight: 900;
+      letter-spacing: .5px;
+      font-size: clamp(2.2rem, 6vw, 4rem);
+      margin-bottom: 14px;
+      color: var(--primary-700);
+    }
+
+    .hero-title .highlight {
+      background: linear-gradient(120deg, var(--primary) 0%, var(--accent) 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      color: transparent;
+      position: relative;
+    }
+
+    .hero-sub {
+      max-width: 780px;
+      margin: 0 auto;
+      color: var(--muted);
+      font-size: clamp(1.05rem, 2.2vw, 1.25rem);
+    }
+
+    /* ========== SECTION STYLES ========== */
+    /* Removed max-width constraint to make sections full-width */
+    .section {
+      padding: 80px 20px;
+      width: 100%;
+    }
+
+    /* Added inner container for content that needs centering */
+    .section-inner {
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .title {
+      text-align: center;
+      font-size: clamp(1.8rem, 5vw, 3rem);
+      font-weight: 800;
+      color: var(--primary-700);
+      margin-bottom: 14px;
+    }
+
+    .title-underline {
+      width: 110px;
+      height: 4px;
+      margin: 0.5rem auto 0;
+      background: linear-gradient(90deg, transparent, var(--primary), transparent);
+      border-radius: 999px;
+    }
+
+    /* ========== EVENTS SECTION ========== */
+    /* Made events section full-width */
+    .events {
+      background: var(--bg-50);
+      width: 100%;
+    }
+
+    .banner {
+      width: 100%;
+      color: #fff;
+      background: linear-gradient(90deg, #90c8bd, #7feab7);
+      border-radius: 16px;
+      padding: 32px 18px;
+      text-align: center;
+      margin-bottom: 34px;
+      box-shadow: var(--shadow);
+      max-width: 1400px;
+      margin-left: auto;
+      margin-right: auto;
+      margin-bottom: 34px;
+    }
+
+    .banner h1 {
+      font-size: clamp(1.8rem, 4.8vw, 3rem);
+      font-weight: 900;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .banner p {
+      margin-top: 10px;
+      opacity: .95;
+      font-size: clamp(1rem, 2vw, 1.1rem);
+    }
+
+    .ev-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 28px;
+      align-items: flex-start;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .cal, .initiative {
+      flex: 1 1 420px;
+      max-width: 660px;
+      background: #fff;
+      border-radius: 16px;
+      padding: 26px;
+      box-shadow: var(--shadow);
+    }
+
+    .cal {
+      border: 2px solid var(--primary);
+    }
+
+    .initiative {
+      border: 2px solid var(--border);
+    }
+
+    .cal h3 {
+      text-align: center;
+      font-size: 1.6rem;
+      color: var(--primary-700);
+      font-weight: 800;
+      margin-bottom: 18px;
+    }
+
+    .list {
+      max-height: 560px;
+      overflow-y: auto;
+      padding-right: 6px;
+    }
+
+    .list::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    .list::-webkit-scrollbar-thumb {
+      background: var(--primary);
+      border-radius: 10px;
+    }
+
+    .list::-webkit-scrollbar-track {
+      background: var(--bg-50);
+      border-radius: 10px;
+    }
+
+    .ev {
+      display: flex;
+      gap: 14px;
+      padding: 16px 0;
+      border-bottom: 1px solid var(--border);
+      opacity: 0;
+      transform: translateY(8px);
+      animation: evIn .35s ease forwards;
+    }
+
+    .ev:last-child {
+      border-bottom: none;
+    }
+
+    @keyframes evIn {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .ev-date {
+      width: 64px;
+      height: 64px;
+      border-radius: 12px;
+      background: var(--primary);
+      color: #fff;
+      display: grid;
+      place-content: center;
+      box-shadow: var(--shadow);
+      flex-shrink: 0;
+      text-align: center;
+      font-weight: 800;
+    }
+
+    .ev-date .d {
+      font-size: 1.35rem;
+      line-height: 1;
+    }
+
+    .ev-date .m {
+      font-size: .8rem;
+      opacity: .95;
+      text-transform: uppercase;
+      letter-spacing: .5px;
+    }
+
+    .ev-body {
+      flex: 1;
+    }
+
+    .ev-title {
+      font-weight: 800;
+      color: var(--ink);
+      margin-bottom: 6px;
+    }
+
+    .ev-row {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      color: var(--muted);
+      font-size: .95rem;
+      margin: 3px 0;
+    }
+
+    .ev-icon {
+      width: 18px;
+      height: 18px;
+      color: var(--primary);
+    }
+
+    .map {
+      display: inline-block;
+      margin-top: 8px;
+      padding: 8px 14px;
+      border: 2px solid var(--primary);
+      border-radius: 8px;
+      color: var(--primary);
+      font-weight: 700;
+      text-decoration: none;
+      transition: .25s;
+    }
+
+    .map:hover {
+      background: var(--primary);
+      color: #fff;
+      transform: translateY(-1px);
+    }
+
+    .initiative p {
+      margin-bottom: 12px;
+      font-size: 1.04rem;
+      color: var(--ink);
+    }
+
+    .initiative strong {
+      color: var(--primary-700);
+    }
+
+    /* ========== PARTNERS SECTION ========== */
+    /* Made partners section full-width */
+    .partners {
+      background: #fff;
+      width: 100%;
+    }
+
+    .partners-slider {
+      position: relative;
+      width: 100%;
+      margin: 40px auto 0;
+      overflow: hidden;
+    }
+
+    .partners-track {
+      display: flex;
+      gap: 22px;
+      will-change: transform;
+      padding: 10px 20px;
+    }
+
+    .partner {
+      min-width: 240px;
+      height: 170px;
+      border-radius: 14px;
+      border: 2px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #fff;
+      transition: .25s;
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+
+    .partner:hover {
+      transform: translateY(-4px);
+      border-color: var(--primary);
+      box-shadow: var(--shadow);
+    }
+
+    .partner img {
+      max-width: 90%;
+      max-height: 90%;
+      object-fit: contain;
+    }
+
+    .p-controls {
+      display: flex;
+      gap: 14px;
+      justify-content: center;
+      margin-top: 18px;
+    }
+
+    .p-btn {
+      width: 46px;
+      height: 46px;
+      border-radius: 999px;
+      border: none;
+      background: var(--primary);
+      color: #fff;
+      font-size: 22px;
+      cursor: pointer;
+      transition: .25s;
+    }
+
+    .p-btn:hover {
+      background: var(--primary-700);
+      transform: scale(1.07);
+    }
+
+    /* ========== GALLERY SECTION ========== */
+    /* Made gallery section full-width with dynamic sizing */
+    .gallery {
+      background: var(--bg-50);
+      width: 100%;
+    }
+
+    /* New masonry-style grid with varied image sizes */
+    .preview-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      grid-auto-rows: 180px;
+      gap: 16px;
+      width: 100%;
+      padding: 0 20px;
+      margin: 40px auto;
+    }
+
+    .preview-item {
+      position: relative;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 2px solid var(--border);
+      background: #fff;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+      transition: .35s;
+    }
+
+    /* Added size variants for different aspect ratios */
+    .preview-item.tall {
+      grid-row: span 2;
+    }
+
+    .preview-item.wide {
+      grid-column: span 2;
+    }
+
+    .preview-item.large {
+      grid-column: span 2;
+      grid-row: span 2;
+    }
+
+    .preview-item:hover {
+      transform: translateY(-4px);
+      border-color: var(--primary);
+      box-shadow: var(--shadow);
+      z-index: 2;
+    }
+
+    .preview-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform .35s;
+    }
+
+    .preview-item:hover img {
+      transform: scale(1.05);
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 14px;
+      margin-top: 26px;
+    }
+
+    /* Button styling for "View All Images" */
+    .view-all {
+      display: inline-block;
+      margin: 0 auto;
+      padding: 16px 40px;
+      gap: 10px;
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-700) 100%);
+      color: #fff;
+      font-size: 1.1rem;
+      font-weight: 700;
+      text-decoration: none;
+      border-radius: 12px;
+      border: none;
+      cursor: pointer;
+      transition: all .3s ease;
+      box-shadow: 0 4px 14px rgba(141, 205, 188, 0.4);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .view-all::before {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 0;
+      height: 0;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.2);
+      transform: translate(-50%, -50%);
+      transition: width .5s, height .5s;
+    }
+
+    .view-all:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(141, 205, 188, 0.5);
+    }
+
+    .view-all:hover::before {
+      width: 300px;
+      height: 300px;
+    }
+
+    .view-all:active {
+      transform: translateY(0);
+      box-shadow: 0 2px 8px rgba(141, 205, 188, 0.4);
+    }
+
+    .gallery .section {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    /* ========== SPONSORS SECTION ========== */
+    .sponsors {
+      background: #fff;
+      border-top: 1px solid var(--border);
+      width: 100%;
+    }
+
+    .c-wrap {
+      position: relative;
+      max-width: 1000px;
+      margin: 34px auto 0;
+      overflow: hidden;
+      border-radius: 16px;
+    }
+
+    .c-track {
+      display: flex;
+      transition: transform .45s ease;
+    }
+
+    .c-slide {
+      min-width: 100%;
+      display: grid;
+      place-items: center;
+      padding: 46px 24px;
+      background: var(--bg-50);
+      border: 2px solid var(--border);
+      cursor: pointer;
+      transition: .25s;
+    }
+
+    .c-slide:hover {
+      border-color: var(--primary);
+      background: #fff;
+    }
+
+    .c-slide img {
+      max-width: 100%;
+      max-height: 280px;
+      object-fit: contain;
+    }
+
+    .dots {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      margin-top: 16px;
+    }
+
+    .dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 999px;
+      background: var(--border);
+      cursor: pointer;
+      transition: .2s;
+    }
+
+    .dot.active {
+      background: var(--primary);
+      box-shadow: 0 0 0 4px rgba(141, 205, 188, .18);
+    }
+
+    /* ========== MODALS ========== */
+    .modal {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, .92);
+      backdrop-filter: blur(8px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      z-index: 50;
+    }
+
+    .modal.active {
+      display: flex;
+    }
+
+    .m-img {
+      max-width: 90vw;
+      max-height: 90vh;
+      border-radius: 12px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, .5);
+    }
+
+    .m-card {
+      background: #fff;
+      border: 2px solid var(--primary);
+      border-radius: 16px;
+      max-width: 640px;
+      padding: 28px;
+      position: relative;
+    }
+
+    .m-card h2 {
+      color: var(--primary-700);
+      margin-bottom: 10px;
+      font-size: 1.6rem;
+    }
+
+    .m-card p {
+      color: var(--muted);
+      margin-bottom: 16px;
+    }
+
+    .m-card a {
+      display: inline-block;
+      padding: 10px 20px;
+      background: var(--primary);
+      color: #fff;
+      border-radius: 8px;
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    .m-close {
+      position: absolute;
+      top: -44px;
+      right: 0;
+      width: 40px;
+      height: 40px;
+      border: none;
+      border-radius: 999px;
+      background: var(--primary);
+      color: #fff;
+      font-size: 22px;
+      cursor: pointer;
+    }
+
+    .m-card-nav {
+      flex: 1;
+      padding: 10px 16px;
+      border: 2px solid var(--primary);
+      border-radius: 8px;
+      background: #fff;
+      color: var(--primary);
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    /* ========== LOADING SCREEN ========== */
+    .page-loader {
+      position: fixed;
+      inset: 0;
+      background: linear-gradient(135deg, #fff 0%, var(--bg-50) 100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      transition: opacity .5s ease, visibility .5s ease;
+    }
+
+    .page-loader.hidden {
+      opacity: 0;
+      visibility: hidden;
+    }
+
+    .loader-logo {
+      width: 120px;
+      height: 120px;
+      margin-bottom: 20px;
+      animation: pulse 1.5s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.05); opacity: 0.8; }
+    }
+
+    .loader-spinner {
+      width: 50px;
+      height: 50px;
+      border: 4px solid var(--border);
+      border-top-color: var(--primary);
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    .loader-text {
+      margin-top: 20px;
+      color: var(--muted);
+      font-size: 1.1rem;
+      font-weight: 600;
+    }
+
+    /* ========== SKELETON LOADING ========== */
+    .skeleton {
+      background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+      background-size: 200% 100%;
+      animation: shimmer 1.5s infinite;
+      border-radius: 8px;
+    }
+
+    @keyframes shimmer {
+      0% { background-position: 200% 0; }
+      100% { background-position: -200% 0; }
+    }
+
+    .preview-item.loading img {
+      opacity: 0;
+    }
+
+    .preview-item.loading::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+      background-size: 200% 100%;
+      animation: shimmer 1.5s infinite;
+    }
+
+    .partner.loading img,
+    .c-slide.loading img {
+      opacity: 0;
+    }
+
+    .partner.loading::before,
+    .c-slide.loading::before {
+      content: "";
+      position: absolute;
+      inset: 10px;
+      background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+      background-size: 200% 100%;
+      animation: shimmer 1.5s infinite;
+      border-radius: 8px;
+    }
+
+    img {
+      transition: opacity .3s ease;
+    }
+
+    img.loaded {
+      opacity: 1;
+    }
+
+    /* ========== RESPONSIVE ========== */
+    /* Enhanced responsive design for tablets and mobile */
+    @media (max-width: 1024px) {
+      .preview-grid {
+        grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+        grid-auto-rows: 160px;
+        gap: 14px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .section {
+        padding: 60px 16px;
+      }
+
+      .partners-slider {
+        margin-top: 26px;
+      }
+
+      .partner {
+        min-width: 200px;
+        height: 140px;
+      }
+
+      .floating-logo.small {
+        width: 40px;
+        height: 40px;
+      }
+
+      .floating-logo.medium {
+        width: 72px;
+        height: 72px;
+      }
+
+      .floating-logo.large {
+        width: 100px;
+        height: 100px;
+      }
+
+      .ev-grid {
+        flex-direction: column;
+      }
+
+      .cal, .initiative {
+        max-width: 100%;
+        width: 100%;
+      }
+
+      .preview-grid {
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+        grid-auto-rows: 140px;
+        gap: 12px;
+        padding: 0 12px;
+      }
+
+      /* Adjust spans for mobile to prevent overflow */
+      .preview-item.wide,
+      .preview-item.large {
+        grid-column: span 2;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .preview-grid {
+        grid-template-columns: repeat(2, 1fr);
+        grid-auto-rows: 160px;
+        gap: 10px;
+      }
+
+      .preview-item.wide {
+        grid-column: span 2;
+      }
+
+      .preview-item.large {
+        grid-column: span 2;
+        grid-row: span 2;
+      }
+
+      .preview-item.tall {
+        grid-row: span 2;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- ========== HERO SECTION ========== -->
+  <section class="hero">
+    <div class="hero-bg-logos" id="heroBgLogos"></div>
+    <div class="hero-inner">
+      <img class="hero-logo" src="https://drabpe.org/wp-content/uploads/2025/09/Picture-bwise.png" alt="BWISE Logo" loading="eager" fetchpriority="high" />
+      <h1 class="hero-title">
+        BWISE: Empowering <span class="highlight">Black Wellness</span> Together <span class="highlight"></span>
+      </h1>
+      <p class="hero-sub">
+        Thank you for joining us in a powerful day of connection, education, and celebration.
+      </p>
+    </div>
+  </section>
+
+  <!-- ========== EVENTS SECTION ========== -->
+  <section class="events">
+    <div class="section">
+      <div class="banner">
+        <h1>BWISE Health Initiative</h1>
+        <p>DRABPE is working with community partners to support wellness and innovation across Durham Region.</p>
+      </div>
+
+      <div class="ev-grid">
+        <!-- Upcoming Events Calendar -->
+        <div class="cal">
+          <h3>Previous Events</h3>
+          <div class="list">
+            <div class="items" id="eventsList"></div>
+          </div>
+        </div>
+
+        <!-- Initiative Summary -->
+        <article class="initiative">
+          <div style="text-align:center;margin-bottom:16px">
+            <img src="https://drabpe.org/wp-content/uploads/2025/09/Picture-bwise.png" alt="BWISE Health & Wellness" style="max-width:180px" />
+          </div>
+          <p>
+            DRABPE is proud to announce our <strong>BWise Health &amp; Wellness initiative</strong>, made possible through government funding and in partnership with <strong>six incredible organizations across The Durham Region</strong>.
+          </p>
+          <p>
+            This initiative is about creating healthier futures for Black communities across Durham Region. By providing funding and capacity-building support, it empowers local organizations to address pressing health concerns such as chronic disease management, mental health, and preventative care in culturally relevant ways.
+          </p>
+          <p>
+            Through collaboration among six partner organizations, the initiative sparks collective impact, strengthening networks, building trust, and planting seeds of long-term change.
+          </p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== PARTNERS SECTION ========== -->
+  <section class="partners">
+    <div class="section">
+      <h2 class="title">Our Partner Organizations</h2>
+      <div class="title-underline"></div>
+      <div class="partners-slider">
+        <div class="partners-track" id="partnersTrack">
+          <div class="partner" data-partner="0">
+            <img src="https://drabpe.org/wp-content/uploads/2025/09/Picture1.jpg" alt="DAELY" loading="lazy" />
+          </div>
+          <div class="partner" data-partner="1">
+            <img src="https://drabpe.org/wp-content/uploads/2024/09/FMB-Logo.jpg" alt="FMB" loading="lazy" />
+          </div>
+          <div class="partner" data-partner="2">
+            <img src="https://drabpe.org/wp-content/uploads/2025/09/Picture1.png" alt="Lighthouse Retreat inc" loading="lazy" />
+          </div>
+          <div class="partner" data-partner="3">
+            <img src="https://drabpe.org/wp-content/uploads/2025/09/Picture3.png" alt="Livewell Pathways" loading="lazy" />
+          </div>
+          <div class="partner" data-partner="4">
+            <img src="https://drabpe.org/wp-content/uploads/2025/09/Picture2.png" alt="Strategize Your Life Centre (SYLC)" loading="lazy" />
+          </div>
+          <div class="partner" data-partner="5">
+            <img src="https://drabpe.org/wp-content/uploads/2025/09/Picture4.jpg" alt="Cultural Expressions for CHANGE (CE4C)" loading="lazy" />
+          </div>
+        </div>
+        <div class="p-controls">
+          <button class="p-btn" id="partnerPrev" aria-label="Previous">‹</button>
+          <button class="p-btn" id="partnerNext" aria-label="Next">›</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== GALLERY SECTION ========== -->
+  <!-- Updated gallery with varied image sizes based on dimensions -->
+  <section class="gallery">
+    <div class="section">
+      <h2 class="title">In Case You Missed It</h2>
+      <div class="title-underline"></div>
+      
+      <div class="preview-grid">
+        <div class="preview-item loading tall">
+          <img src="https://drabpe.org/wp-content/uploads/2025/11/B-Wise-137.jpg" alt="Gallery Image" loading="lazy" />
+        </div>
+        <div class="preview-item loading">
+          <img src="https://drabpe.org/wp-content/uploads/2025/11/B-Wise-6.jpg" alt="Gallery Image" loading="lazy" />
+        </div>
+        <div class="preview-item loading wide">
+          <img src="https://drabpe.org/wp-content/uploads/2025/11/B-Wise-132.jpg" alt="Gallery Image" loading="lazy" />
+        </div>
+        <div class="preview-item loading">
+          <img src="https://drabpe.org/wp-content/uploads/2025/11/B-Wise-17.jpg" alt="Gallery Image" loading="lazy" />
+        </div>
+        <div class="preview-item loading tall">
+          <img src="https://drabpe.org/wp-content/uploads/2025/11/B-Wise-125.jpg" alt="Gallery Image" loading="lazy" />
+        </div>
+        <div class="preview-item loading">
+          <img src="https://drabpe.org/wp-content/uploads/2025/11/B-Wise-121.jpg" alt="Gallery Image" loading="lazy" />
+        </div>
+        <div class="preview-item loading wide">
+          <img src="https://drabpe.org/wp-content/uploads/2025/10/B-Wise-346.jpg" alt="Gallery Image" loading="lazy" />
+        </div>
+        <div class="preview-item loading">
+          <img src="https://drabpe.org/wp-content/uploads/2025/11/B-Wise-146.jpg" alt="Gallery Image" loading="lazy" />
+        </div>
+        <div class="preview-item loading large">
+          <img src="https://drabpe.org/wp-content/uploads/2025/11/B-Wise-156.jpg" alt="Gallery Image" loading="lazy" />
+        </div>
+        <div class="preview-item loading">
+          <img src="https://drabpe.org/wp-content/uploads/2025/11/B-Wise-119.jpg" alt="Gallery Image" loading="lazy" />
+        </div>
+        <div class="preview-item loading tall">
+          <img src="https://drabpe.org/wp-content/uploads/2025/11/B-Wise-133.jpg" alt="Gallery Image" loading="lazy" />
+        </div>
+        <div class="preview-item loading">
+          <img src="https://drabpe.org/wp-content/uploads/2025/11/B-Wise-140.jpg" alt="Gallery Image" loading="lazy" />
+        </div>
+        <div class="preview-item loading wide">
+          <img src="https://drabpe.org/wp-content/uploads/2025/11/B-Wise-8.jpg" alt="Gallery Image" loading="lazy" />
+        </div>
+        <div class="preview-item loading">
+          <img src="https://drabpe.org/wp-content/uploads/2025/11/B-Wise-124.jpg" alt="Gallery Image" loading="lazy" />
+        </div>
+        <div class="preview-item loading">
+          <img src="https://drabpe.org/wp-content/uploads/2025/11/B-Wise-144.jpg" alt="Gallery Image" loading="lazy" />
+        </div>
+        <div class="preview-item loading tall">
+          <img src="https://drabpe.org/wp-content/uploads/2025/11/B-Wise-142.jpg" alt="Gallery Image" loading="lazy" />
+        </div>
+        <div class="preview-item loading">
+          <img src="https://drabpe.org/wp-content/uploads/2025/11/B-Wise-157.jpg" alt="Gallery Image" loading="lazy" />
+        </div>
+        <div class="preview-item loading wide">
+          <img src="https://drabpe.org/wp-content/uploads/2025/11/B-Wise-161.jpg" alt="Gallery Image" loading="lazy" />
+        </div>
+        <div class="preview-item loading">
+          <img src="https://drabpe.org/wp-content/uploads/2025/11/B-Wise-128.jpg" alt="Gallery Image" loading="lazy" />
+        </div>
+        <div class="preview-item loading tall">
+          <img src="https://drabpe.org/wp-content/uploads/2025/11/B-Wise-149.jpg" alt="Gallery Image" loading="lazy" />
+        </div>
+        <div class="preview-item loading">
+          <img src="https://drabpe.org/wp-content/uploads/2025/11/B-Wise-150.jpg" alt="Gallery Image" loading="lazy" />
+        </div>
+        <div class="preview-item loading wide">
+          <img src="https://drabpe.org/wp-content/uploads/2025/11/B-Wise-105.jpg" alt="Gallery Image" loading="lazy" />
+        </div>
+        <div class="preview-item loading">
+          <img src="https://drabpe.org/wp-content/uploads/2025/11/B-Wise-87.jpg" alt="Gallery Image" loading="lazy" />
+        </div>
+        <div class="preview-item loading large">
+          <img src="https://drabpe.org/wp-content/uploads/2025/11/B-Wise-82.jpg" alt="Gallery Image" loading="lazy" />
+        </div>
+      </div>
+      
+      <a class="view-all" href="https://drabpe.org/media-gallery/" target="_blank" rel="noopener">View All Images →</a>
+    </div>
+  </section>
+
+  <!-- ========== SPONSORS SECTION ========== -->
+  <section class="sponsors">
+    <div class="section">
+      <h2 class="title">With Gratitude to Our Sponsors</h2>
+      <div class="title-underline"></div>
+      <div class="c-wrap">
+        <div class="c-track" id="carouselTrack">
+          <div class="c-slide" data-sponsor="0">
+            <img src="https://drabpe.org/wp-content/uploads/2022/04/All-credit-SBCCI-English-1-1024x235.png" alt="Government of Canada" loading="lazy" />
+          </div>
+          <div class="c-slide" data-sponsor="1">
+            <img src="https://drabpe.org/wp-content/uploads/2024/06/Canada-Logo-1-1024x1024.jpg" alt="Government of Canada" loading="lazy" />
+          </div>
+          <div class="c-slide" data-sponsor="2">
+            <img src="https://drabpe.org/wp-content/uploads/2024/11/https___cdn.evbuc_.com_images_900002233_943990820733_1_original.jpg" alt="Event Sponsor" loading="lazy" />
+          </div>
+        </div>
+      </div>
+      <div class="dots" id="carouselDots"></div>
+    </div>
+  </section>
+
+  <!-- ========== MODALS ========== -->
+  <!-- Image Modal -->
+  <div class="modal" id="imageModal" aria-hidden="true">
+    <button class="m-close" id="imgClose" aria-label="Close">×</button>
+    <img class="m-img" id="modalImage" src="/placeholder.svg" alt="Preview" />
+  </div>
+
+  <!-- Sponsor Modal -->
+  <div class="modal" id="sponsorModal" aria-hidden="true">
+    <div class="m-card">
+      <button class="m-close" id="sponsorClose" aria-label="Close">×</button>
+      <div id="sponsorBody"></div>
+    </div>
+  </div>
+
+  <!-- Partner Modal -->
+  <div class="modal" id="partnerModal" aria-hidden="true">
+    <div class="m-card">
+      <button class="m-close" id="partnerClose" aria-label="Close">×</button>
+      <div id="partnerBody"></div>
+      <div style="display:flex;gap:10px;justify-content:space-between;margin-top:10px">
+        <button id="prevPartner" class="m-card-nav">‹ Previous</button>
+        <button id="nextPartner" class="m-card-nav">Next ›</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== PAGE LOADING SCREEN ========== -->
+  <div class="page-loader" id="pageLoader">
+    <img class="loader-logo" src="https://drabpe.org/wp-content/uploads/2025/09/Picture-bwise.png" alt="BWISE Logo" />
+    <div class="loader-spinner"></div>
+    <div class="loader-text">Loading BWISE...</div>
+  </div>
+
+  <!-- ========== JAVASCRIPT ========== -->
+  <script>
+    (function() {
+      // Initialize on idle
+      const onIdle = (fn) => 'requestIdleCallback' in window ? requestIdleCallback(fn) : setTimeout(fn, 80);
+      onIdle(init);
+
+      function init() {
+        setupLazyLoading();
+        floatingLogos();
+        sponsorCarousel();
+        partnerSlider();
+        modals();
+        events();
+      }
+
+      // ========== FLOATING LOGOS ANIMATION ==========
+      function floatingLogos() {
+        const wrap = document.getElementById('heroBgLogos');
+        const sizes = ['small', 'medium', 'large'];
+        const anims = ['diag1', 'diag2', 'diag3', 'diag4'];
+        
+        for (let i = 0; i < 18; i++) {
+          const el = document.createElement('div');
+          el.className = `floating-logo ${sizes[Math.floor(Math.random() * sizes.length)]}`;
+          
+          const dur = 14 + Math.random() * 16;
+          const delay = Math.random() * 10;
+          
+          el.style.animation = `${anims[Math.floor(Math.random() * anims.length)]} ${dur}s linear ${delay}s infinite`;
+          el.style.left = `${Math.random() * 100}%`;
+          el.style.top = `${Math.random() * 100}%`;
+          
+          wrap.appendChild(el);
+        }
+      }
+
+      // ========== SPONSOR CAROUSEL ==========
+      function sponsorCarousel() {
+        const track = document.getElementById('carouselTrack');
+        const dotsWrap = document.getElementById('carouselDots');
+        const slides = [...track.children];
+        
+        let idx = 0;
+        let timer;
+        
+        const sponsors = [
+          {
+            name: 'SBCCI - Supporting Black Canadian Communities',
+            description: 'Supporting and empowering Black communities across Canada through initiatives focused on economic development, education, and social justice.',
+            website: 'https://sbcci.ca'
+          },
+          {
+            name: 'Government of Canada',
+            description: 'Proud supporter of community initiatives that promote diversity, inclusion, and wellness.',
+            website: 'https://canada.ca'
+          },
+          {
+            name: 'Community Partner',
+            description: 'Fostering innovation and community wellness through strategic partnerships and collaborative initiatives.',
+            website: '#'
+          }
+        ];
+        
+        // Create dots
+        slides.forEach((_, i) => {
+          const d = document.createElement('div');
+          d.className = 'dot' + (i ? '' : ' active');
+          d.onclick = () => go(i);
+          dotsWrap.appendChild(d);
+        });
+        
+        function go(i) {
+          idx = (i + slides.length) % slides.length;
+          track.style.transform = `translateX(-${idx * 100}%)`;
+          [...dotsWrap.children].forEach((d, j) => d.classList.toggle('active', j === idx));
+          reset();
+        }
+        
+        function next() {
+          go(idx + 1);
+        }
+        
+        function start() {
+          timer = setInterval(next, 4000);
+        }
+        
+        function reset() {
+          clearInterval(timer);
+          start();
+        }
+        
+        // Click to open modal
+        slides.forEach((s, i) => s.onclick = () => openSponsorModal(sponsors[i]));
+        
+        // Pause on hover
+        track.addEventListener('mouseenter', () => clearInterval(timer));
+        track.addEventListener('mouseleave', start);
+        
+        start();
+      }
+
+      // ========== PARTNER SLIDER ==========
+      function partnerSlider() {
+        const cards = [...document.querySelectorAll('.partner')];
+        const track = document.getElementById('partnersTrack');
+        const prev = document.getElementById('partnerPrev');
+        const next = document.getElementById('partnerNext');
+        
+        const partners = [
+          {
+            name: 'DAELY - Durham Athletic Leadership Youth Initiative',
+            description: 'Founded in 2021 by CFL athlete Alonzo Addae, Daely is a youth-focused organization that blends sports, mentorship, and wellness across the Greater Toronto Area. Rooted in Alonzo’s journey from grassroots football in Durham to professional play, Daely emphasizes resilience, consistency, and the power of daily growth. Through programs like run clubs, Pilates, and other wellness activities, Daely creates accessible spaces for youth to build skills, confidence, and community. Their vision extends beyond athletics—breaking barriers, fostering belonging, and inspiring the next generation to thrive both on and off the field.',
+            website: 'https://daely.ca/'
+          },
+          {
+            name: 'FMB - Functional Mind and Body',
+            description: 'FMB strengthens both mind and body by offering customized wellness programs for people of all ages—from children to seniors. Every session incorporates Cognitive Stimulation Therapy (CST), an evidence-based method of enhancing memory, critical thinking, computation, visual- spatial skills, and language. Through group classes, one-on-one training, and specialized wellness support, FMB provides inclusive, whole-mind and whole-body experiences. From boxing-inspired workouts to gentle mobility sessions, dementia and stroke recovery to cardiac rehabilitation, FMB’s programs empower individuals to improve their health, resilience, and quality of life.',
+            website: 'https://functionalmb.com/'
+          },
+          {
+            name: 'Lighthouse Retreat inc',
+            description: 'For over a decade, Lighthouse Retreat Inc. has supported families and seniors living with Alzheimer’s, dementia, and multiple diagnoses across Durham Region and beyond. Their mission is to provide safe, high-quality care that preserves dignity, independence, and wellness. They offer a Senior’s Day Program with cognitive stimulation and social activities, 24-hour homecare services, and free community exercise classes to promote strength, balance, and social connection. With personalized plans led by registered nurses and compassionate PSWs, Lighthouse Retreat helps seniors thrive at home and in the community.',
+            website: 'https://www.thelighthouseretreat.ca/'
+          },
+          {
+            name: 'Livewell Pathways',
+            description: 'LiveWell Pathways supports families caring for loved ones with dementia, Alzheimer’s, chronic illness, or special needs by focusing on both education and caregiver well-being. They emphasize that caring for yourself is essential to providing the best care for others. Through services such as home care, specialized clinical care, companionship, accident recovery support, and top-up care, LiveWell Pathways helps families navigate the challenges of caregiving. Their monthly caregiver support group, offered both in-person and virtually, provides a space for learning, connection, and relief from caregiver burnout.',
+            website: 'https://www.livewellpathway.ca/'
+          },
+          {
+            name: 'Strategize Your Life Centre (SYLC)',
+            description: 'Strategize Your Life Centre (SYLC), an extension of Covenant Remnant Ministries founded by Rev. Dean and Rev. Jacqueline Richards, combines over 20 years of ministry, counseling, and mentorship experience to help individuals live purpose-filled lives. As pastors, mental health coaches, and co-authors of the best-seller Faith is the Foundation, they bridge biblical strategies with practical tools for wellness and growth. SYLC offers workshops, mentorship programs, and faith-based mental health discussions to support youth, families, and individuals of all ages. Through initiatives like their six-week “Strategize Your Life” program and Mental Health First Aid facilitation, SYLC empowers people to overcome challenges, strengthen identity, and move forward with clarity and purpose',
+            website: 'https://www.sylcentre.com/'
+          },
+          {
+            name: 'Cultural Expressions for CHANGE (CE4C)',
+            description: 'Cultural Expressions for CHANGE (CE4C) is a nonprofit organization rooted in Durham Region that celebrates heritage, the arts, and community engagement through the lens of the Black experience. With a vision of inspiring unity, CE4C fosters creativity, pride, and inclusivity by offering cultural programming, educational initiatives, and community events. Founded by Esther Forde, CE4C has a rich legacy of hosting the region’s largest Black History Month celebration, supporting Indigenous and multicultural events, and awarding post-secondary arts scholarships to nurture the next generation of creatives. Rebranded in 2023, CE4C continues to build connections across Durham and beyond, using arts and culture as tools for unity and change.',
+            website: 'https://ce4c.ca/'
+          }
+        ];
+        
+        let pos = 0;
+        let loop;
+        const step = 260;
+        
+        // Click to open modal
+        cards.forEach(c => c.onclick = () => openPartnerModal(Number(c.dataset.partner), partners));
+        
+        // Auto scroll
+        function auto() {
+          pos += 1;
+          track.style.transform = `translateX(-${pos}px)`;
+          if (pos >= (cards.length * step)) pos = 0;
+        }
+        
+        function start() {
+          loop = setInterval(auto, 30);
+        }
+        
+        function stop() {
+          clearInterval(loop);
+        }
+        
+        // Manual navigation
+        function n(dir) {
+          pos += dir * step;
+          if (pos < 0) pos = 0;
+          track.style.transition = 'transform .45s ease';
+          track.style.transform = `translateX(-${pos}px)`;
+          setTimeout(() => track.style.transition = 'none', 460);
+        }
+        
+        prev.onclick = () => {
+          n(-1);
+          reset();
+        };
+        
+        next.onclick = () => {
+          n(1);
+          reset();
+        };
+        
+        function reset() {
+          stop();
+          setTimeout(start, 1400);
+        }
+        
+        // Pause on hover
+        track.addEventListener('mouseenter', stop);
+        track.addEventListener('mouseleave', start);
+        
+        start();
+      }
+
+      // ========== MODALS ==========
+      function modals() {
+        const imgM = document.getElementById('imageModal');
+        const imgEl = document.getElementById('modalImage');
+        const imgClose = document.getElementById('imgClose');
+        
+        const sM = document.getElementById('sponsorModal');
+        const sBody = document.getElementById('sponsorBody');
+        const sClose = document.getElementById('sponsorClose');
+        
+        const pM = document.getElementById('partnerModal');
+        const pBody = document.getElementById('partnerBody');
+        const pClose = document.getElementById('partnerClose');
+        
+        // Close buttons
+        imgClose.onclick = () => imgM.classList.remove('active');
+        sClose.onclick = () => sM.classList.remove('active');
+        pClose.onclick = () => pM.classList.remove('active');
+        
+        // Click outside to close
+        [imgM, sM, pM].forEach(m => {
+          m.addEventListener('click', e => {
+            if (e.target === m) m.classList.remove('active');
+          });
+        });
+        
+        // Escape key to close
+        document.addEventListener('keydown', e => {
+          if (e.key === 'Escape') {
+            imgM.classList.remove('active');
+            sM.classList.remove('active');
+            pM.classList.remove('active');
+          }
+        });
+        
+        // Global modal functions
+        window.openImageModal = (src) => {
+          imgEl.src = src;
+          imgM.classList.add('active');
+        };
+        
+        window.openSponsorModal = (s) => {
+          sBody.innerHTML = `
+            <h2>${s.name}</h2>
+            <p>${s.description}</p>
+            ${s.website !== "#" ? `<a href="${s.website}" target="_blank" rel="noopener">Visit Website →</a>` : ''}
+          `;
+          sM.classList.add('active');
+        };
+        
+        window.openPartnerModal = (i, arr) => {
+          const prev = document.getElementById('prevPartner');
+          const next = document.getElementById('nextPartner');
+          const p = arr[i];
+          
+          pBody.innerHTML = `
+            <h2>${p.name}</h2>
+            <p>${p.description}</p>
+            ${p.website !== "#" ? `<a href="${p.website}" target="_blank" rel="noopener">Visit Website →</a>` : ''}
+          `;
+          
+          prev.disabled = i === 0;
+          next.disabled = i === arr.length - 1;
+          
+          prev.onclick = () => i > 0 && window.openPartnerModal(i - 1, arr);
+          next.onclick = () => i < arr.length - 1 && window.openPartnerModal(i + 1, arr);
+          
+          pM.classList.add('active');
+        };
+      }
+
+      // ========== EVENTS ==========
+      function events() {
+        const data = [
+          {
+            t: "Ifaradax & FMB: Youth Boxing",
+            d: new Date(2025, 8, 20, 16, 30),
+            l: "1101 Kingston Rd, Unit 215"
+          },
+          {
+            t: "LiveWell Health Expo",
+            d: new Date(2025, 8, 20, 10, 0),
+            l: "PVUC Fellowship Hall, 300 Church St."
+          },
+          {
+            t: "Lighthouse Open House",
+            d: new Date(2025, 8, 27, 13, 0),
+            l: "845 Westney Rd S Unit 5, Ajax, ON L1S 3M4"
+          },
+          {
+            t: "Strategize Your Life Workshop (1 of 6)",
+            d: new Date(2025, 8, 24, 19, 0),
+            l: "1101 Kingston Rd, Unit 215"
+          },
+          {
+            t: "Ifaradax & FMB: Youth Boxing",
+            d: new Date(2025, 8, 27, 16, 30),
+            l: "1101 Kingston Rd, Unit 215"
+          },
+          {
+            t: "Daely Mobility Event",
+            d: new Date(2025, 8, 27, 9, 0),
+            l: "Lululemon, Pickering Town Centre"
+          },
+          {
+            t: "FMB: Dementia Resistance",
+            d: new Date(2025, 8, 27, 10, 0),
+            l: "Unit 215, 1101 Kingston Road, Pickering"
+          }
+        ];
+        
+        const wrap = document.getElementById('eventsList');
+        
+        // Date formatting helpers
+        const M = (d) => d.toLocaleString(undefined, { month: 'short' });
+        const D = (d) => d.toLocaleString(undefined, { day: '2-digit' });
+        const TF = (d) => {
+          const time = d.toLocaleString(undefined, { hour: 'numeric', minute: '2-digit' });
+          const wd = d.toLocaleString(undefined, { weekday: 'short' });
+          const day = d.toLocaleString(undefined, { day: 'numeric' });
+          const mon = d.toLocaleString(undefined, { month: 'short' });
+          return `${time}, ${wd} ${day} ${mon}`;
+        };
+        
+        // Build event list
+        data.forEach((ev, i) => {
+          const el = document.createElement('div');
+          el.className = 'ev';
+          el.style.animationDelay = (i * 50) + 'ms';
+          
+          el.innerHTML = `
+            <div class="ev-date">
+              <div class="d">${D(ev.d)}</div>
+              <div class="m">${M(ev.d)}</div>
+            </div>
+            <div class="ev-body">
+              <div class="ev-title">${ev.t}</div>
+              <div class="ev-row">
+                <svg class="ev-icon" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M12 1.75A10.25 10.25 0 1 0 22.25 12 10.262 10.262 0 0 0 12 1.75Zm0 18.5A8.25 8.25 0 1 1 20.25 12 8.259 8.259 0 0 1 12 20.25Zm.75-12.5a.75.75 0 0 0-1.5 0v4.25c0 .199.079.39.22.53l2.5 2.5a.75.75 0 1 0 1.06-1.06l-2.28-2.28Z"/>
+                </svg>
+                <span>${TF(ev.d)}</span>
+              </div>
+              <div class="ev-row">
+                <svg class="ev-icon" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M12 2a7 7 0 0 0-7 7c0 4.418 5.25 10.5 6.438 11.844a.75.75 0 0 0 1.124 0C13.75 19.5 19 13.418 19 9a7 7 0 0 0-7-7Zm0 9.5A2.5 2.5 0 1 1 14.5 9 2.503 2.503 0 0 1 12 11.5Z"/>
+                </svg>
+                <span>${ev.l}</span>
+              </div>
+              <a class="map" href="https://maps.google.com/?q=${encodeURIComponent(ev.l)}" target="_blank" rel="noopener">View Map</a>
+            </div>
+          `;
+          
+          wrap.appendChild(el);
+        });
+      }
+
+      // ========== PAGE LOADER FUNCTIONALITY ==========
+      window.addEventListener('load', function() {
+        const loader = document.getElementById('pageLoader');
+        setTimeout(() => {
+          loader.classList.add('hidden');
+        }, 800);
+      });
+
+      // ========== LAZY LOADING IMAGE HANDLER WITH SKELETON STATES ==========
+      function setupLazyLoading() {
+        const images = document.querySelectorAll('img[loading="lazy"]');
+        
+        images.forEach(img => {
+          const parent = img.closest('.preview-item, .partner, .c-slide');
+          
+          if (img.complete) {
+            img.classList.add('loaded');
+            if (parent) parent.classList.remove('loading');
+          } else {
+            img.addEventListener('load', function() {
+              img.classList.add('loaded');
+              if (parent) {
+                setTimeout(() => {
+                  parent.classList.remove('loading');
+                }, 200);
+              }
+            });
+            
+            img.addEventListener('error', function() {
+              if (parent) parent.classList.remove('loading');
+            });
+          }
+        });
+      }
+    })();
+  </script>
+</body>
+</html>

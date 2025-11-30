@@ -1,0 +1,880 @@
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    .drabpe-navbar {
+        background: #112026;
+        padding: 0 2rem;
+        box-shadow: 0 4px 20px rgba(126, 235, 183, 0.15);
+        position: relative;
+        width: 100%;
+        z-index: 1000;
+        border-bottom: 2px solid rgba(126, 235, 183, 0.2);
+        transition: all 0.3s ease;
+    }
+
+    .drabpe-navbar.search-expanded {
+        padding-bottom: 70px;
+    }
+
+    .drabpe-nav-container {
+        max-width: 1400px;
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 2rem;
+        padding: 1rem 0;
+        transition: all 0.3s ease;
+    }
+
+    .drabpe-logo-section {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        flex-shrink: 0;
+    }
+
+    .drabpe-logo-link {
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+    }
+
+    .drabpe-logo-placeholder {
+        width: 50px;
+        height: 50px;
+        background: linear-gradient(135deg, #7eebb7 0%, #5dd9a0 100%);
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+        color: #110026;
+        font-size: 20px;
+        box-shadow: 0 4px 15px rgba(126, 235, 183, 0.3);
+        transition: all 0.3s ease;
+        cursor: pointer;
+        overflow: hidden;
+    }
+
+    .drabpe-logo-placeholder img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+    }
+
+    .drabpe-logo-placeholder:hover {
+        transform: translateY(-3px) rotate(5deg);
+        box-shadow: 0 6px 25px rgba(126, 235, 183, 0.5);
+    }
+
+    .drabpe-brand-name {
+        color: #7eebb7;
+        text-decoration: none;
+        font-size: 28px;
+        font-weight: 700;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        transition: all 0.3s ease;
+    }
+
+    .drabpe-brand-name:hover {
+        color: #8ffcc7;
+        text-shadow: 0 0 10px rgba(126, 235, 183, 0.5);
+    }
+
+    .drabpe-nav-menu {
+        display: flex;
+        gap: 0.5rem;
+        flex: 1;
+        justify-content: center;
+        transition: all 0.3s ease;
+        z-index: 1;
+    }
+
+    .drabpe-nav-item {
+        position: relative;
+        color: #fff;
+        text-decoration: none;
+        padding: 0.75rem 1.5rem;
+        border-radius: 8px;
+        font-weight: 500;
+        transition: all 0.3s ease;
+        cursor: pointer;
+        font-size: 15px;
+        white-space: nowrap;
+    }
+
+    .drabpe-nav-item:hover {
+        background: rgba(126, 235, 183, 0.1);
+        color: #7eebb7;
+        transform: translateY(-2px);
+    }
+
+    .drabpe-nav-item.has-dropdown {
+        position: relative;
+    }
+
+    .drabpe-dropdown {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        background: #110026;
+        border: 1px solid rgba(126, 235, 183, 0.3);
+        border-radius: 12px;
+        min-width: 220px;
+        margin-top: 0.5rem;
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(-10px);
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+        overflow: visible;
+        z-index: 100;
+    }
+
+    .drabpe-nav-item.has-dropdown:hover .drabpe-dropdown {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+    }
+
+    .drabpe-dropdown-item {
+        display: block;
+        padding: 1rem 1.5rem;
+        color: #fff;
+        text-decoration: none;
+        transition: all 0.3s ease;
+        border-bottom: 1px solid rgba(126, 235, 183, 0.1);
+        position: relative;
+        overflow: visible;
+    }
+
+    .drabpe-dropdown-item:last-child {
+        border-bottom: none;
+    }
+
+    .drabpe-dropdown-item::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 4px;
+        height: 100%;
+        background: linear-gradient(180deg, #7eebb7 0%, #5dd9a0 100%);
+        transform: scaleY(0);
+        transition: transform 0.3s ease;
+    }
+
+    .drabpe-dropdown-item:hover::before {
+        transform: scaleY(1);
+    }
+
+    .drabpe-dropdown-item:hover {
+        background: rgba(126, 235, 183, 0.1);
+        color: #7eebb7;
+        padding-left: 2rem;
+    }
+
+    .drabpe-sub-dropdown {
+        position: absolute;
+        top: 0;
+        left: 100%;
+        background: #110026;
+        border: 1px solid rgba(126, 235, 183, 0.3);
+        border-radius: 12px;
+        min-width: 220px;
+        margin-left: 0.5rem;
+        opacity: 0;
+        visibility: hidden;
+        transform: translateX(-10px);
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+        overflow: visible;
+        z-index: 101;
+    }
+
+    .drabpe-dropdown-item.has-sub:hover .drabpe-sub-dropdown {
+        opacity: 1;
+        visibility: visible;
+        transform: translateX(0);
+    }
+
+    .drabpe-dropdown-item.has-sub {
+        position: relative;
+        padding-right: 2.5rem;
+    }
+
+    .drabpe-dropdown-item.has-sub::after {
+        content: '›';
+        position: absolute;
+        right: 1rem;
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: 20px;
+        color: #7eebb7;
+    }
+
+    .drabpe-sub-dropdown-item {
+        display: block;
+        padding: 1rem 1.5rem;
+        color: #fff;
+        text-decoration: none;
+        transition: all 0.3s ease;
+        border-bottom: 1px solid rgba(126, 235, 183, 0.1);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .drabpe-sub-dropdown-item:last-child {
+        border-bottom: none;
+    }
+
+    .drabpe-sub-dropdown-item::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 4px;
+        height: 100%;
+        background: linear-gradient(180deg, #7eebb7 0%, #5dd9a0 100%);
+        transform: scaleY(0);
+        transition: transform 0.3s ease;
+    }
+
+    .drabpe-sub-dropdown-item:hover::before {
+        transform: scaleY(1);
+    }
+
+    .drabpe-sub-dropdown-item:hover {
+        background: rgba(126, 235, 183, 0.1);
+        color: #7eebb7;
+        padding-left: 2rem;
+    }
+
+    .drabpe-nav-right {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        flex-shrink: 0;
+    }
+
+    .drabpe-search-wrapper {
+        position: relative;
+        width: auto;
+    }
+
+    .drabpe-search-container {
+        position: relative;
+        display: flex;
+        align-items: center;
+    }
+
+    .drabpe-search-bar-expanded {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: rgba(17, 2, 4, 0.98);
+        border-top: 1px solid rgba(126, 235, 183, 0.2);
+        padding: 1rem 2rem;
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(-20px);
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    .drabpe-search-bar-expanded.active {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+    }
+
+    .drabpe-search-bar-expanded .drabpe-search-input {
+        width: 100%;
+        max-width: 600px;
+        margin: 0 auto;
+        display: block;
+        padding: 1rem 3.5rem 1rem 1.5rem;
+        border: 2px solid #7eebb7;
+        border-radius: 50px;
+        font-size: 16px;
+        color: #7eebb7;
+        background-color: rgba(0, 0, 0, 0.5);
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        font-weight: 500;
+    }
+
+    .drabpe-search-bar-expanded .drabpe-search-input:focus {
+        outline: none;
+        border-color: #7eebb7;
+        box-shadow: 0 0 0 4px rgba(126, 235, 183, 0.25), 0 4px 12px rgba(126, 235, 183, 0.2);
+        transform: translateY(-2px);
+        background-color: rgba(0, 0, 0, 0.7);
+    }
+
+    .drabpe-search-bar-expanded .drabpe-search-input::placeholder {
+        color: #7eebb7;
+        opacity: 0.6;
+    }
+
+    .drabpe-search-icon-btn {
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        background: rgba(126, 235, 183, 0.15);
+        border: 2px solid #7eebb7;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        flex-shrink: 0;
+        z-index: 10;
+    }
+
+    .drabpe-search-icon-btn:hover {
+        background: rgba(126, 235, 183, 0.25);
+        box-shadow: 0 4px 15px rgba(126, 235, 183, 0.3);
+        transform: scale(1.05);
+    }
+
+    .drabpe-search-icon-btn.active {
+        background: rgba(126, 235, 183, 0.3);
+        box-shadow: 0 0 0 4px rgba(126, 235, 183, 0.15);
+    }
+
+    .drabpe-search-icon {
+        width: 20px;
+        height: 20px;
+        stroke: #7eebb7;
+        transition: all 0.3s ease;
+    }
+
+    .drabpe-search-results {
+        position: absolute;
+        top: calc(100% + 8px);
+        left: 50%;
+        transform: translateX(-50%);
+        width: 100%;
+        max-width: 600px;
+        background: #110026;
+        border: 1px solid rgba(126, 235, 183, 0.3);
+        border-radius: 12px;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+        max-height: 400px;
+        overflow-y: auto;
+        z-index: 9999;
+        display: none;
+    }
+
+    .drabpe-search-results.show {
+        display: block;
+    }
+
+    .drabpe-search-section {
+        background-color: transparent;
+        border-bottom: 1px solid rgba(126, 235, 183, 0.1);
+        padding: 14px 16px;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        cursor: pointer;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .drabpe-search-section:hover {
+        background: linear-gradient(90deg, rgba(126, 235, 183, 0.12) 0%, rgba(126, 235, 183, 0.05) 100%);
+        transform: translateX(4px);
+    }
+
+    .drabpe-search-section a {
+        color: #ffffff;
+        text-decoration: none;
+        font-weight: 600;
+        display: block;
+        font-size: 15px;
+        margin-bottom: 4px;
+        transition: all 0.3s ease;
+    }
+
+    .drabpe-search-section a:hover {
+        color: #7eebb7;
+    }
+
+    .drabpe-search-section p {
+        margin: 0;
+        font-size: 13px;
+        color: rgba(255, 255, 255, 0.7);
+        line-height: 1.4;
+    }
+
+    .drabpe-no-results {
+        text-align: center;
+        color: rgba(255, 255, 255, 0.8);
+        padding: 24px;
+        font-size: 14px;
+        display: none;
+    }
+
+    .drabpe-no-results.show {
+        display: block;
+    }
+
+    .drabpe-login-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 44px;
+        height: 44px;
+        padding: 0;
+        background: linear-gradient(135deg, #7eebb7 0%, #5dd9a0 100%);
+        color: #110026;
+        text-decoration: none;
+        border-radius: 50%;
+        font-weight: 600;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 15px rgba(126, 235, 183, 0.3);
+    }
+
+    .drabpe-login-btn:hover {
+        transform: translateY(-3px) scale(1.05);
+        box-shadow: 0 6px 25px rgba(126, 235, 183, 0.5);
+        background: linear-gradient(135deg, #8ffcc7 0%, #6de9b0 100%);
+    }
+
+    .drabpe-user-icon {
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        background: #110026;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .drabpe-mobile-menu-toggle {
+        display: none;
+        width: 44px;
+        height: 44px;
+        background: rgba(126, 235, 183, 0.15);
+        border: 2px solid #7eebb7;
+        border-radius: 8px;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 5px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        flex-shrink: 0;
+    }
+
+    .drabpe-mobile-menu-toggle:hover {
+        background: rgba(126, 235, 183, 0.25);
+    }
+
+    .drabpe-mobile-menu-toggle span {
+        width: 24px;
+        height: 2px;
+        background: #7eebb7;
+        transition: all 0.3s ease;
+    }
+
+    .drabpe-mobile-menu-toggle.active span:nth-child(1) {
+        transform: translateY(7px) rotate(45deg);
+    }
+
+    .drabpe-mobile-menu-toggle.active span:nth-child(2) {
+        opacity: 0;
+    }
+
+    .drabpe-mobile-menu-toggle.active span:nth-child(3) {
+        transform: translateY(-7px) rotate(-45deg);
+    }
+
+    .drabpe-mobile-nav-menu {
+        background: #110026;
+        border-top: 1px solid rgba(126, 235, 183, 0.2);
+        max-height: 0;
+        overflow-y: auto;
+        transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+    }
+
+    .drabpe-mobile-nav-menu.open {
+        max-height: 600px;
+    }
+
+    .drabpe-mobile-nav-item {
+        border-bottom: 1px solid rgba(126, 235, 183, 0.1);
+    }
+
+    .drabpe-mobile-nav-item > .drabpe-nav-item {
+        display: block;
+        padding: 1.25rem 2rem;
+        width: 100%;
+        text-align: left;
+        border-radius: 0;
+        color: #fff;
+    }
+
+    .drabpe-mobile-nav-item .drabpe-dropdown {
+        position: static;
+        opacity: 1;
+        visibility: visible;
+        transform: none;
+        border: none;
+        border-radius: 0;
+        margin: 0;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease;
+        box-shadow: none;
+    }
+
+    .drabpe-mobile-nav-item.open .drabpe-dropdown {
+        max-height: 1000px;
+    }
+
+    .drabpe-mobile-nav-item .drabpe-dropdown-item {
+        padding-left: 3rem;
+        background: rgba(0, 0, 0, 0.2);
+        color: #fff;
+    }
+
+    .drabpe-mobile-nav-item .drabpe-sub-dropdown {
+        position: static;
+        margin: 0;
+        border: none;
+        border-radius: 0;
+        box-shadow: none;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease;
+    }
+
+    .drabpe-mobile-nav-item .drabpe-dropdown-item.open .drabpe-sub-dropdown {
+        max-height: 500px;
+    }
+
+    .drabpe-mobile-nav-item .drabpe-sub-dropdown-item {
+        padding-left: 4.5rem;
+        background: rgba(0, 0, 0, 0.3);
+        color: #fff;
+    }
+
+    @media (max-width: 1024px) {
+        .drabpe-nav-menu {
+            display: none;
+        }
+
+        .drabpe-mobile-nav-menu {
+            display: block;
+        }
+
+        .drabpe-mobile-menu-toggle {
+            display: flex;
+        }
+    }
+
+    @media (max-width: 768px) {
+        .drabpe-navbar {
+            padding: 0 1rem;
+        }
+
+        .drabpe-brand-name {
+            font-size: 20px;
+            letter-spacing: 1px;
+        }
+
+        .drabpe-logo-placeholder {
+            width: 40px;
+            height: 40px;
+            font-size: 16px;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .drabpe-brand-name {
+            font-size: 16px;
+        }
+
+        .drabpe-logo-placeholder {
+            width: 36px;
+            height: 36px;
+        }
+    }
+</style>
+
+<nav class="drabpe-navbar" id="drabpeNavbar">
+    <div class="drabpe-nav-container" id="drabpeNavContainer">
+        <!-- Logo Section -->
+        <div class="drabpe-logo-section">
+            <a href="https://drabpe.org" class="drabpe-logo-link">
+                <div class="drabpe-logo-placeholder" title="DRABPE Logo">
+                    <img src="https://drabpe.org/wp-content/uploads/2024/05/Untitled-2.svg" alt="DRABPE Logo" loading="lazy" />
+                </div>
+                <div class="drabpe-brand-name">DRABPE</div>
+            </a>
+        </div>
+
+        <!-- Mobile Menu Toggle -->
+        <div class="drabpe-mobile-menu-toggle" id="drabpeMobileMenuToggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+
+        <!-- Desktop Navigation Menu -->
+        <div class="drabpe-nav-menu">
+            <div class="drabpe-nav-item has-dropdown">
+                <a href="https://drabpe.org" style="text-decoration: none; color: white;">HOME</a>
+            </div>
+            <div class="drabpe-nav-item has-dropdown">
+                INFO
+                <div class="drabpe-dropdown">
+                    <a href="https://drabpe.org/about-us/" class="drabpe-dropdown-item">ABOUT US</a>
+                    <div class="drabpe-dropdown-item has-sub">
+                        GOOGLE CALENDAR
+                        <div class="drabpe-sub-dropdown">
+                            <a href="https://drabpe.org/google-calendar-event-registration/" class="drabpe-sub-dropdown-item">CALENDAR EVENT REGISTRATION</a>
+                        </div>
+                    </div>
+                    <a href="https://drabpe.org/frequently-asked-questions/" class="drabpe-dropdown-item">FREQUENTLY ASKED QUESTIONS</a>
+                    <a href="https://drabpe.org/financial-information/" class="drabpe-dropdown-item">FINANCIAL INFORMATION</a>
+                    <a href="https://drabpe.org/office-booking-portal/" class="drabpe-dropdown-item">DRABPE OFFICE BOOKING PORTAL</a>
+                </div>
+            </div>
+            <div class="drabpe-nav-item has-dropdown">
+                DIRECTORY
+                <div class="drabpe-dropdown">
+                    <a href="https://drabpe.org/directory/" class="drabpe-dropdown-item">BLACK BUSINESSES DIRECTORY</a>
+                    <a href="https://drabpe.org/register-your-business/" class="drabpe-dropdown-item">REGISTER YOUR BUSINESS</a>
+                    <a href="https://drabpe.org/drabpe-community-entrepreneur-spotlight-registration/" class="drabpe-dropdown-item">DRABPE COMMUNITY ENTREPRENEUR SPOTLIGHT</a>
+                </div>
+            </div>
+            <div class="drabpe-nav-item has-dropdown">
+                <a href="https://drabpe.org/drabpe-news/#events" style="text-decoration: none; color: white;">EVENTS</a>
+            </div>
+            <div class="drabpe-nav-item has-dropdown">
+                PROGRAMS
+                <div class="drabpe-dropdown">
+                    <a href="https://drabpe.org/b-wise-wellness-symposium/" class="drabpe-dropdown-item">BWISE WELLNESS</a>
+                    <div class="drabpe-dropdown-item has-sub">
+                        FUTURE FOUNDERS
+                        <div class="drabpe-sub-dropdown">
+                            <a href="https://drabpe.org/black-youth-career-launch-registration/" class="drabpe-sub-dropdown-item">FUTURE FOUNDERS APPLICATION</a>
+                            <a href="https://drabpe.org/black-youth-career-launch/" class="drabpe-sub-dropdown-item">FUTURE FOUNDERS INFO</a>
+                            <a href="https://drabpe.org/stemm-courses/" class="drabpe-sub-dropdown-item">STEMM COURSES</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="drabpe-nav-item has-dropdown">
+                <a href="https://drabpe.org/contact/" style="text-decoration: none; color: white;">CONTACT US</a>
+            </div>
+        </div>
+
+        <!-- Right Section: Search + Login -->
+        <div class="drabpe-nav-right">
+            <div class="drabpe-search-wrapper">
+                <div class="drabpe-search-container">
+                    <div class="drabpe-search-icon-btn" id="drabpeSearchIconBtn">
+                        <svg class="drabpe-search-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="11" cy="11" r="8"></circle>
+                            <path d="m21 21-4.35-4.35"></path>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+
+            <a href="https://drabpe.org/wp-login.php" class="drabpe-login-btn" title="Login">
+                <div class="drabpe-user-icon">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="12" cy="8" r="4" fill="#7eebb7"/>
+                        <path d="M6 21C6 17.134 8.686 14 12 14C15.314 14 18 17.134 18 21" stroke="#7eebb7" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                </div>
+            </a>
+        </div>
+    </div>
+
+    <!-- Search Bar Expanded -->
+    <div class="drabpe-search-bar-expanded" id="drabpeSearchBarExpanded">
+        <input type="text" id="drabpeSearchInput" class="drabpe-search-input" placeholder="Search DRABPE..." aria-label="Search DRABPE" autocomplete="off">
+        <div class="drabpe-search-results" id="drabpeSearchResults" role="listbox" aria-label="Search results"></div>
+        <div class="drabpe-no-results" id="drabpeNoResults" role="status">No matching results found.</div>
+    </div>
+</nav>
+
+<!-- Mobile Menu -->
+<div class="drabpe-mobile-nav-menu" id="drabpeMobileNavMenu">
+    <div class="drabpe-mobile-nav-item">
+        <a href="https://drabpe.org" class="drabpe-nav-item" style="text-decoration: none;">HOME</a>
+    </div>
+    <div class="drabpe-mobile-nav-item">
+        <div class="drabpe-nav-item" onclick="toggleDrabpeMobileDropdown(this)">INFO</div>
+        <div class="drabpe-dropdown">
+            <a href="https://drabpe.org/about-us/" class="drabpe-dropdown-item">ABOUT US</a>
+            <div class="drabpe-dropdown-item has-sub" onclick="toggleDrabpeMobileSubDropdown(this)">
+                GOOGLE CALENDAR
+                <div class="drabpe-sub-dropdown">
+                    <a href="https://drabpe.org/google-calendar-event-registration/" class="drabpe-sub-dropdown-item">CALENDAR EVENT REGISTRATION</a>
+                </div>
+            </div>
+            <a href="https://drabpe.org/frequently-asked-questions/" class="drabpe-dropdown-item">FREQUENTLY ASKED QUESTIONS</a>
+            <a href="https://drabpe.org/financial-information/" class="drabpe-dropdown-item">FINANCIAL INFORMATION</a>
+            <a href="https://drabpe.org/office-booking-portal/" class="drabpe-dropdown-item">DRABPE OFFICE BOOKING PORTAL</a>
+        </div>
+    </div>
+    <div class="drabpe-mobile-nav-item">
+        <div class="drabpe-nav-item" onclick="toggleDrabpeMobileDropdown(this)">DIRECTORY</div>
+        <div class="drabpe-dropdown">
+            <a href="https://drabpe.org/directory/" class="drabpe-dropdown-item">BLACK BUSINESSES DIRECTORY</a>
+            <a href="https://drabpe.org/register-your-business/" class="drabpe-dropdown-item">REGISTER YOUR BUSINESS</a>
+            <a href="https://drabpe.org/drabpe-community-entrepreneur-spotlight-registration/" class="drabpe-dropdown-item">DRABPE COMMUNITY ENTREPRENEUR SPOTLIGHT</a>
+        </div>
+    </div>
+    <div class="drabpe-mobile-nav-item">
+        <a href="https://drabpe.org/drabpe-news/#events" class="drabpe-nav-item" style="text-decoration: none;">EVENTS</a>
+    </div>
+    <div class="drabpe-mobile-nav-item">
+        <div class="drabpe-nav-item" onclick="toggleDrabpeMobileDropdown(this)">PROGRAMS</div>
+        <div class="drabpe-dropdown">
+            <a href="https://drabpe.org/b-wise-wellness-symposium/" class="drabpe-dropdown-item">BWISE WELLNESS</a>
+            <div class="drabpe-dropdown-item has-sub" onclick="toggleDrabpeMobileSubDropdown(this)">
+                FUTURE FOUNDERS
+                <div class="drabpe-sub-dropdown">
+                    <a href="https://drabpe.org/black-youth-career-launch-registration/" class="drabpe-sub-dropdown-item">FUTURE FOUNDERS APPLICATION</a>
+                    <a href="https://drabpe.org/black-youth-career-launch/" class="drabpe-sub-dropdown-item">FUTURE FOUNDERS INFO</a>
+                    <a href="https://drabpe.org/stemm-courses/" class="drabpe-sub-dropdown-item">STEMM COURSES</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="drabpe-mobile-nav-item">
+        <a href="https://drabpe.org/contact/" class="drabpe-nav-item" style="text-decoration: none;">CONTACT US</a>
+    </div>
+</div>
+
+<script>
+(function() {
+    const searchIconBtn = document.getElementById('drabpeSearchIconBtn');
+    const searchBarExpanded = document.getElementById('drabpeSearchBarExpanded');
+    const searchInput = document.getElementById('drabpeSearchInput');
+    const searchResults = document.getElementById('drabpeSearchResults');
+    const noResults = document.getElementById('drabpeNoResults');
+    const navbar = document.getElementById('drabpeNavbar');
+    const mobileMenuToggle = document.getElementById('drabpeMobileMenuToggle');
+    const mobileNavMenu = document.getElementById('drabpeMobileNavMenu');
+
+    let searchTimeout;
+    let isSearchExpanded = false;
+
+    // Search data
+    const searchData = [
+        { title: 'About Us', url: 'https://drabpe.org/about-us/', keywords: 'about us info information drabpe organization' },
+        { title: 'Events', url: 'https://drabpe.org/drabpe-news/#events', keywords: 'events calendar networking workshops' },
+        { title: 'Contact Us', url: 'https://drabpe.org/contact/', keywords: 'contact reach out support email help' },
+        { title: 'Business Directory', url: 'https://drabpe.org/directory/', keywords: 'directory business listing black businesses' },
+        { title: 'Register Your Business', url: 'https://drabpe.org/register-your-business/', keywords: 'register business add listing' },
+        { title: 'FAQ', url: 'https://drabpe.org/frequently-asked-questions/', keywords: 'faq questions answers help' },
+        { title: 'BWISE Wellness', url: 'https://drabpe.org/b-wise-wellness-symposium/', keywords: 'wellness health bwise program' },
+        { title: 'Future Founders', url: 'https://drabpe.org/black-youth-career-launch/', keywords: 'youth program career education mentorship future founders stemm' }
+    ];
+
+    function toggleSearchBar(expand) {
+        if (expand) {
+            isSearchExpanded = true;
+            searchBarExpanded.classList.add('active');
+            searchIconBtn.classList.add('active');
+            navbar.classList.add('search-expanded');
+            setTimeout(() => searchInput.focus(), 300);
+        } else {
+            isSearchExpanded = false;
+            searchBarExpanded.classList.remove('active');
+            searchIconBtn.classList.remove('active');
+            navbar.classList.remove('search-expanded');
+            searchInput.value = '';
+            searchResults.classList.remove('show');
+            noResults.classList.remove('show');
+        }
+    }
+
+    searchIconBtn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        toggleSearchBar(!isSearchExpanded);
+    });
+
+    searchInput.addEventListener('input', function() {
+        clearTimeout(searchTimeout);
+        const searchTerm = this.value.toLowerCase().trim();
+
+        if (searchTerm === '') {
+            searchResults.classList.remove('show');
+            noResults.classList.remove('show');
+            return;
+        }
+
+        searchTimeout = setTimeout(() => {
+            searchResults.innerHTML = '';
+            let visibleCount = 0;
+
+            searchData.forEach(item => {
+                if (item.keywords.includes(searchTerm) || item.title.toLowerCase().includes(searchTerm)) {
+                    const resultItem = document.createElement('div');
+                    resultItem.className = 'drabpe-search-section';
+                    resultItem.innerHTML = `
+                        <div class="drabpe-search-content">
+                            <a href="${item.url}">${item.title}</a>
+                            <p>Visit ${item.title}</p>
+                        </div>
+                    `;
+                    resultItem.addEventListener('click', function() {
+                        window.location.href = item.url;
+                    });
+                    searchResults.appendChild(resultItem);
+                    visibleCount++;
+                }
+            });
+
+            if (visibleCount === 0) {
+                noResults.classList.add('show');
+                searchResults.classList.remove('show');
+            } else {
+                noResults.classList.remove('show');
+                searchResults.classList.add('show');
+            }
+        }, 300);
+    });
+
+    document.addEventListener('click', function(e) {
+        if (!e.target.closest('.drabpe-search-bar-expanded') && !e.target.closest('.drabpe-search-icon-btn')) {
+            toggleSearchBar(false);
+        }
+    });
+
+    mobileMenuToggle.addEventListener('click', function() {
+        this.classList.toggle('active');
+        mobileNavMenu.classList.toggle('open');
+    });
+
+    window.toggleDrabpeMobileDropdown = function(element) {
+        const parent = element.parentElement;
+        parent.classList.toggle('open');
+    };
+
+    window.toggleDrabpeMobileSubDropdown = function(element) {
+        element.classList.toggle('open');
+        event.stopPropagation();
+    };
+})();
+</script>

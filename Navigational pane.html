@@ -1,0 +1,1306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DRABPE - Professional Navigation</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #110204;
+            min-height: 100vh;
+            padding-top: 90px;
+        }
+
+        .navbar {
+            background: #112026;
+            padding: 0 2rem;
+            box-shadow: 0 4px 20px rgba(126, 235, 183, 0.15);
+            position: fixed;
+            top: 20px;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            border-bottom: 2px solid rgba(126, 235, 183, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .navbar.search-expanded {
+            padding-bottom: 70px;
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            padding: 1rem 0;
+            transition: all 0.3s ease;
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            flex-shrink: 0;
+        }
+
+        .logo-link {
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .logo-placeholder {
+            width: 50px;
+            height: 100%;
+            background: linear-gradient(135deg, #7eebb7 0%, #5dd9a0 100%);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: #112026;
+            font-size: 20px;
+            box-shadow: 0 4px 15px rgba(126, 235, 183, 0.3);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            overflow: hidden;
+        }
+
+        .logo-placeholder img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .logo-placeholder:hover {
+            transform: translateY(-3px) rotate(5deg);
+            box-shadow: 0 6px 25px rgba(126, 235, 183, 0.5);
+        }
+
+        .brand-name {
+            color: #7eebb7;
+            text-decoration: none;
+            font-size: 28px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+        }
+
+        .brand-name:hover {
+            color: #8ffcc7;
+            text-shadow: 0 0 10px rgba(126, 235, 183, 0.5);
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 0.001rem;
+            flex: 1;
+            justify-content: center;
+            transition: all 0.3s ease;
+            z-index: 1;
+        }
+
+        .nav-item {
+            position: relative;
+            color: #fff !important;
+            text-decoration: none !important;
+            text-decoration: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            font-size: 15px;
+            white-space: nowrap;
+        }
+
+        .nav-item:hover {
+            background: rgba(126, 235, 183, 0.1);
+            color: #7eebb7;
+            transform: translateY(-2px);
+        }
+
+        .nav-item.has-dropdown {
+            position: relative;
+        }
+
+        .dropdown {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: #112026;
+            border: 1px solid rgba(126, 235, 183, 0.3);
+            border-radius: 12px;
+            min-width: 220px;
+            margin-top: 0.5rem;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+            overflow: visible;
+            z-index: 100;
+        }
+
+        .nav-item.has-dropdown:hover .dropdown {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown-item {
+            display: block;
+            padding: 1rem 1.5rem;
+            color: #fff !important;
+            text-decoration: none !important;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border-bottom: 1px solid rgba(126, 235, 183, 0.1);
+            position: relative;
+            overflow: visible;
+        }
+
+        .dropdown-item:last-child {
+            border-bottom: none;
+        }
+
+        .dropdown-item::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(180deg, #7eebb7 0%, #5dd9a0 100%);
+            transform: scaleY(0);
+            transition: transform 0.3s ease;
+        }
+
+        .dropdown-item:hover::before {
+            transform: scaleY(1);
+        }
+
+        .dropdown-item:hover {
+            background: rgba(126, 235, 183, 0.1);
+            color: #7eebb7;
+            padding-left: 2rem;
+        }
+
+        .sub-dropdown {
+            position: absolute;
+            top: 0;
+            left: 100%;
+            background: #112026;
+            border: 1px solid rgba(126, 235, 183, 0.3);
+            border-radius: 12px;
+            min-width: 220px;
+            margin-left: 0.5rem;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateX(-10px);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+            overflow: visible;
+            z-index: 101;
+        }
+
+        .dropdown-item.has-sub:hover .sub-dropdown {
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(0);
+        }
+
+        .dropdown-item.has-sub {
+            position: relative;
+            padding-right: 2.5rem;
+        }
+
+        .dropdown-item.has-sub::after {
+            content: '›';
+            position: absolute;
+            right: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 20px;
+            color: #7eebb7;
+            text-decoration: none !important;
+        }
+
+        .sub-dropdown-item {
+            display: block;
+            padding: 1rem 1.5rem;
+            color: #fff !important;
+            text-decoration: none !important;
+            transition: all 0.3s ease;
+            border-bottom: 1px solid rgba(126, 235, 183, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .sub-dropdown-item:last-child {
+            border-bottom: none;
+        }
+
+        .sub-dropdown-item::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(180deg, #7eebb7 0%, #5dd9a0 100%);
+            transform: scaleY(0);
+            transition: transform 0.3s ease;
+        }
+
+        .sub-dropdown-item:hover::before {
+            transform: scaleY(1);
+        }
+
+        .sub-dropdown-item:hover {
+            background: rgba(126, 235, 183, 0.1);
+            color: #7eebb7;
+            padding-left: 2rem;
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            right: 1.7rem;
+            flex-shrink: 0;
+        }
+
+        .search-wrapper {
+            position: relative;
+            width: auto;
+        }
+
+        .search-container {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .search-bar-expanded {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: rgba(17, 2, 4, 0.98);
+            border-top: 1px solid rgba(126, 235, 183, 0.2);
+            padding: 1rem 2rem;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-20px);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .search-bar-expanded.active {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .search-bar-expanded .search-input {
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto;
+            display: block;
+            padding: 1rem 3.5rem 1rem 1.5rem;
+            border: 2px solid #7eebb7;
+            border-radius: 50px;
+            font-size: 16px;
+            color: #7eebb7;
+            background-color: rgba(0, 0, 0, 0.5);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            font-weight: 500;
+        }
+
+        .search-bar-expanded .search-input:focus {
+            outline: none;
+            border-color: #7eebb7;
+            box-shadow: 0 0 0 4px rgba(126, 235, 183, 0.25), 0 4px 12px rgba(126, 235, 183, 0.2);
+            transform: translateY(-2px);
+            background-color: rgba(0, 0, 0, 0.7);
+        }
+
+        .search-bar-expanded .search-input::placeholder {
+            color: #7eebb7;
+            opacity: 0.6;
+        }
+
+        .search-icon-btn {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: rgba(126, 235, 183, 0.15);
+            border: 2px solid #7eebb7;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            flex-shrink: 0;
+            z-index: 10;
+        }
+
+        .search-icon-btn:hover {
+            background: rgba(126, 235, 183, 0.25);
+            box-shadow: 0 4px 15px rgba(126, 235, 183, 0.3);
+            transform: scale(1.05);
+        }
+
+        .search-icon-btn.active {
+            background: rgba(126, 235, 183, 0.3);
+            box-shadow: 0 0 0 4px rgba(126, 235, 183, 0.15);
+        }
+
+        .search-icon {
+            width: 20px;
+            height: 20px;
+            stroke: #7eebb7;
+            transition: all 0.3s ease;
+        }
+
+        #searchResults {
+            position: absolute;
+            top: calc(100% + 8px);
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            max-width: 600px;
+            background: #112026;
+            border: 1px solid rgba(126, 235, 183, 0.3);
+            border-radius: 12px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+            max-height: 400px;
+            overflow-y: auto;
+            z-index: 9999;
+            display: none;
+            animation: slideDown 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        #searchResults.show {
+            display: block;
+        }
+
+        #searchResults::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        #searchResults::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 0 12px 12px 0;
+        }
+
+        #searchResults::-webkit-scrollbar-thumb {
+            background: rgba(126, 235, 183, 0.3);
+            border-radius: 4px;
+        }
+
+        #searchResults::-webkit-scrollbar-thumb:hover {
+            background: rgba(126, 235, 183, 0.5);
+        }
+
+        .search-section {
+            background-color: transparent;
+            border-bottom: 1px solid rgba(126, 235, 183, 0.1);
+            padding: 14px 16px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            opacity: 0;
+            transform: translateX(-10px);
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .search-section::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(180deg, #7eebb7 0%, #5dd9a0 100%);
+            transform: scaleY(0);
+            transition: transform 0.3s ease;
+        }
+
+        .search-section:hover::before {
+            transform: scaleY(1);
+        }
+
+        .search-section:hover {
+            background: linear-gradient(90deg, rgba(126, 235, 183, 0.12) 0%, rgba(126, 235, 183, 0.05) 100%);
+            transform: translateX(4px);
+        }
+
+        .search-section:last-child {
+            border-bottom: none;
+        }
+
+        .search-section.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .search-content {
+            flex: 1;
+            overflow: hidden;
+        }
+
+        .search-section a {
+            color: #fff !important;
+            text-decoration: none;
+            font-weight: 600;
+            display: block;
+            font-size: 15px;
+            margin-bottom: 4px;
+            transition: all 0.3s ease;
+        }
+
+        .search-section a:hover {
+            color: #7eebb7;
+            text-shadow: 0 0 8px rgba(126, 235, 183, 0.3);
+        }
+
+        .search-section p {
+            margin: 0;
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.7) !important;
+            line-height: 1.4;
+        }
+
+        .no-results {
+            text-align: center;
+            color: rgba(255, 255, 255, 0.8) !important;
+            padding: 24px;
+            font-size: 14px;
+            display: none;
+        }
+
+        .no-results.show {
+            display: block;
+        }
+
+        .login-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 44px;
+            height: 44px;
+            padding: 0;
+            background: linear-gradient(135deg, #7eebb7 0%, #5dd9a0 100%);
+            color: #112026;
+            text-decoration: none;
+            border-radius: 50%;
+            font-weight: 600;
+            right: 1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(126, 235, 183, 0.3);
+        }
+
+        .login-btn:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 6px 25px rgba(126, 235, 183, 0.5);
+            background: linear-gradient(135deg, #8ffcc7 0%, #6de9b0 100%);
+        }
+
+        .user-icon {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: #112026;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .mobile-menu-toggle {
+            display: none;
+            width: 44px;
+            height: 44px;
+            background: rgba(126, 235, 183, 0.15);
+            border: 2px solid #7eebb7;
+            border-radius: 8px;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            flex-shrink: 0;
+        }
+
+        .mobile-menu-toggle:hover {
+            background: rgba(126, 235, 183, 0.25);
+        }
+
+        .mobile-menu-toggle span {
+            width: 24px;
+            height: 2px;
+            background: #7eebb7;
+            transition: all 0.3s ease;
+        }
+
+        .mobile-menu-toggle.active span:nth-child(1) {
+            transform: translateY(7px) rotate(45deg);
+        }
+
+        .mobile-menu-toggle.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .mobile-menu-toggle.active span:nth-child(3) {
+            transform: translateY(-7px) rotate(-45deg);
+        }
+
+        .mobile-nav-menu {
+            position: fixed;
+            top: 90px;
+            left: 0;
+            right: 0;
+            background: #112026;
+            border-top: 1px solid rgba(126, 235, 183, 0.2);
+            max-height: 0;
+            overflow-y: auto;
+            transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1), top 0.3s ease;
+            z-index: 999;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+        }
+
+        .mobile-nav-menu.open {
+            max-height: calc(100vh - 90px);
+        }
+
+        .navbar.search-expanded ~ .mobile-nav-menu {
+            top: 160px;
+        }
+
+        .navbar.search-expanded ~ .mobile-nav-menu.open {
+            max-height: calc(100vh - 160px);
+        }
+
+        .mobile-nav-item {
+            border-bottom: 1px solid rgba(126, 235, 183, 0.1);
+        }
+
+        .mobile-nav-item > .nav-item {
+            display: block;
+            padding: 1.5rem 2rem;
+            width: 100%;
+            text-align: left;
+            border-radius: 0;
+            color: #fff !important;
+            text-decoration: none !important;
+            font-size: 16px;
+        }
+
+        .mobile-nav-item .dropdown {
+            position: static;
+            opacity: 1;
+            visibility: visible;
+            transform: none;
+            border: none;
+            border-radius: 0;
+            margin: 0;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+            box-shadow: none;
+        }
+
+        .mobile-nav-item.open .dropdown {
+            max-height: 1000px;
+        }
+
+        .mobile-nav-item .dropdown-item {
+            padding-left: 3rem;
+            background: rgba(0, 0, 0, 0.2);
+            color: #fff !important;
+            text-decoration: none !important;
+            font-size: 15px;
+        }
+
+        .mobile-nav-item .sub-dropdown {
+            position: static;
+            margin: 0;
+            border: none;
+            border-radius: 0;
+            box-shadow: none;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+
+        .mobile-nav-item .dropdown-item.open .sub-dropdown {
+            max-height: 500px;
+        }
+
+        .mobile-nav-item .sub-dropdown-item {
+            padding-left: 4.5rem;
+            background: rgba(0, 0, 0, 0.3);
+            color: #fff !important;
+            text-decoration: none !important;
+            font-size: 14px;
+        }
+
+        @media (max-width: 1024px) {
+            .nav-menu {
+                display: none;
+            }
+
+            .mobile-nav-menu {
+                display: block;
+            }
+
+            .mobile-menu-toggle {
+                display: flex;
+            }
+
+            .navbar {
+                padding: 0 1.5rem;
+            }
+
+            .nav-container {
+                gap: 1rem;
+            }
+
+            .search-bar-expanded {
+                padding: 1rem 1.5rem;
+            }
+
+            .search-bar-expanded .search-input {
+                max-width: 100%;
+            }
+
+            #searchResults {
+                max-width: 100%;
+            }
+        }
+
+        @media (max-width: 900px) {
+            /* Make navbar stick to top on mobile with solid background */
+            .navbar {
+                top: 0;
+                padding: 1rem 1.5rem;
+                background: #112026;
+                box-shadow: 0 2px 15px rgba(0, 0, 0, 0.3);
+            }
+
+            .navbar.search-expanded {
+                padding-bottom: 70px;
+            }
+
+            .nav-container {
+                flex-wrap: wrap;
+                padding: 0.5rem 0;
+                gap: 1rem;
+            }
+
+            /* Make logo section larger on mobile */
+            .logo-section {
+                order: 1;
+                flex: 0 1 auto;
+            }
+
+            .logo-placeholder {
+                width: 45px;
+                height: 100%;
+            }
+
+            .brand-name {
+                font-size: 22px;
+            }
+
+            .mobile-menu-toggle {
+                order: 2;
+                margin-left: auto;
+                width: 48px;
+                height: 48px;
+            }
+
+            /* Make action buttons larger */
+            .nav-right {
+                order: 3;
+                gap: 1.75rem;
+            }
+
+            .search-icon-btn,
+            .login-btn {
+                width: 48px;
+                height: 48px;
+            }
+
+            .search-icon {
+                width: 22px;
+                height: 22px;
+            }
+
+            /* Adjust mobile menu positioning */
+            .mobile-nav-menu {
+                top: 90px;
+                background: #112026;
+            }
+
+            .mobile-nav-menu.open {
+                max-height: calc(100vh - 90px);
+            }
+
+            .navbar.search-expanded ~ .mobile-nav-menu {
+                top: 160px;
+            }
+
+            .navbar.search-expanded ~ .mobile-nav-menu.open {
+                max-height: calc(100vh - 160px);
+            }
+
+            /* Increase body padding for larger navbar */
+            body {
+                padding-top: 90px;
+            }
+
+            body.search-active {
+                padding-top: 160px;
+            }
+
+            /* Make mobile menu items larger and more tappable */
+            .mobile-nav-item > .nav-item {
+                padding: 1.5rem 2rem;
+                font-size: 16px;
+            }
+
+            .mobile-nav-item .dropdown-item {
+                padding: 1.25rem 3rem;
+                font-size: 15px;
+            }
+
+            .mobile-nav-item .sub-dropdown-item {
+                padding: 1.25rem 4.5rem;
+                font-size: 14px;
+            }
+        }
+
+        @media (max-width: 600px) {
+            /* Further optimize for smaller screens with solid background */
+            .navbar {
+                top: 0;
+                padding: 1rem 1rem;
+                background: #112026;
+            }
+
+            .nav-container {
+                gap: 1rem;
+                padding: 0.25rem 0;
+            }
+
+            .logo-section {
+                gap: 0.75rem;
+            }
+
+            .brand-name {
+                font-size: 20px;
+                letter-spacing: 1px;
+            }
+
+            .logo-placeholder {
+                width: 42px;
+                height: 42px;
+            }
+
+            /* Keep larger touch targets on small screens */
+            .mobile-menu-toggle,
+            .search-icon-btn,
+            .login-btn {
+                width: 44px;
+                height: 44px;
+            }
+
+            .nav-right {
+                gap: 1.75rem;
+            }
+
+            .search-bar-expanded {
+                padding: 1rem 1rem;
+                background: #112026;
+            }
+
+            .search-bar-expanded .search-input {
+                font-size: 15px;
+                padding: 1rem 1.25rem;
+            }
+
+            /* Adjust body padding */
+            body {
+                padding-top: 95px;
+            }
+
+            body.search-active {
+                padding-top: 165px;
+            }
+
+            /* Larger mobile menu items for better usability */
+            .mobile-nav-item > .nav-item {
+                padding: 1.5rem 1.5rem;
+                font-size: 16px;
+            }
+
+            .mobile-nav-item .dropdown-item {
+                padding: 1.25rem 2.5rem;
+                font-size: 15px;
+            }
+
+            .mobile-nav-item .sub-dropdown-item {
+                padding: 1.25rem 3.5rem;
+                font-size: 14px;
+            }
+        }
+
+        @media (max-width: 350px) {
+            .brand-name {
+                display: none;
+            }
+
+            .logo-section {
+                gap: 0;
+            }
+
+            .mobile-menu-toggle,
+            .search-icon-btn,
+            .login-btn {
+                width: 40px;
+                height: 40px;
+            }
+
+            body {
+                padding-top: 85px;
+            }
+
+            body.search-active {
+                padding-top: 145px;
+            }
+        }
+
+        .original-search-sections {
+            display: none;
+        }
+
+        .lazy-load {
+            opacity: 0;
+            transition: opacity 0.5s ease-in;
+        }
+
+        .lazy-load.loaded {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar" id="navbar">
+        <div class="nav-container" id="navContainer">
+            <div class="logo-section">
+                <a href="https://drabpe.org" class="logo-link">
+                    <div class="logo-placeholder" title="DRABPE Logo">
+                        <img src="https://drabpe.org/wp-content/uploads/2024/05/Untitled-2.svg" 
+                             alt="DRABPE Logo" 
+                             loading="lazy"
+                             class="lazy-load" />
+                    </div>
+                    <div class="brand-name">DRABPE</div>
+                </a>
+            </div>
+
+            <div class="mobile-menu-toggle" id="mobileMenuToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+
+            <div class="nav-menu">
+                <div class="nav-item has-dropdown">
+                    <a href="https://drabpe.org" style="text-decoration: none !important; color: white !important;">HOME</a>
+                </div>
+                <div class="nav-item has-dropdown">
+                    INFO
+                    <div class="dropdown">
+                        <a href="https://drabpe.org/about-us/" class="dropdown-item">ABOUT US</a>
+                        <div class="dropdown-item has-sub">
+                            EVENTS CALENDAR
+                            <div class="sub-dropdown">
+                                <a href="https://drabpe.org/#calendar-section" class="sub-dropdown-item">COMMUNITY EVENTS CALENDAR</a>
+                                <a href="https://drabpe.org/google-calendar-event-registration/" class="sub-dropdown-item">SHARE YOUR UPCOMING EVENT</a>
+                            </div>
+                        </div>
+                        <a href="https://drabpe.org/frequently-asked-questions/" class="dropdown-item">FREQUENTLY ASKED QUESTIONS</a>
+                        <a href="https://drabpe.org/financial-information/" class="dropdown-item">FINANCIAL INFORMATION</a>
+                        <a href="https://drabpe.org/office-booking-portal/" class="dropdown-item">DRABPE OFFICE BOOKING PORTAL</a>
+                    </div>
+                </div>
+                <div class="nav-item has-dropdown">
+                    DIRECTORY
+                    <div class="dropdown">
+                        <a href="https://drabpe.org/directory/" class="dropdown-item">BLACK BUSINESSES DIRECTORY</a>
+                        <a href="https://drabpe.org/register-your-business/" class="dropdown-item">REGISTER YOUR BUSINESS</a>
+                        <a href="https://drabpe.org/drabpe-community-entrepreneur-spotlight-registration/" class="dropdown-item">DRABPE COMMUNITY ENTREPRENEUR SPOTLIGHT</a>
+                    </div>
+                </div>
+                <div class="nav-item has-dropdown">
+                    <a href="https://drabpe.org/drabpe-news/#events" style="text-decoration: none !important; color: white !important;">EVENTS</a>
+                </div>
+                <div class="nav-item has-dropdown">
+                    PROGRAMS
+                    <div class="dropdown">
+                        <a href="https://drabpe.org/b-wise-wellness-symposium/" class="dropdown-item">BWISE WELLNESS</a>
+                        <div class="dropdown-item has-sub">
+                            FUTURE FOUNDERS
+                            <div class="sub-dropdown">
+                                <a href="https://drabpe.org/black-youth-career-launch-registration/" class="sub-dropdown-item">FUTURE FOUNDERS APPLICATION</a>
+                                <a href="https://drabpe.org/black-youth-career-launch/" class="sub-dropdown-item">FUTURE FOUNDERS INFO</a>
+                                <a href="https://drabpe.org/stemm-courses/" class="sub-dropdown-item">STEMM COURSES</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="nav-item has-dropdown">
+                    <a href="https://drabpe.org/contact/" style="text-decoration: none !important; color: white !important;">CONTACT US</a>
+                </div>
+            </div>
+
+            <div class="nav-right">
+                <div class="search-wrapper">
+                    <div class="search-container">
+                        <div class="search-icon-btn" id="searchIconBtn">
+                            <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="11" cy="11" r="8"></circle>
+                                <path d="m21 21-4.35-4.35"></path>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+
+                <a href="https://drabpe.org/wp-login.php" class="login-btn" title="Login">
+                    <div class="user-icon">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="12" cy="8" r="4" fill="#7eebb7"/>
+                            <path d="M6 21C6 17.134 8.686 14 12 14C15.314 14 18 17.134 18 21" stroke="#7eebb7" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <div class="search-bar-expanded" id="searchBarExpanded">
+            <input 
+                type="text" 
+                id="searchInput" 
+                class="search-input" 
+                placeholder="Search..."
+                aria-label="Search DRABPE"
+                autocomplete="off"
+            >
+            
+            <div id="searchResults" role="listbox" aria-label="Search results"></div>
+            
+            <div class="no-results" id="noResults" role="status">
+                No matching results found.
+            </div>
+        </div>
+    </nav>
+
+    <div class="mobile-nav-menu" id="mobileNavMenu">
+        <div class="mobile-nav-item">
+            <a href="https://drabpe.org" class="nav-item" style="text-decoration: none;">HOME</a>
+        </div>
+        <div class="mobile-nav-item">
+            <div class="nav-item" onclick="toggleMobileDropdown(this)">INFO</div>
+            <div class="dropdown">
+                <a href="https://drabpe.org/about-us/" class="dropdown-item">ABOUT US</a>
+                <div class="dropdown-item has-sub" onclick="toggleMobileSubDropdown(this)">
+                    GOOGLE CALENDAR
+                    <div class="sub-dropdown">
+                        <a href="https://drabpe.org/google-calendar-event-registration/" class="sub-dropdown-item">CALENDAR EVENT REGISTRATION</a>
+                    </div>
+                </div>
+                <a href="https://drabpe.org/frequently-asked-questions/" class="dropdown-item">FREQUENTLY ASKED QUESTIONS</a>
+                <a href="https://drabpe.org/financial-information/" class="dropdown-item">FINANCIAL INFORMATION</a>
+                <a href="https://drabpe.org/office-booking-portal/" class="dropdown-item">DRABPE OFFICE BOOKING PORTAL</a>
+            </div>
+        </div>
+        <div class="mobile-nav-item">
+            <div class="nav-item" onclick="toggleMobileDropdown(this)">DIRECTORY</div>
+            <div class="dropdown">
+                <a href="https://drabpe.org/directory/" class="dropdown-item">BLACK BUSINESSES DIRECTORY</a>
+                <a href="https://drabpe.org/register-your-business/" class="dropdown-item">REGISTER YOUR BUSINESS</a>
+                <a href="https://drabpe.org/drabpe-community-entrepreneur-spotlight-registration/" class="dropdown-item">DRABPE COMMUNITY ENTREPRENEUR SPOTLIGHT</a>
+            </div>
+        </div>
+        <div class="mobile-nav-item">
+            <a href="https://drabpe.org/drabpe-news/#events" class="nav-item" style="text-decoration: none;">EVENTS</a>
+        </div>
+        <div class="mobile-nav-item">
+            <div class="nav-item" onclick="toggleMobileDropdown(this)">PROGRAMS</div>
+            <div class="dropdown">
+                <a href="https://drabpe.org/b-wise-wellness-symposium/" class="dropdown-item">BWISE WELLNESS</a>
+                <div class="dropdown-item has-sub" onclick="toggleMobileSubDropdown(this)">
+                    FUTURE FOUNDERS
+                    <div class="sub-dropdown">
+                        <a href="https://drabpe.org/black-youth-career-launch-registration/" class="sub-dropdown-item">FUTURE FOUNDERS APPLICATION</a>
+                        <a href="https://drabpe.org/black-youth-career-launch/" class="sub-dropdown-item">FUTURE FOUNDERS INFO</a>
+                        <a href="https://drabpe.org/stemm-courses/" class="sub-dropdown-item">STEMM COURSES</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="mobile-nav-item">
+            <a href="https://drabpe.org/contact/" class="nav-item" style="text-decoration: none;">CONTACT US</a>
+        </div>
+    </div>
+
+    <div class="original-search-sections">
+        <div class="search-section" data-keywords="membership benefits join community network">
+            <div class="search-content">
+                <a href="#membership">Membership Benefits</a>
+                <p>Join DRABPE to access networking, resources, and support for Black-owned businesses in Durham.</p>
+            </div>
+        </div>
+
+        <div class="search-section" data-keywords="events calendar networking workshops">
+            <div class="search-content">
+                <a href="#events">Upcoming Events</a>
+                <p>Discover networking opportunities, workshops, and events in the Durham Region.</p>
+            </div>
+        </div>
+
+        <div class="search-section" data-keywords="contact reach out support email help">
+            <div class="search-content">
+                <a href="#contact">Contact Us</a>
+                <p>Get in touch with DRABPE for inquiries, partnerships, or support.</p>
+            </div>
+        </div>
+
+        <div class="search-section" data-keywords="directory business listing register">
+            <div class="search-content">
+                <a href="#directory">Business Directory</a>
+                <p>Explore Black-owned businesses in the Durham Region.</p>
+            </div>
+        </div>
+
+        <div class="search-section" data-keywords="youth program career education mentorship">
+            <div class="search-content">
+                <a href="#youth">Youth Career Launch Program</a>
+                <p>Learn about our STEMM-focused program for Black youth.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const searchIconBtn = document.getElementById('searchIconBtn');
+        const searchBarExpanded = document.getElementById('searchBarExpanded');
+        const searchInput = document.getElementById('searchInput');
+        const searchResults = document.getElementById('searchResults');
+        const noResults = document.getElementById('noResults');
+        const originalSections = document.querySelectorAll('.original-search-sections .search-section');
+        const navbar = document.getElementById('navbar');
+        const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+        const mobileNavMenu = document.getElementById('mobileNavMenu');
+
+        let searchTimeout;
+        let isSearchExpanded = false;
+
+        const lazyLoadObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const element = entry.target;
+                    
+                    if (element.tagName === 'IMG') {
+                        if (element.dataset.src) {
+                            element.src = element.dataset.src;
+                            element.removeAttribute('data-src');
+                        }
+                        element.classList.add('loaded');
+                    }
+                    
+                    if (element.classList.contains('lazy-load')) {
+                        element.classList.add('loaded');
+                    }
+                    
+                    observer.unobserve(element);
+                }
+            });
+        }, {
+            rootMargin: '50px',
+            threshold: 0.01
+        });
+
+        function initLazyLoading() {
+            document.querySelectorAll('img[loading="lazy"], .lazy-load').forEach(element => {
+                lazyLoadObserver.observe(element);
+            });
+        }
+
+        function toggleSearchBar(expand) {
+            if (expand) {
+                isSearchExpanded = true;
+                searchBarExpanded.classList.add('active');
+                searchIconBtn.classList.add('active');
+                navbar.classList.add('search-expanded');
+                document.body.classList.add('search-active');
+                setTimeout(() => {
+                    searchInput.focus();
+                }, 300);
+            } else {
+                isSearchExpanded = false;
+                searchBarExpanded.classList.remove('active');
+                searchIconBtn.classList.remove('active');
+                navbar.classList.remove('search-expanded');
+                document.body.classList.remove('search-active');
+                searchInput.value = '';
+                toggleDropdown(false);
+            }
+        }
+
+        searchIconBtn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            toggleSearchBar(!isSearchExpanded);
+        });
+
+        searchIconBtn.addEventListener('mouseenter', function() {
+            if (!isSearchExpanded) {
+                toggleSearchBar(true);
+            }
+        });
+
+        function toggleDropdown(show) {
+            if (show) {
+                searchResults.classList.add('show');
+                noResults.classList.remove('show');
+            } else {
+                searchResults.classList.remove('show');
+                noResults.classList.remove('show');
+            }
+        }
+
+        searchInput.addEventListener('input', function () {
+            clearTimeout(searchTimeout);
+            
+            const searchTerm = this.value.toLowerCase().trim();
+            
+            if (searchTerm === '') {
+                toggleDropdown(false);
+                return;
+            }
+
+            searchTimeout = setTimeout(() => {
+                let visibleCount = 0;
+                searchResults.innerHTML = '';
+                toggleDropdown(true);
+
+                originalSections.forEach((section, index) => {
+                    const keywords = section.getAttribute('data-keywords').toLowerCase();
+                    const link = section.querySelector('a');
+                    const linkText = link ? link.textContent.toLowerCase() : '';
+                    const description = section.querySelector('p');
+                    const descText = description ? description.textContent.toLowerCase() : '';
+
+                    if (keywords.includes(searchTerm) || linkText.includes(searchTerm) || descText.includes(searchTerm)) {
+                        const clone = section.cloneNode(true);
+                        
+                        clone.setAttribute('tabindex', '0');
+                        clone.setAttribute('role', 'option');
+                        
+                        setTimeout(() => {
+                            clone.classList.add('visible');
+                        }, index * 60);
+                        
+                        clone.addEventListener('click', function() {
+                            const link = this.querySelector('a');
+                            if (link) link.click();
+                        });
+                        
+                        searchResults.appendChild(clone);
+                        visibleCount++;
+                    }
+                });
+
+                if (visibleCount === 0) {
+                    noResults.classList.add('show');
+                } else {
+                    noResults.classList.remove('show');
+                }
+            }, 300);
+        });
+
+        document.addEventListener('click', function(e) {
+            if (!e.target.closest('.search-bar-expanded') && !e.target.closest('.search-icon-btn')) {
+                toggleSearchBar(false);
+            }
+        });
+
+        searchInput.addEventListener('focus', function() {
+            if (this.value.trim() !== '') {
+                toggleDropdown(true);
+            }
+        });
+
+        searchInput.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                toggleSearchBar(false);
+            }
+        });
+
+        mobileMenuToggle.addEventListener('click', function() {
+            this.classList.toggle('active');
+            mobileNavMenu.classList.toggle('open');
+        });
+
+        function toggleMobileDropdown(element) {
+            const parent = element.parentElement;
+            parent.classList.toggle('open');
+        }
+
+        function toggleMobileSubDropdown(element) {
+            element.classList.toggle('open');
+            event.stopPropagation();
+        }
+
+        document.querySelectorAll('.mobile-nav-menu a').forEach(link => {
+            link.addEventListener('click', function() {
+                mobileMenuToggle.classList.remove('active');
+                mobileNavMenu.classList.remove('open');
+            });
+        });
+
+        document.addEventListener('DOMContentLoaded', function() {
+            initLazyLoading();
+        });
+    </script>
+</body>
+</html>

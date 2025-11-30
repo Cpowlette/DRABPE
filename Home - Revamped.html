@@ -1,0 +1,2450 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DRABPE - Durham Region Association of Black Professional Entrepreneurs</title>
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    
+    <style>
+        *, html {
+            scroll-behavior: smooth;
+        }
+        
+        *, *:after, *:before {
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow-x: hidden;
+            background: #112026;
+            color: #fff;
+        }
+
+        #logo {
+            float: left;
+            display: flex;
+            align-items: center;
+            pointer-events: auto;
+            padding: 12px 30px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        #logo:hover {
+            transform: scale(1.05);
+        }
+
+        #logo img {
+            width: 70px;
+            position: relative;
+            filter: drop-shadow(0 2px 8px rgba(126, 235, 183, 0.4));
+        }
+
+        #logo b {
+            position: relative;
+            top: 0px;
+            left: 12px;
+            font-size: 1.8rem;
+            color: #7eebb7;
+            letter-spacing: 3px;
+            font-weight: 700;
+            text-shadow: 0 2px 10px rgba(126, 235, 183, 0.3);
+        }
+
+        #active {
+            color: #7eebb7 !important;
+            font-weight: 600;
+        }
+
+        #active::before {
+            width: 80% !important;
+        }
+
+        #logo2 {
+            float: left !important;
+            display: flex;
+            align-items: center;
+            padding: 12px 30px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        #logo2:hover {
+            transform: scale(1.05);
+        }
+
+        #logo2 img {
+            width: 45px;
+            position: relative;
+            filter: drop-shadow(0 2px 8px rgba(126, 235, 183, 0.4));
+        }
+
+        #logo2 b {
+            position: relative;
+            top: 0px;
+            left: 12px;
+            color: #7eebb7;
+            font-size: 1.5rem;
+            letter-spacing: 3px;
+            font-weight: 700;
+            text-shadow: 0 2px 10px rgba(126, 235, 183, 0.3);
+        }
+
+        #active2 {
+            color: #7eebb7 !important;
+            font-weight: 600;
+        }
+
+        #active2::before {
+            width: 80% !important;
+        }
+
+        /* Responsive adjustments for Testimonials */
+        @media screen and (max-width: 768px) {
+        .brand-title {
+            font-size: 0.2rem; /* Smaller title on mobile */
+            padding-right: 0px; /* Add padding to the right to push text left */
+        }
+        
+        .testimonials-text h3 {
+            font-size: 1rem; /* Smaller heading */
+        }
+        
+        .testimonials-text p {
+            font-size: 0.8rem; /* Smaller paragraph */
+            line-height: 1.4; /* Adjust line height for readability */
+            padding-right: 10px; /* Add padding to the right to push text left */
+            overflow-wrap: break-word; /* Ensure text wraps and doesn't overflow */
+            word-wrap: break-word; /* Fallback for older browsers */
+            white-space: normal; /* Allow text to wrap normally */
+            max-width: 100%; /* Ensure it doesn't exceed container width */
+        }
+        
+        .testimonials-wrapper {
+            gap: 0px; /* Reduce gap between testimonials */
+        }
+        
+        .sponsor-card {
+            padding: 0px; /* Smaller padding for sponsors */
+            max-width: 100%; /* Ensure images fit */
+            max-width: 170px;
+            padding: 0.3px;
+            background: linear-gradient(135deg, rgba(51, 96, 114, 0.95) 0%, rgba(126, 235, 183, 0.95) 100%);
+            border-radius: 1px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            transition: all 0.5s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .testimonials-column {
+            padding-right: 20px; /* Add padding to the right to push content left */
+            max-width: 100%; /* Ensure column doesn't overflow */
+    }
+    }
+
+        /* Roll back to top button */
+        #roll_back {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: linear-gradient(135deg, #7eebb7 0%, #36d2a3 100%);
+            border-radius: 50%;
+            border: 2px solid rgba(255,255,255,0.3);
+            padding: 15px 20px;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 1;
+            box-shadow: 0px 6px 16px -6px rgba(126, 235, 183, 0.8);
+            color: #112026;
+            font-weight: 900;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        #roll_back:hover {
+            transform: translateY(-5px) scale(1.1);
+            box-shadow: 0px 10px 30px rgba(126, 235, 183, 1);
+        }
+
+        .animate {
+            -webkit-animation: animatezoom 0.6s;
+            animation: animatezoom 0.6s;
+        }
+
+        @-webkit-keyframes animatezoom {
+            from { -webkit-transform: scale(0); } 
+            to { -webkit-transform: scale(1); }
+        }
+
+        @keyframes animatezoom {
+            from { transform: scale(0); } 
+            to { transform: scale(1); }
+        }
+
+        /* Added floating donate button with pulse animation */
+        .floating-donate-btn {
+            position: fixed;
+            top: 180px;
+            right: 20px;
+            z-index: 9999;
+            padding: 16px 32px;
+            background: linear-gradient(135deg, #7eebb7 0%, #36d2a3 100%);
+            color: #000;
+            font-size: 1.1rem;
+            font-weight: 700;
+            text-decoration: none;
+            border-radius: 50px;
+            box-shadow: 0 8px 32px rgba(126, 235, 183, 0.5);
+            transition: all 0.3s ease;
+            animation: pulseGlow 2s ease-in-out infinite;
+            cursor: pointer;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .floating-donate-btn:hover {
+            transform: translateY(-4px) scale(1.05);
+            box-shadow: 0 12px 48px rgba(126, 235, 183, 0.8);
+            background: linear-gradient(135deg, #36d2a3 0%, #7eebb7 100%);
+        }
+
+        .floating-donate-btn::before {
+            content: '';
+            margin-right: 8px;
+            animation: heartbeat 1.5s ease-in-out infinite;
+            display: inline-block;
+        }
+
+        @keyframes pulseGlow {
+            0%, 100% {
+                box-shadow: 0 8px 32px rgba(126, 235, 183, 0.5);
+            }
+            50% {
+                box-shadow: 0 8px 48px rgba(126, 235, 183, 0.9), 0 0 60px rgba(126, 235, 183, 0.4);
+            }
+        }
+
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            25% { transform: scale(1.2); }
+            50% { transform: scale(1); }
+        }
+
+        .hero {
+            position: relative;
+            height: 100vh;
+            width: 100%;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 0;
+        }
+
+        .hero-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #1a1a1a 0%, #000 100%);
+        }
+
+        .hero-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100% !important;
+            height: 100% !important;
+            object-fit: cover !important;
+            opacity: 0;
+            animation: fadeInImage 2s ease-out forwards;
+            animation-delay: 0.5s;
+        }
+
+        @keyframes fadeInImage {
+            to {
+                opacity: 0.6;
+            }
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at center, transparent 0%, rgba(0,0,0,0.7) 100%);
+            z-index: 1;
+        }
+
+        .gradient-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, 
+                rgba(126, 235, 183, 0.3) 0%, 
+                rgba(136, 255, 214, 0.2) 50%, 
+                rgba(136, 255, 229, 0.3) 100%);
+            z-index: 1;
+            animation: gradientShift 8s ease-in-out infinite;
+        }
+
+        @keyframes gradientShift {
+            0%, 100% {
+                opacity: 0.3;
+            }
+            50% {
+                opacity: 0.6;
+            }
+        }
+
+        .particles-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 3;
+            text-align: center;
+            max-width: 1200px;
+            padding: 0 2rem;
+        }
+
+        .hero-logo {
+            font-size: 1.2rem;
+            font-weight: 300;
+            letter-spacing: 0.3em;
+            color: #7eebb7;
+            margin-bottom: 2rem;
+            opacity: 0;
+            animation: slideDown 1s ease-out forwards;
+            animation-delay: 1s;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero-title {
+            font-size: 5rem;
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, #fff 0%, #7eebb7 50%, #fff 100%);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: shimmer 3s ease-in-out infinite, splitReveal 1.5s ease-out forwards;
+            animation-delay: 0s, 1.2s;
+        }
+
+        @keyframes shimmer {
+            0%, 100% {
+                background-position: 0% center;
+            }
+            50% {
+                background-position: 100% center;
+            }
+        }
+
+        @keyframes splitReveal {
+            from {
+                opacity: 0;
+                transform: scale(0.8);
+                letter-spacing: -0.5em;
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+                letter-spacing: normal;
+            }
+        }
+
+        .hero-subtitle {
+            font-size: 1.8rem;
+            font-weight: 300;
+            color: #e0e0e0;
+            margin-bottom: 1rem;
+            opacity: 0;
+            padding-bottom: -20px;
+            animation: fadeInUp 1s ease-out forwards;
+            animation-delay: 1.5s;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero-description {
+            font-size: 1.0rem;
+            color: #b0b0b0;
+            max-width: 800px;
+            margin: 0 auto 3rem;
+            line-height: 1.8;
+            opacity: 0;
+            animation: fadeInUp 1s ease-out forwards;
+            animation-delay: 1.8s;
+        }
+
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            padding: 2rem;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .stat-item {
+            opacity: 0;
+            animation: fadeInUp 1s ease-out forwards;
+        }
+
+        .stat-item:nth-child(1) { animation-delay: 2s; }
+        .stat-item:nth-child(2) { animation-delay: 2.2s; }
+        .stat-item:nth-child(3) { animation-delay: 2.4s; }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 700;
+            color: #7eebb7;
+            display: block;
+            margin-top: -30px;
+            gap: 2rem;
+            padding: 1rem;
+        }
+
+        .stat-label {
+            font-size: 1rem;
+            color: #b0b0b0;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            gap: 2rem;
+            padding: 2rem;
+
+        }
+
+        .hero-cta {
+            display: flex;
+            gap: 0.3rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            opacity: 0;
+            animation: fadeInUp 1s ease-out forwards;
+            animation-delay: 2.6s;
+            margin-top: -0px;
+        }
+
+        .cta-button {
+            padding: 1.2rem 3rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+            text-decoration: none;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+            position: relative;
+            overflow: hidden;
+            top: -30px;
+        }
+
+        /* Enhanced button hover effects with ripple animation */
+        .cta-button::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        .cta-button:hover::after {
+            width: 300px;
+            height: 300px;
+        }
+
+        .cta-primary {
+            background: linear-gradient(135deg, #7eebb7 0%, #7eebb7 100%);
+            color: #000;
+            box-shadow: 0 10px 30px rgba(126, 235, 183, 0.3);
+            text-decoration: none !important;
+        }
+
+        .cta-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(126, 235, 183, 0.5);
+        }
+
+        .cta-secondary {
+            background: transparent;
+            color: #fff !important;
+            text-decoration: none !important;
+            border: 2px solid #7eebb7;
+            position: relative;
+        }
+
+        .cta-secondary:hover {
+            background: rgba(126, 235, 183, 0.1);
+            transform: translateY(-3px);
+        }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateX(-50%) translateY(0);
+            }
+            50% {
+                transform: translateX(-50%) translateY(10px);
+            }
+        }
+
+        /* Enhanced floating icons with 3D rotation effect */
+        .floating-icons {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 2;
+            pointer-events: none;
+        }
+
+        .icon {
+            position: absolute;
+            font-size: 2rem;
+            opacity: 0.2;
+            animation: float3D 6s ease-in-out infinite;
+            filter: drop-shadow(0 0 10px rgba(126, 235, 183, 0.5));
+        }
+
+        .icon:nth-child(1) { top: 20%; left: 10%; animation-delay: 0s; }
+        .icon:nth-child(2) { top: 60%; left: 15%; animation-delay: 1s; }
+        .icon:nth-child(3) { top: 30%; right: 10%; animation-delay: 2s; }
+        .icon:nth-child(4) { top: 70%; right: 20%; animation-delay: 3s; }
+        .icon:nth-child(5) { top: 50%; left: 5%; animation-delay: 1.5s; }
+        .icon:nth-child(6) { top: 40%; right: 5%; animation-delay: 2.5s; }
+
+        @keyframes float3D {
+            0%, 100% {
+                transform: translateY(0) rotateY(0deg) rotateX(0deg);
+            }
+            25% {
+                transform: translateY(-20px) rotateY(90deg) rotateX(10deg);
+            }
+            50% {
+                transform: translateY(-10px) rotateY(180deg) rotateX(-10deg);
+            }
+            75% {
+                transform: translateY(-15px) rotateY(270deg) rotateX(5deg);
+            }
+        }
+
+        .parallax-carousel {
+            position: relative;
+            height: 70vh;
+            width: 100%;
+            overflow: hidden;
+            margin: 0;
+            background-color: #112026;
+        }
+
+        .parallax-slide {
+            position: absolute;
+            height: 100%;
+            width: 100%;
+            background-color: #112026; /* Changed from #000 to match site background */
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            top: 0;
+            left: 0; /* Changed to 0 for crossfade effect */
+            opacity: 0;
+            transition: opacity 1.2s ease-in-out; /* Smoother, longer transition */
+            z-index: 1;
+        }
+
+        .parallax-slide.active { 
+            opacity: 1; 
+            z-index: 2;
+        }
+
+        .parallax-overlay {
+            background: rgba(0,0,0,0.3); /* Made more transparent so image is visible */
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center; /* Changed to center for middle positioning */
+        }
+
+        .parallax-content {
+            display: flex;
+            justify-content: center; /* Changed to center */
+            align-items: center;
+            width: 100%;
+            height: 100%;
+        }
+
+        .right-banner {
+            width: 50%; /* Made wider for better visibility */
+            min-width: 320px;
+            height: auto; /* Changed to auto */
+            background: rgba(17, 32, 38, 0.75); /* Made more transparent */
+            backdrop-filter: blur(10px); /* Added blur for glass effect */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 30px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+            border-radius: 20px; /* Added border radius */
+            border: 2px solid rgba(126, 235, 183, 0.3); /* Added border */
+        }
+
+        .right-banner-content {
+            text-align: center;
+            color: #fff;
+            max-width: 500px;
+        }
+
+        .right-banner-content h3 {
+            font-size: 1.8em;
+            margin-bottom: 15px;
+            color: #7eebb7;
+        }
+
+        .right-banner-content p {
+            font-size: 1em;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .carousel-cta-button {
+            background-color: #7eebb7;
+            color: #112026;
+            padding: 15px 30px;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+
+        .carousel-cta-button:hover { 
+            background-color: #65d9a3;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(126, 235, 183, 0.4);
+        }
+
+        .carousel-controls {
+            position: absolute;
+            width: 100%;
+            top: 50%;
+            display: flex;
+            justify-content: space-between;
+            transform: translateY(-50%);
+            z-index: 10;
+        }
+
+        /* Enhanced carousel controls with hover effects */
+        .carousel-controls button {
+            background: rgba(17, 32, 38, 0.8);
+            color: #7eebb7;
+            border: none;
+            font-size: 2rem;
+            padding: 10px 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .carousel-controls button:hover { 
+            background: rgba(126, 235, 183, 0.9);
+            color: #112026;
+            transform: scale(1.2);
+        }
+
+        .impact-section {
+            background: linear-gradient(135deg, #112026 0%, #1a2e38 50%, #112026 100%); /* Updated gradient with #112026 */
+            padding: 80px 20px;
+            color: #fff;
+            position: relative;
+            margin: 0;
+        }
+
+        /* Decorative image next to community impact */
+        .impact-section::before {
+            content: '';
+            position: absolute;
+            right: 5%;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 300px;
+            height: 300px;
+            background-size: contain;
+            background-repeat: no-repeat;
+            opacity: 0.15;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .impact-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .impact-title {
+            text-align: center;
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 800;
+            margin-bottom: 60px;
+            background: linear-gradient(135deg, #7eebb7 0%, #fff 50%, #7eebb7 100%);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: shimmer 3s linear infinite;
+            letter-spacing: -0.02em;
+        }
+
+        .insights-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        /* Enhanced community impact cards with images */
+        .insight-card {
+            background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(126, 235, 183, 0.05) 100%);
+            border: 2px solid rgba(126, 235, 183, 0.3);
+            border-radius: 20px;
+            padding: 30px;
+            text-align: center;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            opacity: 0;
+            transform: translateY(50px);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .insight-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.05;
+            pointer-events: none;
+        }
+
+        .icon-wrapper {
+            position: relative;
+            z-index: 1;
+            width: 56px;
+            height: 56px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, rgba(126, 235, 183, 0.2), rgba(214, 200, 173, 0.2));
+            border-radius: 16px;
+            border: 1px solid rgba(126, 235, 183, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .insight-card:hover .icon-wrapper {
+            transform: rotate(360deg) scale(1.1);
+            background: linear-gradient(135deg, rgba(126, 235, 183, 0.4), rgba(214, 200, 173, 0.4));
+            box-shadow: 0 0 20px rgba(126, 235, 183, 0.6);
+        }
+
+        .icon-svg {
+            width: 100%;
+            height: 100%;
+            color: #7eebb7;
+            padding: 9px; /* adjust as needed */
+            box-sizing: content-box; /* ensures padding adds space */
+
+            filter: drop-shadow(0 0 8px rgba(126, 235, 183, 0.6));
+        }
+
+        .insight-label {
+            position: relative;
+            z-index: 1;
+            font-size: 15px;
+            font-weight: 600;
+            color: rgba(255, 255, 255, 0.8);
+            text-align: center;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            transition: color 0.3s ease;
+        }
+
+        .insight-card:hover .insight-label {
+            color: #7eebb7;
+        }
+
+        .insight-value {
+            position: relative;
+            z-index: 1;
+            font-size: clamp(2rem, 4vw, 2.75rem);
+            font-weight: 800;
+            padding: 5px 0;
+            background: linear-gradient(135deg, #7eebb7 0%, #fff 50%, #7eebb7 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            filter: drop-shadow(0 0 12px rgba(126, 235, 183, 0.5));
+            transition: all 0.3s ease;
+            letter-spacing: -0.02em;
+        }
+
+        .insight-card:hover .insight-value {
+            filter: drop-shadow(0 0 20px rgba(126, 235, 183, 0.8));
+            transform: scale(1.05);
+        }
+
+        /* Added show class for insight cards */
+        .insight-card.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Testimonials and Sponsors Section */
+        .testimonials-sponsors-wrapper {
+            background: /* Testimonials & Sponsors Color Lines */
+                radial-gradient(circle at 20% 50%, rgba(126, 235, 183, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 50%, rgba(51, 96, 114, 0.1) 0%, transparent 50%),
+                linear-gradient(135deg, #112026 0%, #0f3460 50%, #112026 100%);
+            padding: 10px 10px; /* Reduced from 80px to 50px */
+            margin: 0;
+            position: relative;
+            overflow: hidden;
+            max-height: 600px; /* Added max height to make section smaller */
+        }
+
+        /* Background gradient animation */
+        .testimonials-sponsors-wrapper::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                repeating-linear-gradient(
+                    45deg,
+                    transparent,
+                    transparent 10px,
+                    rgba(17, 32, 38, 0.05) 10px,
+                    rgba(126, 235, 183, 0.07) 20px
+                );
+            pointer-events: none;
+        }
+
+        /* Testimonials and Sponsors Container */
+        .testimonials-sponsors-container {
+            display: flex;
+            gap: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+            align-items: flex-start;
+        }
+
+        /* Testimonials and Sponsors Columns */
+        .testimonials-column {
+            flex: 1;
+            animation: slideUpContinuous 30s linear infinite; /* Slowed down from 20s to 30s */
+            overflow: hidden; /* Prevent overflow */
+            width: 100%; /* Ensure full width */
+            max-width: 100%; /* Prevent exceeding container */
+        }
+        /* Sponsors Column */
+        .sponsors-column {
+            flex: 1;
+            animation: slideDownContinuous 30s linear infinite; /* Slowed down from 20s to 30s */
+            max-width: 100%; /* Prevent exceeding container */
+        }
+        
+        /* Animation Keyframes */
+        @keyframes slideUpContinuous {
+            0% {
+                transform: translateY(0);
+            }
+            100% {
+                transform: translateY(-50%);
+            }
+        }
+
+        @keyframes slideDownContinuous {
+            0% {
+                transform: translateY(-50%);
+            }
+            100% {
+                transform: translateY(0);
+            }
+        }
+
+        /* Removed hover pause to keep animations running */
+        /* Removed .testimonials-column:hover and .sponsors-column:hover animation-play-state: paused */
+
+        .section-title {
+            text-align: center;
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 3rem;
+            background: linear-gradient(90deg, #7eebb7 0%, #fff 50%, #7eebb7 100%) ;
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: 2px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .testimonials-wrapper {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .testimonials-text {
+            text-decoration: white !important;
+            color: #ffffff !important;
+        }
+
+        .brand-title {
+            font-size: 2.2rem;
+            font-weight: 600;
+            max-width: 100%;
+            white-space: normal;       /* Allow wrapping */
+            word-wrap: break-word;     /* Break long words */
+            overflow-wrap: break-word; /* Modern equivalent */
+
+            margin-bottom: 15px;
+            color: #ffffff;
+            text-align: center;
+            text-shadow: 0 0 8px #112026, 0 0 15px #7eebb7, 0 0 30px #112026;
+        }
+
+        .sponsors-wrapper {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+            align-items: center;
+        }
+
+        .sponsor-card {
+            width: 100%;
+            max-width: 300px;
+            padding: 9.3px;
+            background: linear-gradient(135deg, rgba(51, 96, 114, 0.95) 0%, rgba(126, 235, 183, 0.95) 100%);
+            border-radius: 1px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            transition: all 0.5s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .sponsor-card:hover {
+            transform: scale(1.05) rotate(2deg);
+            box-shadow: 0 12px 48px rgba(126, 235, 183, 0.4);
+        }
+
+        .sponsor-card img {
+            width: 100%;
+            height: auto;
+            filter: brightness(1.1);
+            transition: all 0.3s ease;
+        }
+
+        .sponsor-card:hover img {
+            filter: brightness(1.2) drop-shadow(0 0 10px rgba(255, 255, 255, 0.5));
+        }
+
+        @media screen and (max-width: 968px) {
+            .testimonials-sponsors-container {
+                flex-direction: row; /* Keep row for side-by-side */
+            }
+            
+            .sponsors-column {
+                order: 1; /* Sponsors on left */
+                flex: 0.4; /* Smaller */
+            }
+            
+            .testimonials-column {
+                order: 2; /* Testimonials on right */
+                flex: 0.6; /* Slightly larger but still smaller overall */
+            }
+            
+            /* Removed animation: none; to keep animations running on mobile/tablet */
+            /* .testimonials-column,
+            .sponsors-column {
+                animation: none;
+            } */
+        }
+
+        .video-description {
+            max-width: 900px;
+            margin: 30px auto 0;
+            padding: 30px;
+            background: linear-gradient(135deg, rgba(17, 32, 38, 0.8) 0%, rgba(26, 46, 56, 0.8) 100%);
+            border-radius: 15px;
+            border: 2px solid rgba(126, 235, 183, 0.3);
+            backdrop-filter: blur(10px);
+        }
+
+        .video-description h3 {
+            color: #7eebb7;
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .video-description p {
+            color: rgba(255,255,255,0.9);
+            line-height: 1.8;
+            font-size: 1.05rem;
+            margin-bottom: 20px;
+        }
+
+        .video-description .social-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: #7eebb7;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .video-description .social-link:hover {
+            color: #65d9a3;
+            transform: translateX(5px);
+        }
+
+        .video-section {
+            background: linear-gradient(135deg, #112026 0%, #1a2e38 100%); /* Changed to gradient with #112026 */
+            padding: 80px 20px;
+            margin: 0;
+        }
+
+        /* Added video title styling */
+        .video-title {
+            text-align: center;
+            font-size: 2.8rem;
+            font-weight: 800;
+            margin-bottom: 50px;
+            background: linear-gradient(135deg, #7eebb7 0%, #fff 50%, #7eebb7 100%);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: shimmer 3s linear infinite;
+            letter-spacing: -0.02em;
+        }
+
+        .video-container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px;
+            transition: transform 0.3s ease-out;
+        }
+
+        .video-container iframe {
+            width: 100%;
+            height: 500px;
+            border-radius: 12px;
+            box-shadow: 0 20px 60px rgba(126, 235, 183, 0.3); /* Enhanced shadow */
+            border: 3px solid rgba(126, 235, 183, 0.5); /* Thicker border */
+        }
+
+        /* Enhanced calendar section with events listing */
+        .calendar-section {
+            width: 100%;
+            margin: 0;
+            padding: 80px 20px;
+            background: linear-gradient(135deg, #112026 0%, #0f3460 100%);
+        }
+
+        .calendar-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin: 0 0 50px 0;
+            color: #ffffff;
+            text-align: center;
+            text-shadow: 0 0 8px #7eebb7, 0 0 15px #7eebb7, 0 0 30px #7eebb7;
+            animation: glowPulse 2.5s infinite alternate;
+            transition: transform 0.3s ease;
+        }
+
+        @keyframes glowPulse {
+            from {
+                text-shadow: 0 0 5px #7eebb7, 0 0 10px #7eebb7, 0 0 20px #7eebb7;
+            }
+            to {
+                text-shadow: 0 0 15px #7eebb7, 0 0 25px #7eebb7, 0 0 40px #7eebb7;
+            }
+        }
+
+        .calendar-title:hover {
+            transform: rotate(-2deg) scale(1.05);
+        }
+
+        .calendar-container {
+            display: block;
+            gap: 30px;
+            max-width: 100%;
+            margin: 0 auto;
+            align-items: flex-start;
+        }
+
+        .calendar-embed {
+            flex: 2;
+            min-width: 0;
+        }
+
+        .calendar-embed iframe {
+            background-color: #112026;
+            border-radius: 12px; /* Added border radius */
+            padding: 0;
+            width: 100%;
+            height: 600px; /* Made smaller */
+            border: 3px solid rgba(126, 235, 183, 0.5); /* Thicker border with #7eebb7 */
+        }
+
+        /* Added upcoming events sidebar */
+        .events-sidebar {
+            flex: 1;
+            background: linear-gradient(135deg, rgba(17, 32, 38, 0.9) 0%, rgba(26, 26, 46, 0.9) 100%);
+            border-radius: 20px;
+            padding: 30px;
+            border: 2px solid rgba(126, 235, 183, 0.3);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(10px);
+            max-height: 600px;
+            overflow-y: auto;
+        }
+
+        .events-sidebar h3 {
+            font-size: 1.8rem;
+            color: #7eebb7;
+            margin-bottom: 25px;
+            text-align: center;
+            border-bottom: 2px solid rgba(126, 235, 183, 0.3);
+            padding-bottom: 15px;
+        }
+
+        .event-item {
+            background: rgba(126, 235, 183, 0.1);
+            border-left: 4px solid #7eebb7;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+            display: flex;
+            gap: 15px;
+            align-items: flex-start;
+        }
+
+        .event-image {
+            width: 60px;
+            height: 60px;
+            border-radius: 10px;
+            object-fit: cover;
+            border: 2px solid #7eebb7;
+            flex-shrink: 0;
+        }
+
+        .event-content {
+            flex: 1;
+        }
+
+        .event-date {
+            font-size: 0.9rem;
+            color: #7eebb7;
+            font-weight: 600;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .event-date i {
+            font-size: 1rem;
+        }
+
+        .event-title {
+            font-size: 1.1rem;
+            color: #fff;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .event-description {
+            font-size: 0.9rem;
+            color: rgba(255,255,255,0.7);
+            line-height: 1.5;
+        }
+
+        .calendar-links {
+            margin-top: 30px;
+            text-align: center;
+        }
+
+        .add-calendar-btn {
+            display: inline-block;
+            padding: 12px 24px;
+            background-color: #7eebb7;
+            color: #112026;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 16px;
+            box-shadow: 0 0 10px #7eebb7, 0 0 20px rgba(126, 235, 183, 0.5);
+            animation: glowPulse 3s infinite alternate;
+            transition: transform 0.2s ease, background-color 0.3s ease;
+        }
+
+        .add-calendar-btn:hover {
+            background-color: #65d9a3;
+            color: #112026;
+            transform: scale(1.05);
+        }
+
+        .add-calendar-btn.sparkle {
+            animation: sparkle 0.8s ease forwards;
+        }
+
+        @keyframes sparkle {
+            0%, 100% { text-shadow: 0 0 5px #ffffff, 0 0 10px #7eebb7; }
+            50% { text-shadow: 0 0 15px #7eebb7, 0 0 30px #7eebb7; }
+        }
+
+        /* Custom scrollbar for events sidebar */
+        .events-sidebar::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .events-sidebar::-webkit-scrollbar-track {
+            background: rgba(17, 32, 38, 0.5);
+            border-radius: 10px;
+        }
+
+        .events-sidebar::-webkit-scrollbar-thumb {
+            background: #7eebb7;
+            border-radius: 10px;
+        }
+
+        .events-sidebar::-webkit-scrollbar-thumb:hover {
+            background: #65d9a3;
+        }
+
+        /* Enhanced sponsors section with animated logos */
+        .sponsors-section {
+            text-align: center;
+            padding: 60px 20px; /* Increased padding */
+            background: linear-gradient(135deg, rgba(17, 32, 38, 0.5) 0%, rgba(15, 52, 96, 0.5) 100%); /* Changed to gradient with transparency */
+            overflow: hidden;
+            margin: 0;
+        }
+        
+        .sponsors-section h2 {
+            margin-bottom: 40px; /* Increased margin */
+            font-size: 2.2em; /* Increased font size */
+            color: #7eebb7; /* Changed color to #7eebb7 */
+            text-shadow: 0 0 20px rgba(126, 235, 183, 0.5); /* Added glow */
+        }
+        
+        .logos-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+            animation: slideIn 2s ease-in-out;
+        }
+        
+        .logo {
+            width: 150px;
+            height: auto;
+            margin: 15px;
+            filter: grayscale(100%);
+            transition: all 0.5s ease;
+            cursor: pointer;
+            padding: 20px;
+            background: linear-gradient(135deg, rgba(51, 96, 114,0.95) 0%, rgba(126, 235, 183,0.95) 100%) !important;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+        }
+
+        .logo:hover {
+            filter: grayscale(0%);
+            transform: scale(1.1) rotate(3deg);
+            box-shadow: 0 10px 40px rgba(126, 235, 183, 0.5);
+        }
+
+        .wide-logo {
+            width: 200px;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-100px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        /* Added cursor trail effect */
+        .cursor-trail {
+            position: fixed;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(126, 235, 183, 0.6), transparent);
+            pointer-events: none;
+            z-index: 1;
+            animation: trailFade 0.8s ease-out forwards;
+        }
+
+        @keyframes trailFade {
+            to {
+                transform: scale(2);
+                opacity: 0;
+            }
+        }
+
+        /* Responsive Hero Section */
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 3rem;
+            }
+            .hero-subtitle {
+                font-size: 1.0rem;
+            }
+            .hero-description {
+                font-size: 1.0rem;
+            }
+            .hero-stats {
+                gap: 2rem;
+            }
+            .stat-number {
+                font-size: 3rem;
+            }
+            .hero-cta {
+                flex-direction: column;
+                align-items: center;
+                max-height: 100%;
+                padding: 20px;
+            }
+            .cta-button {
+                max-width: 100%;
+                max-height: 100%;
+            }
+            .floating-donate-btn {
+                top: 70px;
+                right: 10px;
+                padding: 12px 24px;
+                font-size: 0.95rem;
+            }
+            #roll_back {
+                bottom: 1rem;
+                right: 1rem;
+                padding: 12px 16px;
+                font-size: 1.2rem;
+            }
+            .right-banner {
+                width: 90%; /* Changed to 90% */
+                min-width: unset;
+                height: auto;
+                padding: 25px; /* Adjusted padding */
+                box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+                border-radius: 15px; /* Added border radius */
+            }
+            .parallax-overlay { 
+                justify-content: center; 
+                align-items: center; /* Changed to center */
+            }
+            .parallax-content { 
+                flex-direction: column-reverse; 
+                justify-content: flex-end; 
+                align-items: center; 
+            }
+            .right-banner-content h3 { font-size: 1.5em; }
+            .right-banner-content p { font-size: 0.95em; }
+            .carousel-cta-button { padding: 12px 25px; font-size: 0.95em; }
+            .insights-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            .impact-title {
+                margin-bottom: 40px;
+            }
+            .insight-card {
+                padding: 28px 20px;
+            }
+            .video-container iframe {
+                height: 300px;
+            }
+            .calendar-container {
+                flex-direction: column;
+            }
+            .events-sidebar {
+                max-height: 400px;
+            }
+            .calendar-embed iframe {
+                height: 450px;
+                width: 100%; /* Made smaller for mobile */
+            }
+            .calendar-title {
+                font-size: 1.8rem;
+            }
+            .add-calendar-btn {
+                padding: 10px 20px;
+                font-size: 14px;
+            }
+            .impact-section::before {
+                width: 150px;
+                height: 150px;
+                opacity: 0.1;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .right-banner-content h3 { font-size: 1.2em; }
+            .right-banner-content p { font-size: 0.85em; }
+            .carousel-cta-button { padding: 12px 20px; font-size: 0.85em; }
+            .calendar-title {
+                font-size: 1.5rem;
+            }
+            .events-sidebar {
+                padding: 20px;
+            }
+            .event-item {
+                padding: 15px;
+            }
+        }
+
+        /* Enhanced hero animations */
+        @keyframes heroGlow {
+            0%, 100% {
+                box-shadow: 0 0 20px rgba(126, 235, 183, 0.3),
+                            0 0 40px rgba(126, 235, 183, 0.2),
+                            0 0 60px rgba(126, 235, 183, 0.1);
+            }
+            50% {
+                box-shadow: 0 0 30px rgba(126, 235, 183, 0.5),
+                            0 0 60px rgba(126, 235, 183, 0.3),
+                            0 0 90px rgba(126, 235, 183, 0.2);
+            }
+        }
+
+        .hero-content h1 {
+            animation: fadeInUp 1s ease-out, heroGlow 3s ease-in-out infinite;
+        }
+
+        /* Added smooth scroll reveal animations */
+        .scroll-reveal {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s ease-out;
+        }
+
+        .scroll-reveal.revealed {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .scroll-reveal-left {
+            opacity: 0;
+            transform: translateX(-50px);
+            transition: all 0.8s ease-out;
+        }
+
+        .scroll-reveal-left.revealed {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .scroll-reveal-right {
+            opacity: 0;
+            transform: translateX(50px);
+            transition: all 0.8s ease-out;
+        }
+
+        .scroll-reveal-right.revealed {
+            opacity: 1;
+            transform: translateX(0);
+        }
+    </style>
+</head>
+<body>
+    <!-- Floating donate button -->
+    <a href="https://square.link/u/OFFcW0lX?src=embd" class="floating-donate-btn" id="donateBtn" style="text-decoration: none;">Donate Here</a>
+
+    <!-- Added roll back to top button -->
+    <a href="#" id="roll_back" class="animate"><i class="fa fa-angle-up"></i></a>
+
+    <section class="hero" id="home">
+        <div class="hero-background"></div>
+        <img src="https://drabpe.org/wp-content/uploads/2025/10/WhatsApp-Image-2025-09-13-at-09.12.17_0ddf34e7.jpg" alt="DRABPE Community" class="hero-image">
+        <div class="hero-overlay"></div>
+        <div class="gradient-overlay"></div>
+        <canvas class="particles-canvas" id="particlesCanvas"></canvas>
+        
+        <div class="floating-icons">
+            <div class="icon">💚</div>
+            <div class="icon">💚</div>
+            <div class="icon">🤍</div>
+            <div class="icon">🤍</div>
+            <div class="icon">🖤</div>
+            <div class="icon">🖤</div>
+        </div>
+
+        <div class="hero-content">
+            <div class="hero-logo">DRABPE</div>
+            <h1 class="hero-title">Durham Region Association of Black Professional Entrepreneurs</h1>
+            <p class="hero-subtitle">We connect and empower Durham Black community through mentorship, education and networking.</p>
+            <p class="hero-description">
+            </p>
+            
+            <div class="hero-stats">
+                <div class="stat-item">
+                    <span class="stat-number" data-target="90974" data-prefix="$">0</span>
+                    <span class="stat-label">Community Wellness Investments Allocated</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number" data-target="36550" data-prefix="$">0</span>
+                    <span class="stat-label">Amount Distrubted to Community</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number" data-target="118">0</span>
+                    <span class="stat-label">Black Businesses in Directory</span>
+                </div>
+            </div>
+            <div class="hero-cta">
+                <a href="https://drabpe.org/register-your-business/" class="cta-button cta-primary">Join Our Community</a>
+                <a href="https://drabpe.org/about-us/" class="cta-button cta-secondary">Learn More</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="parallax-carousel" id="about">
+        <div class="parallax-slide" style="background-image: url('https://drabpe.org/wp-content/uploads/2025/11/B-Wise-48.jpg.webp');">
+            <div class="parallax-overlay">
+                <div class="parallax-content">
+                    <div class="right-banner">
+                        <div class="right-banner-content">
+                            <h3>Get your business listed in our Black Business Directory</h3>
+                            <p>
+                                Gain access to a supportive community that values keeping our dollars within the community. 
+                                Increase your visibility and connect with potential customers who are actively seeking Black-owned businesses like yours.
+                            </p>
+                            <a href="https://drabpe.org/register-your-business/" class="carousel-cta-button" target="_blank">Register Here!</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="parallax-slide" style="background-image: url('https://drabpe.org/wp-content/uploads/2025/11/B-Wise-82.jpg.webp');">
+            <div class="parallax-overlay">
+                <div class="parallax-content">
+                    <div class="right-banner">
+                        <div class="right-banner-content">
+                            <h3>Advertise with DRABPE</h3>
+                            <p>
+                                Promote your business at no cost or opt for our premium service at just $50/month.<br><br>
+                                <strong>Our premium service includes:</strong><br>
+                                • Online Promotion: Feature your business on our website and social media channels.<br>
+                                • Newsletter Inclusion: Reach our engaged audience through our monthly newsletter.<br>
+                                • Event Promotion: Highlight your business at our events.<br>
+                                • Plus, include a banner in your promotions!<br><br>
+                                Elevate your business with premium exposure and connect with more clients today.
+                            </p>
+                            <a href="mailto:drabpe@gmail.com" class="carousel-cta-button" target="_blank">Contact Us!</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="parallax-slide" style="background-image: url('https://drabpe.org/wp-content/uploads/2025/11/B-Wise-105.jpg.webp');">
+            <div class="parallax-overlay">
+                <div class="parallax-content">
+                    <div class="right-banner">
+                        <div class="right-banner-content">
+                            <h3>Donate to support our Mission</h3>
+                            <p>
+                                Your generous contributions help us continue to provide essential services and support 
+                                to Black businesses and professionals in the Durham Region.<br><br>
+                                Donate via email transfer to <strong>drabpe@gmail.com</strong>.<br><br>
+                                Every contribution makes a difference and supports our initiatives to foster economic empowerment and community growth.
+                            </p>
+                            <a href="https://square.link/u/OFFcW0lX?src=embd" class="carousel-cta-button" target="_blank">Donate Here!</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="parallax-slide" style="background-image: url('https://drabpe.org/wp-content/uploads/2025/11/B-Wise-87.jpg.webp');">
+            <div class="parallax-overlay">
+                <div class="parallax-content">
+                    <div class="right-banner">
+                        <div class="right-banner-content">
+                            <h3>Search for Black Professional Services and Products</h3>
+                            <p>
+                                Looking for reliable Black-owned services and products in Durham? 
+                                Use our search tool to find professionals and businesses that meet your needs.<br><br>
+                                Support the community and keep our dollars circulating longer within our community.
+                            </p>
+                            <a href="https://drabpe.org/directory/" class="carousel-cta-button" target="_blank">Business Directory</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="carousel-controls">
+            <button class="prev">&#10094;</button>
+            <button class="next">&#10095;</button>
+        </div>
+    </section>
+
+    <section class="impact-section" id="impact">
+        <div class="impact-container">
+            <h1 class="impact-title">Community Impact</h1>
+            <div class="insights-grid">
+                <div class="insight-card">
+                    <div class="card-glow"></div>
+                    <div class="icon-wrapper">
+                        <svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                            <circle cx="9" cy="7" r="4"></circle>
+                            <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                            <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                        </svg>
+                    </div>
+                    <div class="insight-label">Directory Businesses to Date</div>
+                    <div class="insight-value" data-target="118" data-prefix="+">0</div>
+                </div>
+
+                <div class="insight-card">
+                    <div class="card-glow"></div>
+                    <div class="icon-wrapper">
+                        <svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                            <circle cx="9" cy="7" r="4"></circle>
+                            <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                            <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                        </svg>
+                    </div>
+                    <div class="insight-label">Future Founders Youth Impacted</div>
+                    <div class="insight-value" data-target="75" data-prefix="+">0</div>
+                </div>
+
+                <div class="insight-card">
+                    <div class="card-glow"></div>
+                    <div class="icon-wrapper">
+                        <svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
+                        </svg>
+                    </div>
+                    <div class="insight-label">Event Participants Impacted</div>
+                    <div class="insight-value" data-target="372" data-prefix="+">0</div>
+                </div>
+
+            <!--    <div class="insight-card">
+                    <div class="card-glow"></div>
+                    <div class="icon-wrapper">
+                        <svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <path d="M12 6v6l4 2"></path>
+                        </svg>
+                    </div>
+                    <div class="insight-label">Community Organizations Impacted</div>
+                    <div class="insight-value" data-target="17" data-prefix="+">0</div> 
+                </div> -->
+               <div class="insight-card">
+                    <div class="card-glow"></div>
+                    <div class="icon-wrapper">
+                        <svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <text x="50%" y="60%" text-anchor="middle" dominant-baseline="middle" 
+                            font-family="font-norma" font-size="2em" class="fill-current text-4xl ">$</text>
+                        </svg>
+                    </div>
+                    <div class="insight-label">Amount Distrubted to Communities</div>
+                    <div class="insight-value" data-target="36550" data-prefix="$">0</div>
+                </div>
+                <div class="insight-card">
+                    <div class="card-glow"></div>
+                    <div class="icon-wrapper">
+                        <svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <text x="50%" y="60%" text-anchor="middle" dominant-baseline="middle" 
+                            font-family="font-norma" font-size="2em" class="fill-current text-4xl ">$</text>
+                        </svg>
+                    </div>
+                    <div class="insight-label">Health Iniative Funds Distrubted to Communities</div>
+                    <div class="insight-value" data-target="90974.56" data-prefix="$">0</div>
+                </div>
+                
+            </div>
+        </div>
+    </section>
+
+    <!-- Restructured testimonials and sponsors to be side by side -->
+    <section class="testimonials-sponsors-wrapper" id="testimonials">
+        <h1 class="section-title"></h1>
+        
+        <div class="testimonials-sponsors-container">
+            <!-- Testimonials Column (slides up) -->
+            <div class="testimonials-column">
+                <h2 class="brand-title">Testimonies</h2>
+                <div class="testimonials-wrapper">
+                    <div class="testimonials-text">
+                        <h3 style="color: white;">Graduate from DRABPE's STEMM</h3>
+                        <p style="color: white;">
+                            This program is a great way to prepare and set yourself up for when you
+                            graduate from secondary school and prepare for your future. There are
+                            also great networking opportunities where you can meet like-minded
+                            individuals with the same goals and aspirations.
+                        </p>
+                        <p><strong>– Terrence</strong></p>
+                    </div>
+
+                    <div class="testimonials-text">
+                        <h3 style="color: white;">Small Business Support</h3>
+                        <p style="color: white;">
+                            "DRABPE has become a valuable resource to our small business operating
+                            in the region. The well-structured First Fridays creates a safe space for
+                            entrepreneurs to network, open doors for each other and support each
+                            other."
+                        </p>
+                        <p><strong>– Jason D.</strong></p>
+                    </div>
+
+                    <div class="testimonials-text">
+                        <h3 style="color: white;">Speaker Insights</h3>
+                        <p style="color: white;">
+                            "The speakers always provide great information relevant to growing my
+                            business."
+                        <p style="color: white;">
+                        <p><strong>– Anonymous</strong></p>
+                    </div>
+
+                    <!-- Added more duplicate cards for seamless infinite scroll -->
+                    <div class="testimonials-text">
+                        <h3 style="color: white;">Graduate from DRABPE's STEMM</h3>
+                        <p style="color: white;">
+                            This program is a great way to prepare and set yourself up for when you
+                            graduate from secondary school and prepare for your future. There are
+                            also great networking opportunities where you can meet like-minded
+                            individuals with the same goals and aspirations.
+                        <p style="color: white;">
+                        <p><strong>– Terrence</strong></p>
+                    </div>
+
+                    <div class="testimonials-text">
+                        <h3 style="color: white;">Small Business Support</h3>
+                        <p style="color: white;">
+                            "DRABPE has become a valuable resource to our small business operating
+                            in the region. The well-structured First Fridays creates a safe space for
+                            entrepreneurs to network, open doors for each other and support each
+                            other."
+                        </p>
+                        <p><strong>– Jason D.</strong></p>
+                    </div>
+
+                    <div class="testimonials-text">
+                        <h3 style="color: white;">Speaker Insights</h3>
+                        <p style="color: white;">
+                            "The speakers always provide great information relevant to growing my
+                            business."
+                        </p>
+                        <p><strong>– Anonymous</strong></p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sponsors Column (slides down) -->
+            <div class="sponsors-column">
+                <h2 class="brand-title" style="color: white;">Our Sponsors</h2>
+                <div class="sponsors-wrapper">
+                    <div class="sponsor-card">
+                        <img src="https://drabpe.org/wp-content/uploads/2022/04/All-credit-SBCCI-English-1.png" alt="SBCCI Sponsor Logo">
+                    </div>
+                    <div class="sponsor-card">
+                        <img src="https://drabpe.org/wp-content/uploads/2024/06/Canada-Logo-1.jpg" alt="Canada Sponsor Logo">
+                    </div>
+                    <div class="sponsor-card">
+                        <img src="https://drabpe.org/wp-content/uploads/2024/06/FUNDFFBC_1.png" alt="FUNDFFBC Sponsor Logo">
+                    </div>
+                    <div class="sponsor-card">
+                        <img src="https://drabpe.org/wp-content/uploads/2024/06/FONDSFPCN_.png" alt="FONDSFPCN Sponsor Logo">
+                    </div>
+                    <div class="sponsor-card">
+                        <img src="https://drabpe.org/wp-content/uploads/2024/08/ON_POS_LOGO_RGB.png" alt="ON POS Sponsor Logo">
+                    </div>
+                    <div class="sponsor-card">
+                        <img src="https://drabpe.org/wp-content/uploads/2024/10/TD_Canada_Trust_logo.svg.png" alt="TD Canada Trust Sponsor Logo">
+                    </div>
+                    <div class="sponsor-card">
+                        <img src="https://drabpe.org/wp-content/uploads/2024/11/BCE-Digital-Banner1.png" alt="BCE Digital Sponsor Logo">
+                    </div>
+
+                    <!-- Added more duplicate sponsor cards for seamless infinite scroll -->
+                    <div class="sponsor-card">
+                        <img src="https://drabpe.org/wp-content/uploads/2022/04/All-credit-SBCCI-English-1.png" alt="SBCCI Sponsor Logo">
+                    </div>
+                    <div class="sponsor-card">
+                        <img src="https://drabpe.org/wp-content/uploads/2024/06/Canada-Logo-1.jpg" alt="Canada Sponsor Logo">
+                    </div>
+                    <div class="sponsor-card">
+                        <img src="https://drabpe.org/wp-content/uploads/2024/06/FUNDFFBC_1.png" alt="FUNDFFBC Sponsor Logo">
+                    </div>
+                    <div class="sponsor-card">
+                        <img src="https://drabpe.org/wp-content/uploads/2024/06/FONDSFPCN_.png" alt="FONDSFPCN Sponsor Logo">
+                    </div>
+                    <div class="sponsor-card">
+                        <img src="https://drabpe.org/wp-content/uploads/2024/08/ON_POS_LOGO_RGB.png" alt="ON POS Sponsor Logo">
+                    </div>
+                    <div class="sponsor-card">
+                        <img src="https://drabpe.org/wp-content/uploads/2024/10/TD_Canada_Trust_logo.svg.png" alt="TD Canada Trust Sponsor Logo">
+                    </div>
+                    <div class="sponsor-card">
+                        <img src="https://drabpe.org/wp-content/uploads/2024/11/BCE-Digital-Banner1.png" alt="BCE Digital Sponsor Logo">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="video-section scroll-reveal">
+        <!-- Enhanced video title -->
+        <h2 class="video-title">Watch Our Community in Action</h2>
+        <div class="video-container">
+            <iframe
+                src="https://www.youtube.com/embed/E6AlnYXkDKw?autoplay=0&mute=0"
+                title="YouTube video player"
+                frameborder="0"
+                allow="autoplay; encrypted-media"
+                allowfullscreen>
+            </iframe>
+        </div>
+        
+        <!-- Added video description section -->
+        <div class="video-description">
+            <h3>
+                <i class="fa fa-youtube-play"></i>
+                Welcome to DRABPE
+            </h3>
+            <p>
+                Welcome to DRABPE (Durham Region Association of Black Professionals and Entrepreneurs)! 
+                We are reintroducing ourselves and our mission: to empower Black professionals, foster entrepreneurship, 
+                and strengthen community connections across Durham Region and beyond.
+            </p>
+            <p>
+                Through mentorship, networking events, youth programs, and business resources, DRABPE creates spaces 
+                where Black brilliance thrives. Whether you're an aspiring entrepreneur, established business owner, 
+                or professional looking to connect, this is your community.
+            </p>
+            <a href="https://www.youtube.com/@DRABPE" target="_blank" class="social-link">
+                <i class="fa fa-youtube-play"></i>
+                Stay tuned for more updates, success stories, and opportunities to grow with DRABPE
+            </a>
+        </div>
+    </section>
+
+    <!-- Enhanced calendar section with events sidebar -->
+    <section class="calendar-section" id="calendar">
+        <h2 class="calendar-title">Business-Driven Events in the Black Durham Community</h2>
+        
+        <div class="calendar-container">
+            <div class="calendar-embed">
+                <iframe
+                    src="https://calendar.google.com/calendar/embed?src=7aaed31731927e9e11a3b45fc8499a1d3363d3c1a6ea841fe0224f4cc3389b91@group.calendar.google.com&color=%231B887A&src=en.canadian%23holiday@group.v.calendar.google.com&color=%23B1365F&src=itmia7b05rl0bfdar1o9prfrmibokqpt@import.calendar.google.com&color=%230F4B81&ctz=America%2FToronto&showTitle=0&showPrint=0&showTabs=1&showCalendars=1&mode=MONTH"
+                    style="border:0;"
+                    frameborder="0"
+                    scrolling="no"
+                    style="width: 100%; height: 100%"
+                    loading="lazy">
+                </iframe>
+            </div>
+            
+            <aside class="events-sidebar scroll-reveal-right">
+                <h3>Upcoming Events</h3>
+                    <div class="event-item">
+                    <img src="https://drabpe.org/wp-content/uploads/2025/09/Picture1.png" alt="Event" class="event-image">
+                    <div class="event-content">
+                        <div class="event-date">
+                            <i class="fa fa-calendar"></i>
+                            November 19, 2025, 1PM - 3PM
+                        </div>
+                        <div class="event-title"><a href="https://l.instagram.com/?u=https%3A%2F%2Fwww.thelighthouseretreat.ca%2F%3Ffbclid%3DPAZXh0bgNhZW0CMTEAAadVex59L74hj9IwhykBT0LyP45Gn1Bj7luIa5IRwJnOpqN4DJDGz-yhFhYVZA_aem_tYcemKU_ZhxbzmoTcCX-QA&e=AT2JS2Wf29I9MY5BHVrMUS7VrYtoTNnnmOGW95Wtl8QZgt8PyZd-YqrI8I0ChRCBuDabXmCjDnBmqKTtLsc7AECjOZf0ql4on7KYOEoVqw" style="color: white; text-decoration: none;">The Lightouse Retreat - Open House Invitation</a></div>
+                        <div class="event-description">
+                            <a href="https://l.instagram.com/?u=https%3A%2F%2Fwww.thelighthouseretreat.ca%2F%3Ffbclid%3DPAZXh0bgNhZW0CMTEAAadVex59L74hj9IwhykBT0LyP45Gn1Bj7luIa5IRwJnOpqN4DJDGz-yhFhYVZA_aem_tYcemKU_ZhxbzmoTcCX-QA&e=AT2JS2Wf29I9MY5BHVrMUS7VrYtoTNnnmOGW95Wtl8QZgt8PyZd-YqrI8I0ChRCBuDabXmCjDnBmqKTtLsc7AECjOZf0ql4on7KYOEoVqw" style="color: white; text-decoration: none;">Join SYLC, for a free, full-day Africentric Mental Health First Response Workshop led by Shanique Edwards, where you'll gain practical, trauma-informed, and culturally grounded tools to support mental wellness in your community.</a>
+                        </div>
+                    </div>
+                </div>
+                    <div class="event-item">
+                    <img src="https://scontent-yyz1-1.cdninstagram.com/v/t1.15752-9/582039419_1471916140531510_3157086234189477799_n.jpg?stp=dst-jpg_s640x640_tt6&_nc_cat=103&ccb=1-7&_nc_sid=0024fc&_nc_ohc=KxpupsgfmRIQ7kNvwFVe2gj&_nc_oc=Adk0BwHNCW3ptdfhxykSTl2qOImYgM3VQE8g7WBArRvZaHF5ZiG65vvYy_0zH33DkIz5QRFSgMHYcqdMXiiRewhW&_nc_zt=23&_nc_ht=scontent-yyz1-1.cdninstagram.com&oh=03_Q7cD3wEjZKVeiBhbhMfpmTwdEzdLkXLsMAo1rw-SGP6YKVY8Ug&oe=6939901F" alt="Event" class="event-image">
+                    <div class="event-content">
+                        <div class="event-date">
+                            <i class="fa fa-calendar"></i>
+                            November 19, 2025, 4PM - 8PM
+                        </div>
+                        <div class="event-title"><a href="https://www.eventbrite.ca/e/at-the-table-celebrating-entrepreneurship-with-drabpe-do-it-in-durham-tickets-1854984662059?aff=oddtdtcreator&utm-source=wsa&utm-campaign=social&utm-content=attendeeshare&utm-medium=discovery&utm-term=listing" style="color: white; text-decoration: none;">At The Table</a></div>
+                        <div class="event-description">
+                            <a href="https://www.eventbrite.ca/e/at-the-table-celebrating-entrepreneurship-with-drabpe-do-it-in-durham-tickets-1854984662059?aff=oddtdtcreator&utm-source=wsa&utm-campaign=social&utm-content=attendeeshare&utm-medium=discovery&utm-term=listing" style="color: white; text-decoration: none;">Join DRABPE for At the Table during Do It in Durham Business Week, an in-person celebration of entrepreneurship featuring inspiring dialogue, live podcasting, cybersecurity training, networking, and community connection at 1101 Kingston Rd #215.</a>
+                        </div>
+                    </div>
+                </div>
+                    <div class="event-item">
+                    <img src="https://drabpe.org/wp-content/uploads/2025/09/Picture2.png" alt="Event" class="event-image">
+                    <div class="event-content">
+                        <div class="event-date">
+                            <i class="fa fa-calendar"></i>
+                            December 8, 2025, 9AM - 5PM
+                        </div>
+                        <div class="event-title"><a href="https://www.sylcentre.com/event-details/join-strategize-your-life-centre-for-the-africentric-mental-health-first-response-workshop" style="color: white; text-decoration: none;">Strategize Your Life Centre Workshop</a></div>
+                        <div class="event-description">
+                            <a href="https://www.sylcentre.com/event-details/join-strategize-your-life-centre-for-the-africentric-mental-health-first-response-workshop" style="color: white; text-decoration: none;">We’re welcoming seniors—especially from the Black community—to a special Open House! Join us for a day filled with connection, community, and refreshments.</a>
+                        </div>
+                    </div>
+                </div>
+                    <div class="event-item">
+                    <img src="https://drabpe.org/wp-content/uploads/2025/09/https___cdn.evbuc_.com_images_900002233_943990820733_1_original.jpg" alt="Event" class="event-image">
+                    <div class="event-content">
+                        <div class="event-date">
+                            <i class="fa fa-calendar"></i>
+                            December 12, 2025
+                        </div>
+                        <div class="event-title"><a href="" style="color: white; text-decoration: none;">Holiday Mixer</a></div>
+                        <div class="event-description">
+                            <a href="" style="color: white; text-decoration: none;">Coming Soon!</a>
+                        </div>
+                    </div>
+                </div>
+                    <div class="event-item">
+                    <img src="https://drabpe.org/wp-content/uploads/2025/09/https___cdn.evbuc_.com_images_900002233_943990820733_1_original.jpg" alt="Event" class="event-image">
+                    <div class="event-content">
+                        <div class="event-date">
+                            <i class="fa fa-calendar"></i>
+                            February 19, 2025
+                        </div>
+                        <div class="event-title"><a href="" style="color: white; text-decoration: none;">Whitby Library Panel</a></div>
+                        <div class="event-description">
+                            <a href="" style="color: white; text-decoration: none;">Coming Soon!</a>
+                        </div>
+                    </div>
+                </div>
+            </aside>
+        </div>
+        
+        <div class="calendar-links">
+            <a id="calendar-btn" class="add-calendar-btn" href="https://drabpe.org/google-calendar-event-registration/" target="_blank" rel="noopener noreferrer" style="text-decoration: none;">
+                Submit Your Event to the Calendar
+            </a>
+        </div>
+    </section>
+
+    <section id="donate-placeholder" style="padding: 80px 20px; background: linear-gradient(135deg, #112026 0%, #0f3460 50%, #112026 100%); text-align: center; margin: 0;">
+        <h2 style="font-size: 3rem; color: #7eebb7; margin-bottom: 20px; text-shadow: 0 0 20px rgba(126, 235, 183, 0.5);">Support Our Mission</h2>
+        <p style="font-size: 1.3rem; color: #fff; max-width: 700px; margin: 0 auto 40px; line-height: 1.8;">
+            Your donation helps us empower Black entrepreneurs and professionals in the Durham Region. 
+            Every contribution makes a real difference in our community.
+        </p>
+        <a href="https://square.link/u/OFFcW0lX?src=embd" target="_blank" style="display: inline-block; padding: 20px 50px; background: linear-gradient(135deg, #7eebb7, #36d2a3); color: #000; font-size: 1.3rem; font-weight: 700; text-decoration: none; border-radius: 50px; box-shadow: 0 10px 40px rgba(126, 235, 183, 0.5); transition: all 0.3s ease;">
+            Donate Now
+        </a>
+    </section>
+
+    <script>
+
+        const canvas = document.getElementById('particlesCanvas');
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        const particles = [];
+        const particleCount = 80;
+        const colors = ['#88ffe5', '#7eebb7', '#36d2a3', '#7eebb7'];
+        let mouse = { x: null, y: null, radius: 150 };
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 3 + 1;
+                this.baseSpeedX = Math.random() * 1 - 0.5;
+                this.baseSpeedY = Math.random() * 1 - 0.5;
+                this.speedX = this.baseSpeedX;
+                this.speedY = this.baseSpeedY;
+                this.color = colors[Math.floor(Math.random() * colors.length)];
+                this.opacity = Math.random() * 0.5 + 0.2;
+            }
+
+            update() {
+                // Mouse interaction
+                const dx = mouse.x - this.x;
+                const dy = mouse.y - this.y;
+                const distance = Math.sqrt(dx * dx + dy * dy);
+                
+                if (distance < mouse.radius && mouse.x !== null) {
+                    const forceX = dx / distance;
+                    const forceY = dy / distance;
+                    const force = (mouse.radius - distance) / mouse.radius;
+                    
+                    this.speedX = this.baseSpeedX - forceX * force * 3;
+                    this.speedY = this.baseSpeedY - forceY * force * 3;
+                } else {
+                    this.speedX = this.baseSpeedX;
+                    this.speedY = this.baseSpeedY;
+                }
+
+                this.x += this.speedX;
+                this.y += this.speedY;
+
+                if (this.x > canvas.width) this.x = 0;
+                if (this.x < 0) this.x = canvas.width;
+                if (this.y > canvas.height) this.y = 0;
+                if (this.y < 0) this.y = canvas.height;
+            }
+
+            draw() {
+                ctx.fillStyle = this.color;
+                ctx.globalAlpha = this.opacity;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+
+        function initParticles() {
+            for (let i = 0; i < particleCount; i++) {
+                particles.push(new Particle());
+            }
+        }
+
+        function animateParticles() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            particles.forEach(particle => {
+                particle.update();
+                particle.draw();
+            });
+
+            particles.forEach((particleA, indexA) => {
+                particles.slice(indexA + 1).forEach(particleB => {
+                    const dx = particleA.x - particleB.x;
+                    const dy = particleA.y - particleB.y;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
+
+                    if (distance < 150) {
+                        ctx.strokeStyle = '#7eebb7';
+                        ctx.globalAlpha = (1 - distance / 150) * 0.2;
+                        ctx.lineWidth = 1;
+                        ctx.beginPath();
+                        ctx.moveTo(particleA.x, particleA.y);
+                        ctx.lineTo(particleB.x, particleB.y);
+                        ctx.stroke();
+                    }
+                });
+            });
+
+            ctx.globalAlpha = 1;
+            requestAnimationFrame(animateParticles);
+        }
+
+        canvas.addEventListener('mousemove', (e) => {
+            mouse.x = e.x;
+            mouse.y = e.y;
+        });
+
+        canvas.addEventListener('mouseleave', () => {
+            mouse.x = null;
+            mouse.y = null;
+        });
+
+        initParticles();
+        animateParticles();
+
+        let mouseX = 0;
+        let mouseY = 0;
+        let currentX = 0;
+        let currentY = 0;
+
+        document.addEventListener('mousemove', (e) => {
+            mouseX = (e.clientX - window.innerWidth / 2) / 50;
+            mouseY = (e.clientY - window.innerHeight / 2) / 50;
+        });
+
+        function smoothParallax() {
+            currentX += (mouseX - currentX) * 0.1;
+            currentY += (mouseY - currentY) * 0.1;
+
+            const heroContent = document.querySelector('.hero-content');
+            const heroImage = document.querySelector('.hero-image');
+            
+            if (heroContent) {
+                heroContent.style.transform = `translate(${currentX}px, ${currentY}px)`;
+            }
+            if (heroImage) {
+                heroImage.style.transform = `translate(${-currentX * 2}px, ${-currentY * 2}px) scale(1.1)`;
+            }
+
+            requestAnimationFrame(smoothParallax);
+        }
+
+        smoothParallax();
+
+function animateCounter(element) {
+    const target = parseInt(element.getAttribute('data-target'));
+    const prefix = element.getAttribute('data-prefix') || '';
+    const duration = 2000;
+    const increment = target / (duration / 16);
+    let current = 0;
+
+    const updateCounter = () => {
+        current += increment;
+        if (current < target) {
+            element.textContent = prefix + Math.floor(current).toLocaleString();
+            requestAnimationFrame(updateCounter);
+        } else {
+            element.textContent = prefix + target.toLocaleString();
+        }
+    };
+
+    updateCounter();
+}
+
+
+
+        const observerOptions = {
+            threshold: 0.5
+        };
+        
+        const observer = new IntersectionObserver((entries) => { 
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const counters = document.querySelectorAll('.stat-number'); 
+                    counters.forEach(counter => {
+                        if (counter.textContent === '0') {
+                            animateCounter(counter);
+                        }
+                    });
+                }
+            });
+        }, observerOptions);
+
+        const statsSection = document.querySelector('.hero-stats');
+        if (statsSection) {
+            observer.observe(statsSection);
+        }
+        
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
+
+        const ctaButtons = document.querySelectorAll('.cta-button');
+        ctaButtons.forEach(button => {
+            button.addEventListener('mouseenter', function(e) {
+                for (let i = 0; i < 5; i++) {
+                    setTimeout(() => {
+                        const sparkle = document.createElement('div');
+                        sparkle.style.position = 'absolute';
+                        sparkle.style.width = '100%';
+                        sparkle.style.height = '100%';
+                        sparkle.style.top = '0';
+                        sparkle.style.left = '0';
+                        sparkle.style.background = 'radial-gradient(circle, rgba(255,255,255,0.8) 0%, transparent 70%)';
+                        sparkle.style.pointerEvents = 'none';
+                        sparkle.style.animation = 'sparkle 0.6s ease-out';
+                        this.appendChild(sparkle);
+                        
+                        setTimeout(() => sparkle.remove(), 600);
+                    }, i * 100);
+                }
+            });
+        });
+
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes sparkle {
+                0% {
+                    transform: scale(0);
+                    opacity: 1;
+                }
+                100% {
+                    transform: scale(2);
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+
+        const slides = document.querySelectorAll('.parallax-slide');
+        let currentSlide = 0;
+        let autoSlideInterval;
+
+        function showSlide(index) {
+            slides.forEach((slide, i) => {
+                slide.classList.remove('active', 'prev');
+                if (i === index) slide.classList.add('active');
+                else if (i === (index - 1 + slides.length) % slides.length) slide.classList.add('prev');
+            });
+        }
+
+        function nextSlide() {
+            const slides = document.querySelectorAll('.parallax-slide');
+            slides[currentSlide].classList.remove('active');
+            currentSlide = (currentSlide + 1) % slides.length;
+            slides[currentSlide].classList.add('active');
+        }
+
+        function prevSlide() {
+            const slides = document.querySelectorAll('.parallax-slide');
+            slides[currentSlide].classList.remove('active');
+            currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+            slides[currentSlide].classList.add('active');
+        }
+
+        document.querySelector('.next').addEventListener('click', () => { nextSlide(); resetAutoSlide(); });
+        document.querySelector('.prev').addEventListener('click', () => { prevSlide(); resetAutoSlide(); });
+
+        function startAutoSlide() { autoSlideInterval = setInterval(nextSlide, 7000); }
+        function resetAutoSlide() { clearInterval(autoSlideInterval); startAutoSlide(); }
+
+        showSlide(currentSlide);
+        startAutoSlide();
+
+        function easeOutExpo(t) {
+            return t === 1 ? 1 : 1 - Math.pow(2, -10 * t);
+        }
+
+        function animateValue(element, start, end, duration, prefix = "", suffix = "") {
+            let startTimestamp = null;
+
+            const step = (timestamp) => {
+                if (!startTimestamp) startTimestamp = timestamp;
+                const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+
+                const easedProgress = easeOutExpo(progress);
+                const value = Math.floor(easedProgress * (end - start) + start);
+
+                element.textContent = prefix + value.toLocaleString() + suffix;
+
+                if (progress < 1) {
+                    window.requestAnimationFrame(step);
+                } else {
+                    element.textContent = prefix + end.toLocaleString() + suffix;
+                }
+            };
+
+            window.requestAnimationFrame(step);
+        }
+
+        function revealOnScroll() {
+            const reveals = document.querySelectorAll('.scroll-reveal, .scroll-reveal-left, .scroll-reveal-right');
+            
+            reveals.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const elementVisible = 150;
+                
+                if (elementTop < window.innerHeight - elementVisible) {
+                    element.classList.add('revealed');
+                }
+            });
+        }
+
+        window.addEventListener('scroll', revealOnScroll);
+        revealOnScroll(); // Initial check
+
+        function launchConfetti(x, y) {
+            const colors = ['#7eebb7', '#112026', '#fff', '#36d2a3', '#88ffe5'];
+            const confettiCount = 40;
+            for (let i = 0; i < confettiCount; i++) {
+                const conf = document.createElement('div');
+                conf.style.position = 'fixed';
+                conf.style.left = x + 'px';
+                conf.style.top = y + 'px';
+                conf.style.width = Math.random() * 10 + 5 + 'px';
+                conf.style.height = conf.style.width;
+                conf.style.background = colors[Math.floor(Math.random() * colors.length)];
+                conf.style.borderRadius = Math.random() > 0.5 ? '50%' : '0';
+                conf.style.pointerEvents = 'none';
+                conf.style.zIndex = 9999;
+                conf.style.opacity = 0.85;
+                conf.style.boxShadow = '0 0 8px #0002';
+                const angle = Math.random() * 2 * Math.PI;
+                const distance = 60 + Math.random() * 60;
+                const dx = Math.cos(angle) * distance;
+                const dy = Math.sin(angle) * distance;
+                const rotation = Math.random() * 720 - 360;
+                conf.animate([
+                    { transform: 'translate(0,0) scale(1) rotate(0deg)', opacity: 0.85 },
+                    { transform: `translate(${dx}px,${dy}px) scale(${0.3 + Math.random()}) rotate(${rotation}deg)`, opacity: 0 }
+                ], {
+                    duration: 1200 + Math.random() * 600,
+                    easing: 'cubic-bezier(.6,.2,.2,1)'
+                });
+                setTimeout(() => conf.remove(), 1800);
+                document.body.appendChild(conf);
+            }
+        }
+
+        document.querySelectorAll('.cards-wrapper').forEach(wrapper => {
+            wrapper.addEventListener('click', function(e) {
+                launchConfetti(e.clientX, e.clientY);
+            });
+        });
+
+        const testimonialCards = document.querySelectorAll('.card');
+
+        function checkTestimonialCards() {
+            const triggerPoint = window.innerHeight * 0.85;
+
+            testimonialCards.forEach(card => {
+                const rect = card.getBoundingClientRect();
+                if (rect.top < triggerPoint) {
+                    card.classList.add('show');
+                } else {
+                    card.classList.remove('show');
+                }
+            });
+        }
+
+        checkTestimonialCards();
+
+        const calendarBtn = document.getElementById('calendar-btn');
+        calendarBtn.addEventListener('click', () => {
+            calendarBtn.classList.add('sparkle');
+            setTimeout(() => calendarBtn.classList.remove('sparkle'), 1000);
+        });
+
+        const calendarTitle = document.querySelector('.calendar-title');
+        calendarTitle.addEventListener('mouseenter', () => {
+            calendarTitle.style.transform = 'rotate(-2deg) scale(1.05)';
+        });
+        calendarTitle.addEventListener('mouseleave', () => {
+            calendarTitle.style.transform = 'rotate(0) scale(1)';
+        });
+
+        let lastTrailTime = 0;
+        document.addEventListener('mousemove', (e) => {
+            const now = Date.now();
+            if (now - lastTrailTime > 50) {
+                const trail = document.createElement('div');
+                trail.className = 'cursor-trail';
+                trail.style.left = e.pageX - 10 + 'px';
+                trail.style.top = e.pageY - 10 + 'px';
+                document.body.appendChild(trail);
+                
+                setTimeout(() => trail.remove(), 800);
+                lastTrailTime = now;
+            }
+        });
+
+        const donateBtn = document.getElementById('donateBtn');
+        donateBtn.addEventListener('click', (e) => {
+            launchConfetti(e.clientX, e.clientY);
+        });
+
+        /* Added intersection observer for insight cards */
+        const insightObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('show');
+                    
+                    // Animate the counter when card becomes visible
+                    const valueElement = entry.target.querySelector('.insight-value');
+                    if (valueElement && valueElement.textContent === '0') {
+                        const target = parseInt(valueElement.getAttribute('data-target'));
+                        const prefix = valueElement.getAttribute('data-prefix') || '';
+                        animateValue(valueElement, 0, target, 5000, prefix);
+                    }
+                }
+            });
+        }, { threshold: 0.2 });
+
+        // Observe all insight cards
+        const insightCards = document.querySelectorAll('.insight-card');
+        insightCards.forEach(card => insightObserver.observe(card));
+    </script>
+</body>
+</html>

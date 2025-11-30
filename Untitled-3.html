@@ -1,0 +1,1995 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DRABPE - Durham Black Business Directory</title>
+    <meta name="description" content="Discover and support Black-owned businesses in Durham Region">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --color-primary: #0a1828;
+            --color-secondary: #f5f5f5;
+            --color-accent: #10b981;
+            --color-text: #1a1a1a;
+            --color-text-light: #666;
+            --color-border: #e5e7eb;
+            --color-white: #ffffff;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--color-text);
+            background: var(--color-white);
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* Header */
+        .header {
+            background: var(--color-primary);
+            color: var(--color-white);
+            padding: 20px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 32px;
+            font-weight: 800;
+            letter-spacing: -1px;
+        }
+
+        .nav {
+            display: flex;
+            gap: 32px;
+        }
+
+        .nav a {
+            color: var(--color-white);
+            text-decoration: none;
+            font-weight: 500;
+            transition: opacity 0.2s;
+        }
+
+        .nav a:hover {
+            opacity: 0.7;
+        }
+
+        /* Hero with Canvas Animation */
+        .hero {
+            position: relative;
+            min-height: 80vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            background: linear-gradient(135deg, #0a1828 0%, #134e4a 100%);
+        }
+
+        #waveCanvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            color: var(--color-white);
+            max-width: 900px;
+            padding: 40px 20px;
+        }
+
+        .hero-title {
+            font-size: 72px;
+            font-weight: 800;
+            margin-bottom: 16px;
+            letter-spacing: -2px;
+            text-shadow: 0 2px 20px rgba(0,0,0,0.3);
+        }
+
+        .hero-divider {
+            width: 100px;
+            height: 4px;
+            background: var(--color-accent);
+            margin: 0 auto 32px;
+            border-radius: 2px;
+        }
+
+        .hero-subtitle {
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 24px;
+            line-height: 1.2;
+        }
+
+        .hero-description {
+            font-size: 24px;
+            opacity: 0.9;
+            margin-bottom: 48px;
+        }
+
+        .search-box {
+            display: flex;
+            max-width: 700px;
+            margin: 0 auto;
+            background: var(--color-white);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+
+        .search-input {
+            flex: 1;
+            padding: 20px 24px;
+            border: none;
+            font-size: 16px;
+            outline: none;
+        }
+
+        .search-btn {
+            padding: 20px 40px;
+            background: var(--color-accent);
+            border: none;
+            color: white;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 16px;
+            transition: background 0.2s;
+        }
+
+        .search-btn:hover {
+            background: #059669;
+        }
+
+        .hero-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+            max-width: 700px;
+            margin: 60px auto 0;
+            padding-top: 40px;
+            border-top: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 48px;
+            font-weight: 700;
+            color: var(--color-accent);
+            margin-bottom: 8px;
+        }
+
+        .stat-label {
+            font-size: 14px;
+            opacity: 0.8;
+        }
+
+        /* Added Trending Businesses Carousel Section */
+        .trending-section {
+            padding: 80px 0;
+            background: linear-gradient(to bottom, #f9fafb 0%, #ffffff 100%);
+            overflow: hidden;
+        }
+
+        .trending-header {
+            text-align: center;
+            margin-bottom: 48px;
+        }
+
+        .trending-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--color-accent);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 24px;
+            font-weight: 600;
+            font-size: 14px;
+            margin-bottom: 16px;
+        }
+
+        .trending-title {
+            font-size: 48px;
+            font-weight: 800;
+            margin-bottom: 12px;
+            color: var(--color-primary);
+        }
+
+        .trending-subtitle {
+            font-size: 18px;
+            color: var(--color-text-light);
+        }
+
+        .carousel-container {
+            position: relative;
+            width: 100%;
+            overflow: hidden;
+            padding: 20px 0;
+        }
+
+        .carousel-track {
+            display: flex;
+            gap: 24px;
+            animation: scroll 40s linear infinite;
+            width: fit-content;
+        }
+
+        .carousel-track:hover {
+            animation-play-state: paused;
+        }
+
+        @keyframes scroll {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+
+        .trending-card {
+            flex-shrink: 0;
+            width: 380px;
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: 2px solid transparent;
+        }
+
+        .trending-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 32px rgba(16,185,129,0.2);
+            border-color: var(--color-accent);
+        }
+
+        .trending-card-image {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .trending-card:hover .trending-card-image {
+            transform: scale(1.1);
+        }
+
+        .trending-card-content {
+            padding: 24px;
+        }
+
+        .trending-rank {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            background: linear-gradient(135deg, var(--color-accent) 0%, #059669 100%);
+            color: white;
+            border-radius: 50%;
+            font-weight: 700;
+            font-size: 16px;
+            margin-bottom: 12px;
+            box-shadow: 0 4px 12px rgba(16,185,129,0.3);
+        }
+
+        .trending-card-name {
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: var(--color-primary);
+        }
+
+        .trending-card-category {
+            display: inline-block;
+            background: var(--color-secondary);
+            padding: 6px 14px;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--color-text);
+            margin-bottom: 12px;
+        }
+
+        .trending-card-description {
+            font-size: 14px;
+            color: var(--color-text-light);
+            line-height: 1.6;
+            margin-bottom: 16px;
+        }
+
+        .trending-card-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding-top: 16px;
+            border-top: 1px solid var(--color-border);
+        }
+
+        .trending-location {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 14px;
+            color: var(--color-text-light);
+        }
+
+        .trending-views {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--color-accent);
+        }
+
+        /* Sections */
+        .section {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            font-size: 40px;
+            font-weight: 800;
+            text-align: center;
+            margin-bottom: 16px;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: var(--color-text-light);
+            font-size: 18px;
+            margin-bottom: 48px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Regions Grid */
+        .regions-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2px;
+        }
+
+        .region-card {
+            position: relative;
+            aspect-ratio: 4 / 3;
+            border-radius: 12px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: transform 0.3s;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .region-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 24px rgba(0,0,0,0.15);
+        }
+
+        .region-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .region-card:hover .region-image {
+            transform: scale(1.1);
+        }
+
+        .region-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 24px;
+        }
+
+        .region-label {
+            color: var(--color-accent);
+            font-size: 12px;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .region-name {
+            color: var(--color-white);
+            font-size: 28px;
+            font-weight: 700;
+        }
+
+        /* Categories Grid */
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 24px;
+        }
+
+        .category-card {
+            border-radius: 12px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: transform 0.3s;
+            border: 2px solid var(--color-border);
+            background: white;
+        }
+
+        .category-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--color-accent);
+            box-shadow: 0 12px 24px rgba(16,185,129,0.15);
+        }
+
+        .category-image {
+            width: 100%;
+            aspect-ratio: 4 / 3;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .category-card:hover .category-image {
+            transform: scale(1.1);
+        }
+
+        .category-name {
+            padding: 16px;
+            font-size: 18px;
+            font-weight: 600;
+            text-align: center;
+        }
+
+        /* Filters */
+        .filters-section {
+            padding: 40px 0;
+            background: var(--color-secondary);
+            border-top: 1px solid var(--color-border);
+        }
+
+        .filters-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        .filters-title {
+            font-size: 32px;
+            font-weight: 700;
+        }
+
+        .results-count {
+            color: var(--color-text-light);
+            font-size: 18px;
+            font-weight: 400;
+            margin-left: 12px;
+        }
+
+        .filter-buttons {
+            display: flex;
+            gap: 12px;
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border: 2px solid var(--color-primary);
+            background: transparent;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-size: 14px;
+        }
+
+        .btn:hover {
+            background: var(--color-primary);
+            color: white;
+        }
+
+        .btn-accent {
+            background: var(--color-accent);
+            border-color: var(--color-accent);
+            color: white;
+        }
+
+        .btn-accent:hover {
+            background: #059669;
+            border-color: #059669;
+        }
+
+        .filters {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+        }
+
+        .filter-input, .filter-select {
+            padding: 14px 20px;
+            border: 2px solid var(--color-border);
+            border-radius: 8px;
+            font-size: 16px;
+            width: 100%;
+            background: white;
+        }
+
+        .filter-input:focus, .filter-select:focus {
+            outline: none;
+            border-color: var(--color-accent);
+        }
+
+        /* Business Grid */
+        .business-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 32px;
+            transition: opacity 0.3s ease;
+        }
+
+        /* Added loading state styles */
+        .business-grid.loading {
+            opacity: 0.5;
+            filter: blur(2px);
+            pointer-events: none;
+        }
+
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(255, 255, 255, 0.8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .loading-overlay.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .loading-spinner {
+            width: 50px;
+            height: 50px;
+            border: 4px solid var(--color-border);
+            border-top-color: var(--color-accent);
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .business-card {
+            border: 2px solid var(--color-border);
+            border-radius: 12px;
+            overflow: hidden;
+            transition: all 0.3s;
+            background: white;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .business-card:hover {
+            border-color: var(--color-accent);
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px rgba(0,0,0,0.1);
+        }
+
+        /* Removed checkbox for businesses, no longer needed */
+
+        /* Fixed image sizing to be uniform */
+        .business-image {
+            width: 100%;
+            height: 240px;
+            object-fit: cover;
+            flex-shrink: 0;
+        }
+
+        .business-info {
+            padding: 20px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .business-name {
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: var(--color-primary);
+        }
+
+        /* Improved category badge styling */
+        .business-category {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--color-accent) 0%, #059669 100%);
+            color: white;
+            padding: 6px 14px;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 14px;
+            width: fit-content;
+            box-shadow: 0 2px 8px rgba(16, 185, 129, 0.2);
+        }
+
+        .business-description {
+            color: var(--color-text-light);
+            font-size: 15px;
+            margin-bottom: 16px;
+            line-height: 1.6;
+            flex: 1;
+        }
+
+        /* Improved location styling */
+        .business-location {
+            color: var(--color-text);
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            margin-bottom: 14px;
+            font-weight: 500;
+            padding: 8px 12px;
+            background: var(--color-secondary);
+            border-radius: 8px;
+            width: fit-content;
+        }
+
+        .business-social {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 16px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .social-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            transition: all 0.2s;
+            text-decoration: none;
+            font-size: 18px;
+            font-weight: 700;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .social-link.linkedin {
+            background: #0077b5;
+            color: white;
+        }
+
+        .social-link.linkedin:hover {
+            background: #005885;
+            transform: translateY(-3px);
+            box-shadow: 0 4px 12px rgba(0, 119, 181, 0.4);
+        }
+
+        .social-link.facebook {
+            background: #1877f2;
+            color: white;
+        }
+
+        .social-link.facebook:hover {
+            background: #0d5dbf;
+            transform: translateY(-3px);
+            box-shadow: 0 4px 12px rgba(24, 119, 242, 0.4);
+        }
+
+        .social-link.instagram {
+            background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+            color: white;
+        }
+
+        .social-link.instagram:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 12px rgba(188, 24, 136, 0.5);
+        }
+
+        .social-link.website {
+            background: var(--color-accent);
+            color: white;
+        }
+
+        .social-link.website:hover {
+            background: #059669;
+            transform: translateY(-3px);
+            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.4);
+        }
+
+        /* Improved owner section styling */
+        .business-owner {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding-top: 16px;
+            border-top: 2px solid var(--color-border);
+            margin-top: auto;
+        }
+
+        .owner-avatar {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--color-accent);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .owner-info {
+            flex: 1;
+        }
+
+        .owner-label {
+            font-size: 11px;
+            color: var(--color-text-light);
+            text-transform: uppercase;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            margin-bottom: 2px;
+        }
+
+        .owner-name {
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--color-primary);
+        }
+
+        /* About Section */
+        .about {
+            background: var(--color-secondary);
+        }
+
+        .about-content {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .about-text {
+            font-size: 18px;
+            line-height: 1.8;
+            margin-bottom: 24px;
+            color: var(--color-text-light);
+        }
+
+        .about-goals {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 32px;
+            margin-top: 48px;
+        }
+
+        .goal-item {
+            background: var(--color-white);
+            padding: 32px;
+            border-radius: 12px;
+            border: 2px solid var(--color-border);
+            transition: transform 0.3s;
+        }
+
+        .goal-item:hover {
+            transform: translateY(-4px);
+            border-color: var(--color-accent);
+        }
+
+        .goal-title {
+            font-size: 24px;
+            margin-bottom: 12px;
+            font-weight: 700;
+        }
+
+        .goal-text {
+            font-size: 16px;
+            color: var(--color-text-light);
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--color-primary);
+            color: var(--color-white);
+            padding: 40px 0;
+            text-align: center;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 80px 20px;
+        }
+
+        .empty-state p {
+            font-size: 20px;
+            color: var(--color-text-light);
+            margin-bottom: 24px;
+        }
+
+        /* Updated multi-select info for categories instead of businesses */
+        .multi-select-info {
+            background: linear-gradient(135deg, var(--color-accent) 0%, #059669 100%);
+            color: white;
+            padding: 16px 24px;
+            border-radius: 12px;
+            margin-bottom: 24px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.2);
+        }
+
+        .multi-select-info-icon {
+            font-size: 24px;
+            flex-shrink: 0;
+        }
+
+        .multi-select-info-text {
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        .selected-count {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 4px 12px;
+            border-radius: 6px;
+            font-weight: 600;
+            margin-left: auto;
+            white-space: nowrap;
+        }
+
+        .clear-selection-btn {
+            background: white;
+            color: var(--color-accent);
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-size: 14px;
+        }
+
+        .clear-selection-btn:hover {
+            background: var(--color-secondary);
+        }
+
+        /* Added category multi-select styles */
+        .category-filter-container {
+            position: relative;
+        }
+
+        .category-dropdown {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: white;
+            border: 2px solid var(--color-accent);
+            border-radius: 8px;
+            margin-top: 4px;
+            max-height: 300px;
+            overflow-y: auto;
+            z-index: 100;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+            display: none;
+        }
+
+        .category-dropdown.active {
+            display: block;
+        }
+
+        .category-option {
+            padding: 12px 16px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            transition: background 0.2s;
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .category-option:last-child {
+            border-bottom: none;
+        }
+
+        .category-option:hover {
+            background: var(--color-secondary);
+        }
+
+        .category-option input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+            accent-color: var(--color-accent);
+        }
+
+        .category-option label {
+            flex: 1;
+            cursor: pointer;
+            font-size: 15px;
+        }
+
+        .category-display {
+            padding: 14px 20px;
+            border: 2px solid var(--color-border);
+            border-radius: 8px;
+            font-size: 16px;
+            width: 100%;
+            background: white;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: border-color 0.2s;
+        }
+
+        .category-display:hover,
+        .category-display.active {
+            border-color: var(--color-accent);
+        }
+
+        .category-display-text {
+            flex: 1;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .category-display-arrow {
+            margin-left: 8px;
+            transition: transform 0.2s;
+        }
+
+        .category-display.active .category-display-arrow {
+            transform: rotate(180deg);
+        }
+
+        .selected-categories-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 12px;
+        }
+
+        .category-tag {
+            background: var(--color-accent);
+            color: white;
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 13px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .category-tag-remove {
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 16px;
+            line-height: 1;
+        }
+
+        .category-tag-remove:hover {
+            opacity: 0.7;
+        }
+
+        /* Added load more button styles */
+        .load-more-container {
+            text-align: center;
+            padding: 40px 0;
+        }
+
+        .load-more-btn {
+            padding: 16px 40px;
+            background: var(--color-accent);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.2);
+        }
+
+        .load-more-btn:hover {
+            background: #059669;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(16, 185, 129, 0.3);
+        }
+
+        .load-more-btn:disabled {
+            background: var(--color-border);
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* Responsive */
+        @media (max-width: 1200px) {
+            .regions-grid, .categories-grid, .business-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            .business-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero-title { font-size: 48px; }
+            .hero-subtitle { font-size: 32px; }
+            .trending-title { font-size: 36px; }
+            .trending-card { width: 320px; }
+            .regions-grid, .categories-grid, .business-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .filters {
+                grid-template-columns: 1fr;
+            }
+            .about-goals {
+                grid-template-columns: 1fr;
+            }
+            .hero-stats {
+                grid-template-columns: 1fr;
+                gap: 24px;
+            }
+            /* Better mobile styling for business cards */
+            .business-image {
+                height: 200px;
+            }
+            .business-name {
+                font-size: 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .trending-card { width: 280px; }
+            .regions-grid, .categories-grid, .business-grid {
+                grid-template-columns: 1fr;
+            }
+            /* Optimized for mobile */
+            .business-image {
+                height: 220px;
+            }
+            .business-info {
+                padding: 16px;
+            }
+            .social-link {
+                width: 36px;
+                height: 36px;
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Added loading overlay -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loading-spinner"></div>
+    </div>
+
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <h1 class="logo">DRABPE</h1>
+                <nav class="nav">
+                    <a href="https://drabpe.org/about-us/">About</a>
+                    <a href="https://drabpe.org/register-your-business/">Submit Business</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section with Animated Waves -->
+        <section class="hero">
+            <canvas id="waveCanvas"></canvas>
+            <div class="container">
+                <div class="hero-content">
+                    <h2 class="hero-title">DRABPE</h2>
+                    <div class="hero-divider"></div>
+                    <p class="hero-subtitle">Discover Black-Owned<br>Businesses in Durham Region</p>
+                    <p class="hero-description">Supporting entrepreneurial equity and strengthening our local economy</p>
+                    
+                    <div class="search-box">
+                        <input type="text" id="heroSearch" placeholder="Search businesses by name, category, or owner..." class="search-input">
+                        <button class="search-btn" onclick="performSearch()">Search</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Added Trending Businesses Carousel -->
+        <section class="trending-section">
+            <div class="container">
+                <div class="trending-header">
+                    <div class="trending-badge">
+                        🔥 TRENDING NOW
+                    </div>
+                    <h3 class="trending-title">Most Popular Businesses</h3>
+                    <p class="trending-subtitle">Discover the most visited and highly engaged businesses in Durham Region</p>
+                </div>
+            </div>
+            <div class="carousel-container">
+                <div class="carousel-track" id="carouselTrack"></div>
+            </div>
+        </section>
+
+        <!-- Filters Section -->
+        <section class="filters-section" id="filters-section">
+            <div class="container">
+                <div class="filters-header">
+                    <div>
+                        <span class="filters-title">All Businesses</span>
+                        <span class="results-count" id="resultsCount">(20 found)</span>
+                    </div>
+                    <div class="filter-buttons">
+                        <button class="btn" id="toggleFilters" onclick="toggleFilters()">Show Filters</button>
+                        <button class="btn" onclick="clearAllFilters()">Clear All</button>
+                    </div>
+                </div>
+                
+                <div class="filters" id="filterInputs" style="display: none; margin-top: 24px;">
+                    <input type="text" id="searchFilter" placeholder="Search businesses, owners..." class="filter-input">
+                    
+                    <!-- Replaced single select with multi-select category dropdown -->
+                    <div class="category-filter-container">
+                        <div class="category-display" id="categoryDisplay" onclick="toggleCategoryDropdown()">
+                            <span class="category-display-text" id="categoryDisplayText">All Categories</span>
+                            <span class="category-display-arrow">▼</span>
+                        </div>
+                        <div class="category-dropdown" id="categoryDropdown">
+                            <!-- Categories will be populated here -->
+                        </div>
+                        <div class="selected-categories-tags" id="selectedCategoriesTags"></div>
+                    </div>
+                    
+                    <select id="locationFilter" class="filter-select">
+                        <option value="all">All Locations</option>
+                    </select>
+                </div>
+            </div>
+        </section>
+
+        <!-- Business Grid -->
+        <section class="section">
+            <div class="container">
+                <!-- Updated tooltip text for category multi-select -->
+                <div class="multi-select-info" id="multiSelectInfo" style="display: none;">
+                    <span class="multi-select-info-icon">✓</span>
+                    <span class="multi-select-info-text">
+                        Filter by multiple categories to find exactly what you're looking for
+                    </span>
+                    <span class="selected-count" id="selectedCount">0 categories</span>
+                    <button class="clear-selection-btn" onclick="clearCategorySelection()">Clear Categories</button>
+                </div>
+                <div id="businessGrid" class="business-grid"></div>
+                <!-- Added load more button for lazy loading -->
+                <div class="load-more-container" id="loadMoreContainer" style="display: none;">
+                    <button class="load-more-btn" id="loadMoreBtn" onclick="loadMoreBusinesses()">
+                        Load More Businesses
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="section about">
+            <div class="container">
+                <div class="about-content">
+                    <h3 class="section-title">About the Directory</h3>
+                    <p class="about-text">
+                        We believe that one of the best ways of increasing the community's "Share of the Wallet" is by giving much-needed exposure to Black businesses that would otherwise struggle for brand recognition and market presence.
+                    </p>
+                    <p class="about-text">
+                        The directory includes more than traditional shops, it showcases web and home-based companies working extremely hard to be seen and heard. The collection is a one-stop resource for the greater Durham community to discover and support Black-owned businesses.
+                    </p>
+                    <div class="about-goals">
+                        <div class="goal-item">
+                            <h4 class="goal-title">Showcase Culture</h4>
+                            <p class="goal-text">Provides a space to showcase Black culture and entrepreneurs</p>
+                        </div>
+                        <div class="goal-item">
+                            <h4 class="goal-title">Promote Equity</h4>
+                            <p class="goal-text">Promotes entrepreneurial equity to help strengthen the local economy</p>
+                        </div>
+                        <div class="goal-item">
+                            <h4 class="goal-title">Increase Visibility</h4>
+                            <p class="goal-text">Helps increase Black visibility and representation within the community</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        // Animated Wave Canvas
+        const canvas = document.getElementById('waveCanvas');
+        const ctx = canvas.getContext('2d');
+        let animationId;
+
+        function resizeCanvas() {
+            canvas.width = canvas.offsetWidth;
+            canvas.height = canvas.offsetHeight;
+        }
+
+        resizeCanvas();
+        window.addEventListener('resize', resizeCanvas);
+
+        class Wave {
+            constructor(yOffset, speed, amplitude, frequency, color) {
+                this.yOffset = yOffset;
+                this.speed = speed;
+                this.amplitude = amplitude;
+                this.frequency = frequency;
+                this.color = color;
+                this.increment = 0;
+            }
+
+            draw() {
+                ctx.beginPath();
+                ctx.moveTo(0, canvas.height);
+
+                for (let x = 0; x < canvas.width; x++) {
+                    const y = this.yOffset + Math.sin((x * this.frequency) + this.increment) * this.amplitude;
+                    ctx.lineTo(x, y);
+                }
+
+                ctx.lineTo(canvas.width, canvas.height);
+                ctx.closePath();
+                ctx.fillStyle = this.color;
+                ctx.fill();
+
+                this.increment += this.speed;
+            }
+        }
+
+        const waves = [
+            new Wave(canvas.height * 0.7, 0.015, 40, 0.01, 'rgba(16, 185, 129, 0.1)'),
+            new Wave(canvas.height * 0.75, 0.02, 30, 0.015, 'rgba(16, 185, 129, 0.15)'),
+            new Wave(canvas.height * 0.8, 0.01, 35, 0.012, 'rgba(16, 185, 129, 0.08)')
+        ];
+
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            waves.forEach(wave => wave.draw());
+            animationId = requestAnimationFrame(animate);
+        }
+
+        animate();
+
+        // Business Data
+        const businesses = [
+            {
+                id: 1,
+                name: "Active Scholars",
+                category: "Sports & Recreation",
+                location: "Ajax",
+                description: "Youth sports programs and academic support services helping young athletes excel.",
+                owner: "Sunday Eniojukan",
+                ownerImage: "https://media.licdn.com/dms/image/v2/C4E03AQGN5aX2woD6BQ/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1579550784526?e=1763596800&v=beta&t=_28SaLjmNeIWxpseqW5IO5gduplfuykts7TCRGaht04",
+                image: "https://drabpe.org/wp-content/uploads/2024/09/Active-Scholars-Logo-2-scaled-1-232x300.jpg",
+                views: 1250,
+                linkedin: "https://linkedin.com/company/active-scholars",
+                facebook: "https://facebook.com/activescholars",
+                instagram: "https://instagram.com/activescholars",
+                website: "https://activescholars.com"
+            },
+            {
+                id: 2,
+                name: "AeroStream Consulting Inc.",
+                category: "Technology",
+                location: "Whitby",
+                description: "Innovative software development and IT consulting services for businesses.",
+                owner: "Aisha Thompson",
+                ownerImage: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&h=100&fit=crop",
+                image: "https://drabpe.org/wp-content/uploads/2024/07/AD1-1.png",
+                views: 980,
+                linkedin: "https://linkedin.com/company/afiwi-groove",
+                facebook: "https://facebook.com/afiwigroove",
+                instagram: "https://instagram.com/afiwigroove",
+                website: "https://afiwigroove.com"
+            },
+            {
+                id: 3,
+                name: "Fitness First Training",
+                category: "Sports & Recreation",
+                location: "Whitby",
+                description: "Personal training and group fitness classes focused on holistic wellness.",
+                owner: "Jordan Mitchell",
+                ownerImage: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=0&h=0&fit=crop",
+                image: "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=600&h=400&fit=crop",
+                views: 875,
+                linkedin: "https://linkedin.com/company/fitness-first-training",
+                facebook: "https://facebook.com/fitnessfirsttraining",
+                instagram: "https://instagram.com/fitnessfirsttraining",
+                website: "https://fitnessfirsttraining.com"
+            },
+            {
+                id: 4,
+                name: "Prosperity Financial",
+                category: "Finance",
+                location: "Oshawa",
+                description: "Comprehensive financial planning and investment advisory services.",
+                owner: "Naomi Davis",
+                ownerImage: "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=100&h=100&fit=crop",
+                image: "https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?w=600&h=400&fit=crop",
+                views: 820,
+                linkedin: "https://linkedin.com/company/prosperity-financial",
+                facebook: "https://facebook.com/prosperityfinancial",
+                instagram: "https://instagram.com/prosperityfinancial",
+                website: "https://prosperityfinancial.com"
+            },
+            {
+                id: 5,
+                name: "Justice Law Firm",
+                category: "Legal Services",
+                location: "Pickering",
+                description: "Experienced legal representation in family law, real estate, and business.",
+                owner: "Isaiah Carter",
+                ownerImage: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=100&h=100&fit=crop",
+                image: "https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=600&h=400&fit=crop",
+                views: 765,
+                linkedin: "https://linkedin.com/company/justice-law-firm",
+                facebook: "https://facebook.com/justicelawfirm",
+                instagram: "https://instagram.com/justicelawfirm",
+                website: "https://justicelawfirm.com"
+            },
+            {
+                id: 6,
+                name: "Crown Cuts Barbershop",
+                category: "Grooming",
+                location: "Ajax",
+                description: "Premium barbering services specializing in fades, lineups, and beard grooming.",
+                owner: "Jamal Harris",
+                ownerImage: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop",
+                image: "https://images.unsplash.com/photo-1503951914875-452162b0f3f1?w=600&h=400&fit=crop",
+                views: 710,
+                linkedin: "https://linkedin.com/company/crown-cuts",
+                facebook: "https://facebook.com/crowncuts",
+                instagram: "https://instagram.com/crowncuts",
+                website: "https://crowncuts.com"
+            },
+            {
+                id: 7,
+                name: "Soul Food Kitchen",
+                category: "Restaurants & Catering",
+                location: "Whitby",
+                description: "Authentic soul food and Caribbean cuisine with catering services.",
+                owner: "Simone Jackson",
+                ownerImage: "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=100&h=100&fit=crop",
+                image: "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=600&h=400&fit=crop",
+                views: 695,
+                linkedin: "https://linkedin.com/company/soul-food-kitchen",
+                facebook: "https://facebook.com/soulfoodkitchen",
+                instagram: "https://instagram.com/soulfoodkitchen",
+                website: "https://soulfoodkitchen.com"
+            },
+            {
+                id: 8,
+                name: "Elegant Events Planning",
+                category: "Event Planning",
+                location: "Oshawa",
+                description: "Full-service event planning for weddings, corporate events, and celebrations.",
+                owner: "Destiny Brown",
+                ownerImage: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&h=100&fit=crop",
+                image: "https://images.unsplash.com/photo-1511578314322-379afb476865?w=600&h=400&fit=crop",
+                views: 640,
+                linkedin: "https://linkedin.com/company/elegant-events",
+                facebook: "https://facebook.com/elegantevents",
+                instagram: "https://instagram.com/elegantevents",
+                website: "https://elegantevents.com"
+            },
+            {
+                id: 9,
+                name: "Wellness Health Clinic",
+                category: "Healthcare",
+                location: "Clarington",
+                description: "Comprehensive healthcare services including family medicine and preventive care.",
+                owner: "Dr. Michael Johnson",
+                ownerImage: "https://images.unsplash.com/photo-1519345182560-3f2917c472ef?w=100&h=100&fit=crop",
+                image: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=600&h=400&fit=crop",
+                views: 590,
+                linkedin: "https://linkedin.com/company/wellness-health-clinic",
+                facebook: "https://facebook.com/wellnesshealthclinic",
+                instagram: "https://instagram.com/wellnesshealthclinic",
+                website: "https://wellnesshealthclinic.com"
+            },
+            {
+                id: 10,
+                name: "Style Boutique",
+                category: "Retail",
+                location: "Pickering",
+                description: "Curated fashion and accessories celebrating Black culture and style.",
+                owner: "Aaliyah Moore",
+                ownerImage: "https://images.unsplash.com/photo-1485893226355-9a1c32a0d81e?w=100&h=100&fit=crop",
+                image: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=600&h=400&fit=crop",
+                views: 550,
+                linkedin: "https://linkedin.com/company/style-boutique",
+                facebook: "https://facebook.com/styleboutique",
+                instagram: "https://instagram.com/styleboutique",
+                website: "https://styleboutique.com"
+            },
+            {
+                id: 11,
+                name: "Digital Marketing Pro",
+                category: "Services",
+                location: "Ajax",
+                description: "Strategic digital marketing services including social media and SEO.",
+                owner: "Tyrone Washington",
+                ownerImage: "https://images.unsplash.com/photo-1463453091185-61582044d556?w=100&h=100&fit=crop",
+                image: "https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=600&h=400&fit=crop",
+                views: 520,
+                linkedin: "https://linkedin.com/company/digital-marketing-pro",
+                facebook: "https://facebook.com/digitalmarketingpro",
+                instagram: "https://instagram.com/digitalmarketingpro",
+                website: "https://digitalmarketingpro.com"
+            },
+            {
+                id: 12,
+                name: "Radiance Spa & Wellness",
+                category: "Health & Personal Care",
+                location: "Whitby",
+                description: "Luxury spa services specializing in treatments for melanin-rich skin.",
+                owner: "Zara Robinson",
+                ownerImage: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=100&h=100&fit=crop",
+                image: "https://images.unsplash.com/photo-1540555700478-4be289fbecef?w=600&h=400&fit=crop",
+                views: 485,
+                linkedin: "https://linkedin.com/company/radiance-spa",
+                facebook: "https://facebook.com/radiancespa",
+                instagram: "https://instagram.com/radiancespa",
+                website: "https://radiancespa.com"
+            },
+            {
+                id: 13,
+                name: "Heritage Inn",
+                category: "Hospitality",
+                location: "Scugog",
+                description: "Boutique hotel offering comfortable accommodations with warm hospitality.",
+                owner: "Cameron Lee",
+                ownerImage: "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?w=100&h=100&fit=crop",
+                image: "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=600&h=400&fit=crop",
+                views: 460,
+                linkedin: "https://linkedin.com/company/heritage-inn",
+                facebook: "https://facebook.com/heritageinn",
+                instagram: "https://instagram.com/heritageinn",
+                website: "https://heritageinn.com"
+            },
+            {
+                id: 14,
+                name: "Code Academy Durham",
+                category: "Technology",
+                location: "Oshawa",
+                description: "Teaching coding and technology skills to youth and adults in Durham.",
+                owner: "Elijah Turner",
+                ownerImage: "https://images.unsplash.com/photo-1543132220-4bf3de6e10ae?w=100&h=100&fit=crop",
+                image: "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=600&h=400&fit=crop",
+                views: 430,
+                linkedin: "https://linkedin.com/company/code-academy-durham",
+                facebook: "https://facebook.com/codeacademydurham",
+                instagram: "https://instagram.com/codeacademydurham",
+                website: "https://codeacademydurham.com"
+            },
+            {
+                id: 15,
+                name: "Freedom Financial",
+                category: "Finance",
+                location: "Pickering",
+                description: "Building generational wealth through smart investment strategies.",
+                owner: "Monica Stewart",
+                ownerImage: "https://images.unsplash.com/photo-1487412720507-59d30e846162?w=100&h=100&fit=crop",
+                image: "https://images.unsplash.com/photo-1559526324-4b87b5e36e44?w=600&h=400&fit=crop",
+                views: 410,
+                linkedin: "https://linkedin.com/company/freedom-financial",
+                facebook: "https://facebook.com/freedomfinancial",
+                instagram: "https://instagram.com/freedomfinancial",
+                website: "https://freedomfinancial.com"
+            },
+            {
+                id: 16,
+                name: "Champion Athletics",
+                category: "Sports & Recreation",
+                location: "Ajax",
+                description: "Sports equipment retail and custom team uniform design services.",
+                owner: "DeShawn Anderson",
+                ownerImage: "https://images.unsplash.com/photo-1522556189639-6b5742339e62?w=100&h=100&fit=crop",
+                image: "https://images.unsplash.com/photo-1461896836934-ffe607ba8211?w=600&h=400&fit=crop",
+                views: 385,
+                linkedin: "https://linkedin.com/company/champion-athletics",
+                facebook: "https://facebook.com/championathletics",
+                instagram: "https://instagram.com/championathletics",
+                website: "https://championathletics.com"
+            },
+            {
+                id: 17,
+                name: "Essence Beauty Bar",
+                category: "Grooming",
+                location: "Whitby",
+                description: "Hair styling and beauty services specializing in natural hair care.",
+                owner: "Keisha Williams",
+                ownerImage: "https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?w=100&h=100&fit=crop",
+                image: "https://images.unsplash.com/photo-1560066984-138dadb4c035?w=600&h=400&fit=crop",
+                views: 360,
+                linkedin: "https://linkedin.com/company/essence-beauty-bar",
+                facebook: "https://facebook.com/essencebeautybar",
+                instagram: "https://instagram.com/essencebeautybar",
+                website: "https://essencebeautybar.com"
+            },
+            {
+                id: 18,
+                name: "Community Legal Aid",
+                category: "Legal Services",
+                location: "Oshawa",
+                description: "Accessible legal services focusing on immigration and tenant rights.",
+                owner: "Patricia Green",
+                ownerImage: "https://images.unsplash.com/photo-1598550476439-6847785fcea6?w=100&h=100&fit=crop",
+                image: "https://images.unsplash.com/photo-1505664194779-8beaceb93744?w=600&h=400&fit=crop",
+                views: 340,
+                linkedin: "https://linkedin.com/company/community-legal-aid",
+                facebook: "https://facebook.com/communitylegalaid",
+                instagram: "https://instagram.com/communitylegalaid",
+                website: "https://communitylegalaid.com"
+            },
+            {
+                id: 19,
+                name: "Island Spice Restaurant",
+                category: "Restaurants & Catering",
+                location: "Pickering",
+                description: "Authentic Caribbean and West African cuisine bringing island flavors to Durham.",
+                owner: "Samuel Osei",
+                ownerImage: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop",
+                image: "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=600&h=400&fit=crop",
+                views: 315,
+                linkedin: "https://linkedin.com/company/island-spice",
+                facebook: "https://facebook.com/islandspice",
+                instagram: "https://instagram.com/islandspice",
+                website: "https://islandspice.com"
+            },
+            {
+                id: 20,
+                name: "Creative Designs Studio",
+                category: "Services",
+                location: "Clarington",
+                description: "Graphic design, branding, and creative services for small businesses.",
+                owner: "Janelle Martinez",
+                ownerImage: "https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?w=100&h=100&fit=crop",
+                image: "https://images.unsplash.com/photo-1561070791-2526d30994b5?w=600&h=400&fit=crop",
+                views: 290,
+                linkedin: "https://linkedin.com/company/creative-designs-studio",
+                facebook: "https://facebook.com/creativedesignsstudio",
+                instagram: "https://instagram.com/creativedesignsstudio",
+                website: "https://creativedesignsstudio.com"
+            }
+        ];
+
+        const regions = [
+            { name: "Ajax"},
+            { name: "Whitby" },
+            { name: "Oshawa"},
+            { name: "Pickering"},
+            { name: "Clarington"},
+            { name: "Scugog"},
+            { name: "Uxbridge"},
+            { name: "Brock"}
+        ];
+
+        const categories = [
+            { name: "Technology"},
+            { name: "Sports & Recreation"},
+            { name: "Finance"},
+            { name: "Legal Services"},
+            { name: "Services"},
+            { name: "Retail"},
+            { name: "Restaurants & Catering"},
+            { name: "Hospitality"},
+            { name: "Healthcare"},
+            { name: "Health & Personal Care"},
+            { name: "Personal Grooming"},
+            { name: "Event Planning"},
+            { name: "Event Planning"}
+        ];
+
+        let currentFilters = {
+            search: '',
+            categories: [], // Changed from single category to array
+            location: 'all'
+        };
+
+        let selectedCategories = new Set();
+        let displayedBusinessCount = 8; // Start with 8 businesses
+        const businessesPerLoad = 8;
+
+        // Initialize
+        function init() {
+            renderTrendingCarousel();
+            populateFilterOptions();
+            renderBusinesses();
+            setupEventListeners();
+            setupIntersectionObserver();
+        }
+
+        function renderTrendingCarousel() {
+            const track = document.getElementById('carouselTrack');
+            
+            // Sort businesses by views and get top 8
+            const trendingBusinesses = [...businesses]
+                .sort((a, b) => b.views - a.views)
+                .slice(0, 8);
+            
+            // Duplicate the array for seamless infinite scroll
+            const duplicatedBusinesses = [...trendingBusinesses, ...trendingBusinesses];
+            
+            track.innerHTML = duplicatedBusinesses.map((business, index) => {
+                const rank = (index % trendingBusinesses.length) + 1;
+                return `
+                    <div class="trending-card" onclick="scrollToBusinessDetails(${business.id})">
+                        <img src="${business.image}" alt="${business.name}" class="trending-card-image">
+                        <div class="trending-card-content">
+                            <div class="trending-rank">${rank}</div>
+                            <h4 class="trending-card-name">${business.name}</h4>
+                            <span class="trending-card-category">${business.category}</span>
+                            <p class="trending-card-description">${business.description}</p>
+                            <div class="trending-card-footer">
+                                <div class="trending-location">
+                                    📍 ${business.location}
+                                </div>
+                                <div class="trending-views">
+                                    👁️ ${business.views}+ views
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function scrollToBusinessDetails(businessId) {
+            scrollToFilters();
+        }
+
+        function setupEventListeners() {
+            document.getElementById('searchFilter').addEventListener('input', (e) => {
+                currentFilters.search = e.target.value.toLowerCase();
+                displayedBusinessCount = businessesPerLoad;
+                renderBusinesses();
+            });
+
+            document.getElementById('locationFilter').addEventListener('change', (e) => {
+                currentFilters.location = e.target.value;
+                displayedBusinessCount = businessesPerLoad;
+                renderBusinesses();
+            });
+
+            document.getElementById('heroSearch').addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') performSearch();
+            });
+
+            // Close category dropdown when clicking outside
+            document.addEventListener('click', (e) => {
+                const dropdown = document.getElementById('categoryDropdown');
+                const display = document.getElementById('categoryDisplay');
+                if (!dropdown.contains(e.target) && !display.contains(e.target)) {
+                    dropdown.classList.remove('active');
+                    display.classList.remove('active');
+                }
+            });
+        }
+
+        function populateFilterOptions() {
+            const categoryDropdown = document.getElementById('categoryDropdown');
+            const locationSelect = document.getElementById('locationFilter');
+
+            // Populate category checkboxes
+            categoryDropdown.innerHTML = categories.map(cat => `
+                <div class="category-option" onclick="event.stopPropagation()">
+                    <input 
+                        type="checkbox" 
+                        id="cat-${cat.name.replace(/\s+/g, '-')}" 
+                        value="${cat.name}"
+                        onchange="toggleCategory('${cat.name}')"
+                    >
+                    <label for="cat-${cat.name.replace(/\s+/g, '-')}">${cat.name}</label>
+                </div>
+            `).join('');
+
+            // Populate location select
+            regions.forEach(region => {
+                const option = document.createElement('option');
+                option.value = region.name;
+                option.textContent = region.name;
+                locationSelect.appendChild(option);
+            });
+        }
+
+        function toggleCategoryDropdown() {
+            const dropdown = document.getElementById('categoryDropdown');
+            const display = document.getElementById('categoryDisplay');
+            dropdown.classList.toggle('active');
+            display.classList.toggle('active');
+        }
+
+        function toggleCategory(categoryName) {
+            if (selectedCategories.has(categoryName)) {
+                selectedCategories.delete(categoryName);
+            } else {
+                selectedCategories.add(categoryName);
+            }
+            
+            currentFilters.categories = Array.from(selectedCategories);
+            displayedBusinessCount = businessesPerLoad;
+            updateCategoryDisplay();
+            renderBusinesses();
+        }
+
+        function updateCategoryDisplay() {
+            const displayText = document.getElementById('categoryDisplayText');
+            const tagsContainer = document.getElementById('selectedCategoriesTags');
+            const multiSelectInfo = document.getElementById('multiSelectInfo');
+            const selectedCount = document.getElementById('selectedCount');
+            
+            if (selectedCategories.size === 0) {
+                displayText.textContent = 'All Categories';
+                tagsContainer.innerHTML = '';
+                multiSelectInfo.style.display = 'none';
+            } else {
+                displayText.textContent = `${selectedCategories.size} selected`;
+                
+                // Show tags
+                tagsContainer.innerHTML = Array.from(selectedCategories).map(cat => `
+                    <div class="category-tag">
+                        ${cat}
+                        <span class="category-tag-remove" onclick="toggleCategory('${cat}')">×</span>
+                    </div>
+                `).join('');
+                
+                // Show info banner
+                multiSelectInfo.style.display = 'flex';
+                selectedCount.textContent = `${selectedCategories.size} ${selectedCategories.size === 1 ? 'category' : 'categories'}`;
+            }
+        }
+
+        function clearCategorySelection() {
+            selectedCategories.clear();
+            currentFilters.categories = [];
+            displayedBusinessCount = businessesPerLoad;
+            
+            // Uncheck all checkboxes
+            document.querySelectorAll('#categoryDropdown input[type="checkbox"]').forEach(checkbox => {
+                checkbox.checked = false;
+            });
+            
+            updateCategoryDisplay();
+            renderBusinesses();
+        }
+
+        function filterBusinesses() {
+            return businesses.filter(business => {
+                const matchesSearch = !currentFilters.search || 
+                    business.name.toLowerCase().includes(currentFilters.search) ||
+                    business.description.toLowerCase().includes(currentFilters.search) ||
+                    business.owner.toLowerCase().includes(currentFilters.search);
+
+                const matchesCategory = currentFilters.categories.length === 0 || 
+                    currentFilters.categories.includes(business.category);
+
+                const matchesLocation = currentFilters.location === 'all' || 
+                    business.location === currentFilters.location;
+
+                return matchesSearch && matchesCategory && matchesLocation;
+            });
+        }
+
+        function setupIntersectionObserver() {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const btn = document.getElementById('loadMoreBtn');
+                        if (btn && !btn.disabled) {
+                            loadMoreBusinesses();
+                        }
+                    }
+                });
+            }, {
+                rootMargin: '100px'
+            });
+
+            const loadMoreContainer = document.getElementById('loadMoreContainer');
+            if (loadMoreContainer) {
+                observer.observe(loadMoreContainer);
+            }
+        }
+
+        function loadMoreBusinesses() {
+            showLoading();
+            
+            // Simulate loading delay for smooth UX
+            setTimeout(() => {
+                displayedBusinessCount += businessesPerLoad;
+                renderBusinesses();
+                hideLoading();
+            }, 500);
+        }
+
+        function showLoading() {
+            const overlay = document.getElementById('loadingOverlay');
+            const grid = document.getElementById('businessGrid');
+            overlay.classList.add('active');
+            grid.classList.add('loading');
+        }
+
+        function hideLoading() {
+            const overlay = document.getElementById('loadingOverlay');
+            const grid = document.getElementById('businessGrid');
+            overlay.classList.remove('active');
+            grid.classList.remove('loading');
+        }
+
+        function renderBusinesses() {
+            const grid = document.getElementById('businessGrid');
+            const loadMoreContainer = document.getElementById('loadMoreContainer');
+            const loadMoreBtn = document.getElementById('loadMoreBtn');
+            const filtered = filterBusinesses();
+            
+            document.getElementById('resultsCount').textContent = `(${filtered.length} found)`;
+
+            if (filtered.length === 0) {
+                grid.innerHTML = `
+                    <div class="empty-state" style="grid-column: 1/-1;">
+                        <p>No businesses found matching your criteria</p>
+                        <button class="btn btn-accent" onclick="clearAllFilters()">Clear filters</button>
+                    </div>
+                `;
+                loadMoreContainer.style.display = 'none';
+                return;
+            }
+
+            // Show only displayedBusinessCount businesses
+            const businessesToShow = filtered.slice(0, displayedBusinessCount);
+            
+            grid.innerHTML = businessesToShow.map(business => `
+                <div class="business" data-id="${business.id}" data-name="${business.name}">
+                    <div class="business-card">
+                        <img src="${business.image}" alt="${business.name}" class="business-image">
+                        <div class="business-info">
+                            <h3 class="business-name">${business.name}</h3>
+                            <span class="business-category">${business.category}</span>
+                            <p class="business-description">${business.description}</p>
+                            <div class="business-location">📍 ${business.location}</div>
+                            
+                            <div class="business-social">
+                                <a href="${business.linkedin}" target="_blank" rel="noopener noreferrer" class="social-link linkedin" title="LinkedIn">
+                                    in
+                                </a>
+                                <a href="${business.facebook}" target="_blank" rel="noopener noreferrer" class="social-link facebook" title="Facebook">
+                                    f
+                                </a>
+                                <a href="${business.instagram}" target="_blank" rel="noopener noreferrer" class="social-link instagram" title="Instagram">
+                                    📷
+                                </a>
+                                <a href="${business.website}" target="_blank" rel="noopener noreferrer" class="social-link website" title="Website">
+                                    🌐
+                                </a>
+                            </div>
+                            
+                            <div class="business-owner">
+                                <img src="${business.ownerImage}" alt="${business.owner}" class="owner-avatar">
+                                <div class="owner-info">
+                                    <div class="owner-label">Owned by</div>
+                                    <div class="owner-name">${business.owner}</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+
+            // Show/hide load more button
+            if (displayedBusinessCount < filtered.length) {
+                loadMoreContainer.style.display = 'block';
+                loadMoreBtn.disabled = false;
+            } else {
+                loadMoreContainer.style.display = 'none';
+            }
+        }
+
+
+        function filterByLocation(location) {
+            currentFilters.location = location;
+            document.getElementById('locationFilter').value = location;
+            displayedBusinessCount = businessesPerLoad;
+            renderBusinesses();
+            scrollToFilters();
+        }
+
+        function performSearch() {
+            const query = document.getElementById('heroSearch').value;
+            document.getElementById('searchFilter').value = query;
+            currentFilters.search = query.toLowerCase();
+            displayedBusinessCount = businessesPerLoad;
+            renderBusinesses();
+            scrollToFilters();
+        }
+
+        function toggleFilters() {
+            const filterInputs = document.getElementById('filterInputs');
+            const btn = document.getElementById('toggleFilters');
+            if (filterInputs.style.display === 'none') {
+                filterInputs.style.display = 'grid';
+                btn.textContent = 'Hide Filters';
+            } else {
+                filterInputs.style.display = 'none';
+                btn.textContent = 'Show Filters';
+            }
+        }
+
+        function clearAllFilters() {
+            currentFilters = { search: '', categories: [], location: 'all' };
+            selectedCategories.clear();
+            displayedBusinessCount = businessesPerLoad;
+            
+            document.getElementById('searchFilter').value = '';
+            document.getElementById('heroSearch').value = '';
+            document.getElementById('locationFilter').value = 'all';
+            
+            // Uncheck all category checkboxes
+            document.querySelectorAll('#categoryDropdown input[type="checkbox"]').forEach(checkbox => {
+                checkbox.checked = false;
+            });
+            
+            updateCategoryDisplay();
+            renderBusinesses();
+        }
+
+        function scrollToFilters() {
+            document.getElementById('filters-section').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Start the app
+        init();
+    </script>
+</body>
+</html>

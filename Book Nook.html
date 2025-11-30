@@ -1,0 +1,559 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>The Book Nook Maker | Professional Builder Community</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    
+    <script src="https://kit.fontawesome.com/50e9b64021.js" crossorigin="anonymous"></script>
+
+    <style>
+        /* THEME VARIABLES */
+        :root {
+            --primary-black: #000000;
+            --primary-gold: #7eebb7;
+            --secondary-gold: #d6c8ad;
+            --bg-white: #ffffff;
+            --bg-light-gray: #f8f9fa;
+            --text-dark: #212529;
+            --text-gray: #6c757d;
+            --border-color: #e9ecef;
+        }
+
+        body {
+            font-family: 'Open Sans', sans-serif;
+            color: var(--text-dark);
+            background-color: var(--bg-light-gray);
+        }
+
+        h1, h2, h3, h4, h5 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            color: var(--primary-black);
+            text-transform: uppercase;
+            letter-spacing: -0.5px;
+        }
+
+        a {
+            color: var(--primary-black);
+            font-weight: 600;
+            transition: all 0.2s ease;
+        }
+
+        a:hover {
+            color: var(--primary-gold);
+            text-decoration: none;
+        }
+
+        /* NAVIGATION */
+        #mainNav {
+            background-color: var(--primary-black);
+            padding: 0;
+            border-bottom: 4px solid var(--primary-gold);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .navbar-brand {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 800;
+            color: var(--bg-white) !important;
+            text-transform: uppercase;
+            font-size: 1.5rem;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .navbar-brand span {
+            color: var(--primary-gold);
+            margin-left: 5px;
+        }
+
+        .nav-link {
+            color: rgba(255,255,255,0.8) !important;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            font-weight: 600;
+            padding: 1.5rem 1rem !important;
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s;
+        }
+
+        .nav-link:hover, .nav-item.active .nav-link {
+            color: var(--bg-white) !important;
+            background-color: rgba(255,255,255,0.1);
+            border-bottom: 3px solid var(--primary-gold);
+        }
+
+        /* HERO SECTION */
+        #header-carousel {
+            position: relative;
+            background-color: #112026;
+            color: white;
+        }
+        
+        .hero-slide {
+            height: 450px;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .hero-overlay {
+            background: linear-gradient(90deg, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.4) 100%);
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            padding-left: 15px;
+            max-width: 600px;
+        }
+
+        .hero-title {
+            font-size: 3rem;
+            color: var(--bg-white);
+            margin-bottom: 1rem;
+            border-left: 5px solid var(--primary-gold);
+            padding-left: 20px;
+        }
+
+        .hero-text {
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            padding-left: 20px;
+            color: #ddd;
+        }
+
+        .btn-gold {
+            background-color: var(--primary-gold);
+            color: var(--primary-black);
+            font-weight: 700;
+            padding: 10px 25px;
+            text-transform: uppercase;
+            border: none;
+            margin-left: 20px;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .btn-gold:hover {
+            background-color: var(--secondary-gold);
+            color: var(--primary-black);
+            box-shadow: 0 5px 15px rgba(212, 175, 55, 0.4);
+        }
+
+        /* CARDS */
+        .content-card {
+            background: var(--bg-white);
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .content-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.08);
+            border-color: var(--primary-gold);
+        }
+
+        .card-img-top {
+            height: 250px;
+            object-fit: cover;
+        }
+
+        .card-body {
+            padding: 1.5rem;
+            flex-grow: 1;
+        }
+
+        .card-category {
+            font-size: 0.75rem;
+            color: var(--primary-gold);
+            text-transform: uppercase;
+            font-weight: 700;
+            letter-spacing: 1px;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .card-title {
+            font-size: 1.25rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .card-text {
+            font-size: 0.95rem;
+            color: var(--text-gray);
+            line-height: 1.6;
+        }
+
+        .card-footer-custom {
+            padding: 1rem 1.5rem;
+            background-color: var(--bg-white);
+            border-top: 1px solid var(--border-color);
+        }
+
+        .text-link {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+        }
+
+        /* FOOTER */
+        footer {
+            background-color: var(--primary-black);
+            color: rgba(255,255,255,0.7);
+            padding: 3rem 0;
+            margin-top: 4rem;
+            border-top: 5px solid var(--primary-gold);
+        }
+        footer h5 { color: var(--bg-white); margin-bottom: 1rem; }
+        footer ul { padding-left: 0; list-style: none; }
+        footer a { color: rgba(255,255,255,0.7); font-weight: 400; font-size: 0.9rem; }
+        footer a:hover { color: var(--primary-gold); }
+
+        /* SKELETON LOADING */
+        @keyframes skeleton-loading {
+            0% { background-position: -200px 0; }
+            100% { background-position: calc(200px + 100%) 0; }
+        }
+
+        .skeleton-anim {
+            background-color: #eee;
+            background-image: linear-gradient(90deg, #eee, #f5f5f5, #eee);
+            background-size: 200px 100%;
+            background-repeat: no-repeat;
+            animation: skeleton-loading 1.5s infinite linear;
+            border-radius: 4px;
+        }
+        
+        .form-control:focus {
+            border-color: var(--primary-gold);
+            box-shadow: 0 0 0 0.2rem rgba(212, 175, 55, 0.25);
+        }
+    </style>
+</head>
+<body>
+    <div id="header-carousel">
+        <div class="hero-slide" style="background-image: url('https://via.placeholder.com/1600x600/212529/555555?text=Professional+Book+Nook+Design');">
+            <div class="hero-overlay"></div>
+            <div class="container">
+                <div class="hero-content">
+                    <h1 class="hero-title">Elevate Your Bookshelf</h1>
+                    <p class="hero-text">Join the community for selected bookshelf enchancers. Discover great reads, premium stories, and showcases of regional authors.</p>
+                    <a href="#" class="btn btn-gold">Take a Look</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-12">
+
+                <div class="section-header text-center d-block mb-4">
+                    <h2>Featured Kits</h2>
+                    <a href="#">View Full Directory <i class="fas fa-arrow-right ml-1"></i></a>
+                </div>
+
+                <div class="mb-5 p-4 bg-white border rounded mx-auto" style="border-left: 4px solid var(--primary-gold) !important; max-width: 800px; box-shadow: 0 4px 15px rgba(0,0,0,0.05);">
+                    <label for="authorInput" class="font-weight-bold text-uppercase small" style="letter-spacing: 1px;">Filter by Author / Builder</label>
+                    <div class="input-group">
+                        <input type="text" id="authorInput" class="form-control form-control-lg" placeholder="Search by author or book tritles 🔎" style="border-radius: 0; border: 1px solid #ddd;">
+                        <div class="input-group-append">
+                            <button class="btn btn-dark" type="button" id="btnApply"><i class="fas fa-filter"></i> Apply</button>
+                        </div>
+                    </div>
+                    <small class="text-muted mt-2 d-block">Press Enter or click Apply to filter results.</small>
+                </div>
+
+                <div id="no-results-msg" class="alert alert-warning text-center mx-auto" style="display:none; max-width: 600px;">
+                    No kits found matching your search. <a href="#" onclick="clearSearch()" class="font-weight-bold text-dark">Clear Search</a>
+                </div>
+
+<div class="row">
+    <div class="col-12">
+        <h2 class="display-4 text-center mb-5 text-dark font-weight-bold">
+            <i class="fas fa-plus-circle mr-2" style="color: var(--primary-gold);"></i> 
+            Recently Added
+        </h2>
+    </div>
+</div>
+<div class="row" id="book-grid">
+    
+    <div class="col-md-6 col-lg-4 mb-4 book-item">
+        <div class="content-card">
+            <img src="https://tse4.mm.bing.net/th/id/OIP.rJV9C0tXiG-p6K203cAHrgHaEK?rs=1&pid=ImgDetMain&o=7&rm=3" class="card-img-top" alt="Steampunk Kit">
+            <div class="card-body">
+                <span class="card-category">Advanced Series</span>
+                <h3 class="card-title">Monsters We Make</h3>
+                <p class="card-author small text-muted mb-3">
+                    <i class="fas fa-user-edit mr-1" style="color: var(--primary-gold);"></i> 
+                    Designed by: <span class="font-weight-bold text-dark">CoryxKenshin</span>
+                </p>
+                <p class="card-text">In 2114, young musician Jabari Booker discovers his academy secretly trains students to fight monsters created by SANADA, forcing him and his allies to battle both external horrors and their own inner darkness.</p>
+            </div>
+            <div class="card-footer-custom">
+                <a href="#" class="text-link">Take a Look!</a>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-6 col-lg-4 mb-4 book-item">
+        <div class="content-card">
+            <img src="https://tse3.mm.bing.net/th/id/OIP.yY9Q4s1tH6qQ8B0y5Xh27gHaEK?rs=1&pid=ImgDetMain&o=7&rm=3" class="card-img-top" alt="Clockwork Kit">
+            <div class="card-body">
+                <span class="card-category">Beginner Series</span>
+                <h3 class="card-title">The Clockwork Heart</h3>
+                <p class="card-author small text-muted mb-3">
+                    <i class="fas fa-user-edit mr-1" style="color: var(--primary-gold);"></i> 
+                    Designed by: <span class="font-weight-bold text-dark">Lofi Girl</span>
+                </p>
+                <p class="card-text">A young engineer must repair a mysterious clockwork mechanism that powers their city, learning about its forgotten history and confronting the enigmatic inventor who holds the city's fate in their hands.</p>
+            </div>
+            <div class="card-footer-custom">
+                <a href="#" class="text-link">View Details</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6 col-lg-4 mb-4 book-item">
+        <div class="content-card">
+            <img src="https://tse4.mm.bing.net/th/id/OIP.iF7g5jYn6qfQ8E4eC-gYbgHaD3?rs=1&pid=ImgDetMain&o=7&rm=3" class="card-img-top" alt="Airship Art">
+            <div class="card-body">
+                <span class="card-category">Intermediate Series</span>
+                <h3 class="card-title">Iron Sky Pirates</h3>
+                <p class="card-author small text-muted mb-3">
+                    <i class="fas fa-user-edit mr-1" style="color: var(--primary-gold);"></i> 
+                    Designed by: <span class="font-weight-bold text-dark">Miyamoto</span>
+                </p>
+                <p class="card-text">Join Captain Astra and her crew as they navigate the treacherous, cloud-filled seas aboard their airship, searching for ancient relics and outrunning the tyrannical Aerial Fleet.</p>
+            </div>
+            <div class="card-footer-custom">
+                <a href="#" class="text-link">Explore Now</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 col-lg-4 mb-4 book-item">
+    <div class="content-card">
+        <img src="https://th.bing.com/th/id/R.ab0ccffad27cbb0ab0473782d4c23ce6?rik=vBic8SQhD4PGSA&pid=ImgRaw&r=0" class="card-img-top" alt="Cafe Kit">
+        <div class="card-body">
+            <span class="card-category">Starter Series</span>
+            <h3 class="card-title">Children of Blood and Bone</h3>
+            <p class="card-author small text-muted mb-3">
+                <i class="fas fa-user-edit mr-1" style="color: var(--primary-gold);"></i> 
+                Designed by: <span class="font-weight-bold text-dark">Tomi Adeymi</span>
+            </p>
+            <p class="card-text"></p>
+        </div>
+        <div class="card-footer-custom">
+            <a href="#" class="text-link">Take a Look!</a>
+        </div>
+    </div>
+</div>
+
+<div class="col-md-6 col-lg-4 mb-4 book-item">
+    <div class="content-card">
+        <img src="https://via.placeholder.com/600x400/222/fff?text=Cyberpunk+Alley" class="card-img-top" alt="Cyberpunk Kit">
+        <div class="card-body">
+            <span class="card-category">Sci-Fi Series</span>
+            <h3 class="card-title">Neon City Alley</h3>
+            <p class="card-author small text-muted mb-3">
+                <i class="fas fa-user-edit mr-1" style="color: var(--primary-gold);"></i> 
+                Designed by: <span class="font-weight-bold text-dark">William Gibson</span>
+            </p>
+            <p class="card-text">Dystopian future aesthetic with UV-reactive paint and fiber optic cabling.</p>
+        </div>
+        <div class="card-footer-custom">
+            <a href="#" class="text-link">Take a Look!</a>
+        </div>
+    </div>
+</div>
+</div>
+                </div>
+                <div class="row" id="skeleton-loader" style="display: none;">
+                    <div class="col-md-6 col-lg-4 mb-4">
+                        <div class="content-card border-0 shadow-none">
+                            <div class="skeleton-anim" style="height: 250px; width: 100%;"></div>
+                            <div class="card-body">
+                                <div class="skeleton-anim mb-3" style="height: 28px; width: 80%;"></div>
+                                <div class="skeleton-anim" style="height: 14px; width: 100%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4 mb-4">
+                        <div class="content-card border-0 shadow-none">
+                            <div class="skeleton-anim" style="height: 250px; width: 100%;"></div>
+                            <div class="card-body">
+                                <div class="skeleton-anim mb-3" style="height: 28px; width: 80%;"></div>
+                                <div class="skeleton-anim" style="height: 14px; width: 100%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4 mb-4">
+                        <div class="content-card border-0 shadow-none">
+                            <div class="skeleton-anim" style="height: 250px; width: 100%;"></div>
+                            <div class="card-body">
+                                <div class="skeleton-anim mb-3" style="height: 28px; width: 80%;"></div>
+                                <div class="skeleton-anim" style="height: 14px; width: 100%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="text-center mt-2 mb-5">
+                    <button id="btnLoadMore" class="btn btn-gold px-5 py-3" style="min-width: 250px;" onclick="loadMoreBooks()">
+                        Load More Books <i class="fas fa-chevron-down ml-2"></i>
+                    </button>
+                </div>
+
+            </div> </div> <div class="row mt-5 pt-5 border-top">
+            <div class="col-md-6">
+                <div class="section-header">
+                    <h2>Community Updates</h2>
+                </div>
+                <div class="p-4 bg-white border rounded">
+                    <div class="news-item">
+                        <div class="news-date">November 25, 2025</div>
+                        <a href="#" class="news-title">DRABPE Book Nook Showcase Created</a>
+                        <p class="small text-muted mb-0">See what the Black Durham Region is reading.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 d-flex flex-column justify-content-center">
+                 <div class="p-5 text-center text-white h-100 d-flex flex-column justify-content-center" style="background-color: var(--primary-black); border-radius: 4px;">
+                    <h4 class="text-white">Become a Member</h4>
+                    <p class="small mb-4" style="color:#ccc;">Join the Book Nook!</p>
+                    <div>
+                        <button class="btn btn-gold px-5">Register Today</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+<script>
+    document.getElementById('btnApply').addEventListener('click', filterBooks);
+    document.getElementById('authorInput').addEventListener('keyup', function(event) {
+        if (event.key === 'Enter') filterBooks();
+    });
+
+    function filterBooks() {
+        const input = document.getElementById('authorInput');
+        const filter = input.value.toLowerCase();
+        const grid = document.getElementById('book-grid');
+        const items = grid.getElementsByClassName('book-item');
+        let visibleCount = 0;
+
+        for (let i = 0; i < items.length; i++) {
+            let itemText = items[i].textContent || items[i].innerText;
+            if (itemText.toLowerCase().indexOf(filter) > -1) {
+                items[i].style.display = "";
+                visibleCount++;
+            } else {
+                items[i].style.display = "none";
+            }
+        }
+        const noResults = document.getElementById('no-results-msg');
+        noResults.style.display = visibleCount === 0 ? 'block' : 'none';
+    }
+
+    function clearSearch() {
+        document.getElementById('authorInput').value = '';
+        filterBooks();
+    }
+
+    function loadMoreBooks() {
+        const btn = document.getElementById('btnLoadMore');
+        const skeleton = document.getElementById('skeleton-loader');
+        const grid = document.getElementById('book-grid');
+        
+        btn.style.display = 'none';
+        skeleton.style.display = 'flex';
+        
+        setTimeout(() => {
+            skeleton.style.display = 'none';
+            // UPDATED to use col-lg-4
+            const newContent = `
+                <div class="col-md-6 col-lg-4 mb-4 book-item fade-in-up">
+                    <div class="content-card">
+                        <img src="https://via.placeholder.com/600x400/4a3b2a/fff?text=Hobbit+Hole" class="card-img-top" alt="Fantasy Kit">
+                        <div class="card-body">
+                            <span class="card-category">Fantasy Series</span>
+                            <h3 class="card-title">The Shire Door</h3>
+                            <p class="card-author small text-muted mb-3">
+                                <i class="fas fa-user-edit mr-1" style="color: var(--primary-gold);"></i> 
+                                Designed by: <span class="font-weight-bold text-dark">J.R.R. Tolkien</span>
+                            </p>
+                            <p class="card-text">Organic shapes and moss flocking. Inspired by classic fantasy.</p>
+                        </div>
+                        <div class="card-footer-custom">
+                            <a href="#" class="text-link">View Specifications</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4 mb-4 book-item fade-in-up">
+                    <div class="content-card">
+                        <img src="https://via.placeholder.com/600x400/222/fff?text=Dune+Diorama" class="card-img-top" alt="Sci-Fi Kit">
+                        <div class="card-body">
+                            <span class="card-category">Sci-Fi Series</span>
+                            <h3 class="card-title">Arrakis Sands</h3>
+                            <p class="card-author small text-muted mb-3">
+                                <i class="fas fa-user-edit mr-1" style="color: var(--primary-gold);"></i> 
+                                Designed by: <span class="font-weight-bold text-dark">Frank Herbert</span>
+                            </p>
+                            <p class="card-text">Sand texturing techniques and spice-melange styling.</p>
+                        </div>
+                        <div class="card-footer-custom">
+                            <a href="#" class="text-link">View Specifications</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4 mb-4 book-item fade-in-up">
+                    <div class="content-card">
+                        <img src="https://via.placeholder.com/600x400/333/fff?text=Gothic+Manor" class="card-img-top" alt="Horror Kit">
+                        <div class="card-body">
+                            <span class="card-category">Horror Series</span>
+                            <h3 class="card-title">Haunted Manor</h3>
+                            <p class="card-author small text-muted mb-3">
+                                <i class="fas fa-user-edit mr-1" style="color: var(--primary-gold);"></i> 
+                                Designed by: <span class="font-weight-bold text-dark">Shirley Jackson</span>
+                            </p>
+                            <p class="card-text">Miniature ghost effects and crooked architecture.</p>
+                        </div>
+                        <div class="card-footer-custom">
+                            <a href="#" class="text-link">View Specifications</a>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            grid.insertAdjacentHTML('beforeend', newContent);
+            filterBooks();
+            btn.innerHTML = "Load Even More";
+            btn.style.display = 'inline-block';
+            
+        }, 2000); 
+    }
+</script>
+
+</body>
+</html>
