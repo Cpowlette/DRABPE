@@ -1,4 +1,9 @@
-<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<!-- put Swiper library first -->
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js" defer></script>
+
+<!-- script that initializes Swiper and other behavior -->
+<script src="./script.js" defer></script>
+
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             
